@@ -1,0 +1,11 @@
+1. setup vite project --> npm create vite @latest
+   project name --> ecommerce-website
+   framework --> react
+   variant --> javascript + SWC
+
+2. Installing tailwind CSS plugin -
+   cd ecommerce-website
+   npm install tailwindcss @tailwindcss/vite
+   add tailwind css to vite.config.js
+   add @import "tailwindcss" to index.css
+   remove extra code and files
