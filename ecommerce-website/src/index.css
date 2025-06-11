@@ -1,1 +1,28 @@
 @import "tailwindcss";
+
+@theme {
+    --color-primary: #ff5722;
+    --color-secondary: #ff9800;
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+.link:hover {
+    color: var(--color-primary);
+}
+
+.MuiBadge-badge {
+    background-color: var(--color-primary) !important;
+    height: 1.2rem !important;
+    width: 1.2rem !important;
+    min-width: 1.2rem !important;
+    font-size: 12px !important;
+}
