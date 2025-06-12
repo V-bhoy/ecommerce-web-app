@@ -10,6 +10,21 @@
     box-sizing: border-box;
 }
 
+body {
+    overflow-x: hidden;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1)
+}
+
+.pages {
+    background-color: #fff7ed;
+}
 .container {
     width: 95%;
     margin: auto;
@@ -38,3 +53,91 @@
 nav button {
     text-transform: capitalize !important;
 }
+
+.slider, .categorySlider, .productSlider, .blogsSlider {
+    overflow: inherit !important;
+}
+
+.swiper-button-prev, .swiper-button-next {
+    background-color: white;
+    width: 45px;
+    min-width: 45px;
+    height: 45px;
+    border-radius: 100%;
+    box-shadow: 0 1px 3px #0000001f, 0 1px 2px #0000003d !important;
+    margin: 0 10px;
+}
+
+.swiper-button-prev:after, .swiper-button-next:after {
+    font-size: 20px !important;
+    color: black;
+    font-weight: 800 !important;
+}
+
+.categorySlider .swiper-button-prev,.categorySlider .swiper-button-next{
+    width: 25px;
+    min-width: 25px;
+    height: 25px;
+}
+
+.categorySlider .swiper-button-prev{
+    left: -5px;
+}
+
+.categorySlider .swiper-button-next{
+    right: -5px;
+}
+
+.categorySlider .swiper-button-prev:after,.categorySlider .swiper-button-next:after {
+    font-size: 10px !important;
+}
+
+.item:hover {
+    transform: scale(1.1);
+}
+
+.tab {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+}
+
+.tab:hover {
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.productCard, .blogCard {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.imageWrapper img:hover{
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+.bannerSlider img:hover {
+    transform: scale(1.1);
+}
+
+.MuiFormControlLabel-label {
+    font-size: 13px !important;
+    color: gray;
+}
+
+.MuiCheckbox-root.Mui-checked {
+    color: var(--color-primary) !important;
+}
+
+.slider .swiper-slide-active .info{
+   right: 0 !important;
+    opacity: 1;
+}
+
+.slider .swiper-slide-active .info-left{
+    left: 3rem !important;
+    opacity: 1;
+}
+
+.navlink:hover .submenu {
+    display: block;
+}
+
