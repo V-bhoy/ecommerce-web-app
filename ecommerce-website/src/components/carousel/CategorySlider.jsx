@@ -7,7 +7,7 @@ import Card from "./Card.jsx";
 
 
 export default function CategorySlider(){
-    return <div className={"py-2"}>
+    return <div className={"py-4"}>
         <div className={"container"}>
             <Swiper navigation={true} spaceBetween={20} slidesPerView={6} modules={[Navigation]} className={"categorySlider !py-2"}>
                 {

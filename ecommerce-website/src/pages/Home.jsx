@@ -76,6 +76,5 @@ export default function Home(){
                 <BlogsSlider/>
             </div>
         </section>
-        <Footer/>
     </div>
 }

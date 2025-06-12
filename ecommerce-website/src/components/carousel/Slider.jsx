@@ -6,7 +6,7 @@ import {Button} from "@mui/material";
 
 
 export default function Slider() {
-    return <div className={"homeSlider py-4"}>
+    return <div className={"homeSlider pt-4"}>
         <div className={"container"}>
             <Swiper loop autoplay={{
                 delay: 2500,

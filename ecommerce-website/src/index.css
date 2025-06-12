@@ -54,7 +54,7 @@ nav button {
     text-transform: capitalize !important;
 }
 
-.slider, .categorySlider, .productSlider, .blogsSlider {
+.categorySlider, .productSlider, .blogsSlider {
     overflow: inherit !important;
 }
 
