@@ -2,7 +2,7 @@ import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import {Navigation} from "swiper/modules";
-import ProductCard from "./ProductCard.jsx";
+import ProductCard from "../cards/ProductCard.jsx";
 
 export default function ProductSlider(){
     return <div className={"py-5"}>

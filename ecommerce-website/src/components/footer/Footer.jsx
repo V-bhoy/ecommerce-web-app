@@ -10,7 +10,7 @@ import {FaFacebookF, FaInstagram, FaLinkedinIn, FaPinterestP} from "react-icons/
 import SocialLink from "./SocialLink.jsx";
 
 export default function Footer(){
-    return <footer className={"py-6 !bg-white"}>
+    return <footer className={"py-6 !bg-white border-t border-t-gray-200"}>
         <div className={"container"}>
            <div className={"flex items-center justify-center gap-10 columns-5 pt-4 pb-10"}>
               <ServiceCard icon={FaShippingFast} title={"Free Shipping"} details={"For all orders over ₹2000"}/>

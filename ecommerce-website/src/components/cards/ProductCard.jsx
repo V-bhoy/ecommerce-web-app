@@ -6,7 +6,7 @@ import {LuGitCompareArrows} from "react-icons/lu";
 
 export default function ProductCard(){
     return <div className={"productCard rounded-md bg-orange-50"}>
-        <div className={"group imageWrapper h-[250px] rounded-t-md relative overflow-hidden"}>
+        <div className={"group imageWrapper h-[220px] rounded-t-md relative overflow-hidden"}>
             <Link to={"/"}>
                 <img className={"w-full h-full rounded-t-md overflow-hidden transition"}
                      src={"https://cdn.pixabay.com/photo/2022/12/04/07/03/woman-7633843_1280.jpg"}
@@ -29,12 +29,12 @@ export default function ProductCard(){
             </div>
         </div>
         <div className={"info py-3 px-2 flex flex-col gap-1"}>
-            <Link className={"link"} to={"/"}><h3 className={"text-[15px] font-[500]"}>Libas Kurta Set</h3></Link>
-            <p className={"text-[13px] text-gray-500"}>Silk kurta set in teal with ombre georgette dupatta.</p>
+            <Link className={"link"} to={"/"}><h3 className={"text-[14px] font-[500]"}>Libas Kurta Set</h3></Link>
+            <p className={"text-[12px] text-gray-500"}>Silk kurta set in teal with ombre georgette dupatta.</p>
             <Rating size={"small"} defaultValue={4} readOnly/>
             <div>
-                <span className={"text-[14px] text-gray-500 line-through font-[500] !mr-2"}>₹5000</span>
-                <span className={"text-[14px] font-[500] text-primary"}>₹3000</span>
+                <span className={"text-[13px] text-gray-500 line-through font-[500] !mr-2"}>₹5000</span>
+                <span className={"text-[13px] font-[500] text-primary"}>₹3000</span>
             </div>
         </div>
     </div>

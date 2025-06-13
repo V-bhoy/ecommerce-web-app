@@ -141,3 +141,14 @@ nav button {
     display: block;
 }
 
+.Mui-selected.MuiPaginationItem-page {
+    background-color: var(--color-orange-400) !important;
+    color: white;
+}
+
+.MuiPaginationItem-page:hover, .MuiPaginationItem-previousNext:hover {
+    background-color: var(--color-orange-100) !important;
+    color: var(--color-primary);
+}
+
+
