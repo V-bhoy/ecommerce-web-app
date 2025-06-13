@@ -5,10 +5,10 @@ import {FaRegHeart} from "react-icons/fa6";
 import {LuGitCompareArrows} from "react-icons/lu";
 
 export default function ProductCardListView(){
-    return <div className={"productCard rounded-md bg-orange-50 flex gap-3"}>
-        <div className={"group imageWrapper w-[25%] h-[200px] rounded-t-md relative overflow-hidden"}>
+    return <div className={"productCard rounded-md bg-orange-50 flex gap-3 h-[220px]"}>
+        <div className={"group imageWrapper w-[30%] rounded-l-md relative overflow-hidden"}>
             <Link to={"/"}>
-                <img className={"w-full h-full rounded-t-md overflow-hidden transition"}
+                <img className={"w-full h-full rounded-l-md overflow-hidden transition"}
                      src={"https://cdn.pixabay.com/photo/2022/12/04/07/03/woman-7633843_1280.jpg"}
                      alt={"poster-image"}
                 />

@@ -11,7 +11,7 @@ export default function PriceFilter() {
     };
 
     return <div className={"size-filter border-t border-t-gray-200 px-5"}>
-        <h3 className={"text-[15px] font-[500] py-3"}>Price</h3>
+        <h3 className={"text-[14px] font-[500] py-3"}>Price</h3>
         <div className={"py-3"}>
             <ReactRangeSliderInput className={"!h-[4px]"}
                                    min={0} max={50000}

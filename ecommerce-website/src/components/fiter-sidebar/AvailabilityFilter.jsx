@@ -8,7 +8,7 @@ export default function AvailabilityFilter(){
     return <div className={"availability-filter"}>
         <div onClick={() => setOpen(!open)}
              className={"flex px-5 items-center font-[500] justify-between  p-3 cursor-pointer transition"}>
-            <h3 className={"text-[15px]"}>Availability</h3>
+            <h3 className={"text-[14px]"}>Availability</h3>
             {open ? <FaAngleUp size={"0.9rem"}/> : <FaAngleDown size={"0.8rem"}/>}
         </div>
         <Collapse in={open}>
