@@ -1,6 +1,5 @@
 import {Button, Drawer} from "@mui/material";
 import {GiHamburgerMenu} from "react-icons/gi";
-import {FaAngleDown} from "react-icons/fa6";
 import {useState} from "react";
 import PanelList from "./PanelList.jsx";
 

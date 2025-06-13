@@ -6,6 +6,7 @@ import {FaListUl} from "react-icons/fa6";
 import SortByFilter from "../components/sorting/SortByFilter.jsx";
 import {useState} from "react";
 import ProductCardListView from "../components/cards/ProductCardListView.jsx";
+import {products} from "../mock-data/products.js";
 
 export default function Products() {
     const [itemView, setItemView] = useState("grid");
@@ -35,29 +36,9 @@ export default function Products() {
                         </div>
                     </div>
                     <div className={`grid ${itemView === "grid" ? "grid-cols-4 md:grid-cols-4" : "grid-cols-1 md:grid-cols-1"} gap-4`}>
-                        {itemView === "grid" ? <>  <ProductCard/>
-                                <ProductCard/>
-                                <ProductCard/>
-                                <ProductCard/>
-                                <ProductCard/>
-                                <ProductCard/>
-                                <ProductCard/>
-                                <ProductCard/>
-                                <ProductCard/>
-                                <ProductCard/></> :
-                            <><ProductCardListView/>
-                                <ProductCardListView/>
-                                <ProductCardListView/>
-                                <ProductCardListView/>
-                                <ProductCardListView/>
-                                <ProductCardListView/>
-                                <ProductCardListView/>
-                                <ProductCardListView/>
-                                <ProductCardListView/>
-                                <ProductCardListView/>
-                            </>
+                        {itemView === "grid" ? products?.map(product=><ProductCard key={product.id} product={product}/>):
+                            products?.map(product=><ProductCardListView key={product.id} product={product}/>)
                         }
-
                     </div>
                     <div className={"flex items-center justify-center py-5 !mt-5"}>
                         <Pagination count={10} size={"small"} variant={"text"}/>

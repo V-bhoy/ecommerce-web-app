@@ -3,36 +3,14 @@ import "swiper/css";
 import "swiper/css/navigation";
 import {Navigation} from "swiper/modules";
 import ProductCard from "../cards/ProductCard.jsx";
+import {products} from "../../mock-data/products.js";
 
 export default function ProductSlider(){
     return <div className={"py-5"}>
       <Swiper slidesPerView={5} navigation={true} spaceBetween={10} modules={[Navigation]} className={"productSlider"}>
-          <SwiperSlide>
-              <ProductCard/>
-          </SwiperSlide>
-          <SwiperSlide>
-              <ProductCard/>
-          </SwiperSlide>
-          <SwiperSlide>
-              <ProductCard/>
-          </SwiperSlide>
-
-          <SwiperSlide>
-              <ProductCard/>
-          </SwiperSlide>
-
-          <SwiperSlide>
-              <ProductCard/>
-          </SwiperSlide>
-
-          <SwiperSlide>
-              <ProductCard/>
-          </SwiperSlide>
-
-          <SwiperSlide>
-              <ProductCard/>
-          </SwiperSlide>
-
+          {products?.map((product)=><SwiperSlide key={product.id}>
+              <ProductCard product={product}/>
+          </SwiperSlide>)}
       </Swiper>
     </div>
 }

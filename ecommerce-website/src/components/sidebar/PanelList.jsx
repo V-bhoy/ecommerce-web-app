@@ -1,10 +1,9 @@
 import {Box, Button} from "@mui/material";
 import {IoClose} from "react-icons/io5";
-import {Link} from "react-router-dom";
 import {FaAngleDown, FaAngleUp} from "react-icons/fa6";
 import SubLinks from "./SubLinks.jsx";
-import {links} from "../../constants/sublinks.js";
 import {useState} from "react";
+import {navigation} from "../../constants/navigation.js";
 
 export default function PanelList({toggleDrawer}) {
     const [sectionIndex, setSectionIndex] = useState([]);
@@ -28,18 +27,19 @@ export default function PanelList({toggleDrawer}) {
         </div>
         <div>
             {
-                links?.map((link, index) => {
+                navigation?.categories?.map((link, index) => {
                         const isIndexPresent = sectionIndex?.includes(index);
-                        return <>
-                            <Link key={index} to={"#"}>
-                                <Button color={"black"} onClick={() => switchSection(index)}
-                                        className={`link !px-5 w-full !justify-between !text-[12px] ${isIndexPresent ? "active" : ""}`}>
-                                    {link?.title}
-                                    {isIndexPresent ? <FaAngleUp size={"0.7rem"}/> : <FaAngleDown size={"0.7rem"}/>}
-                                </Button>
-                            </Link>
-                            {isIndexPresent && <SubLinks links={link?.subLinks}/>}
-                        </>
+                        return <div key={link.id}>
+                            <Button
+                                    color={"black"}
+                                    onClick={() => switchSection(index)}
+                                    className={`link !px-5 w-full !justify-between !text-[12px] ${isIndexPresent ? "active" : ""}`}
+                            >
+                                {link?.title}
+                                {isIndexPresent ? <FaAngleUp size={"0.7rem"}/> : <FaAngleDown size={"0.7rem"}/>}
+                            </Button>
+                            {isIndexPresent && <SubLinks links={link?.subCategories} category={link.id} closeDrawer={toggleDrawer}/>}
+                        </div>
                     }
                 )
             }

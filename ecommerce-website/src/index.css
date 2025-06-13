@@ -127,8 +127,8 @@ nav button {
     color: var(--color-primary) !important;
 }
 
-.slider .swiper-slide-active .info{
-   right: 0 !important;
+.slider .swiper-slide-active .info-right{
+    right: 0 !important;
     opacity: 1;
 }
 
