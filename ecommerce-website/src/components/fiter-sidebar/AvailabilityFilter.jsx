@@ -13,9 +13,8 @@ export default function AvailabilityFilter(){
         </div>
         <Collapse in={open}>
             <div className={"flex flex-col px-5"}>
-                <FormControlLabel control={<Checkbox size={"small"}/>} label={"Available"} className={"w-full"}/>
                 <FormControlLabel control={<Checkbox size={"small"}/>} label={"In Stock"} className={"w-full"}/>
-                <FormControlLabel control={<Checkbox size={"small"}/>} label={"Not Available"} className={"w-full"}/>
+                <FormControlLabel control={<Checkbox size={"small"}/>} label={"Out Of Stock"} className={"w-full"}/>
             </div>
         </Collapse>
 

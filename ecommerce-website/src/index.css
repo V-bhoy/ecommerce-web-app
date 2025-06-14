@@ -151,4 +151,26 @@ nav button {
     color: var(--color-primary);
 }
 
+.sizeBtn {
+    width: 35px !important;
+    min-width: 35px !important;
+    height: 35px !important;
+    color: var(--color-blue-500) !important;
+    border: 1px solid var(--color-gray-200) !important;
+}
+
+.sizeBtn:hover {
+    background-color: var(--color-blue-50) !important;
+}
+
+.sizeBtn.active {
+    background-color: var(--color-primary) !important;
+    color: white !important;
+    border: none !important;
+}
+
+
+
+
+
 

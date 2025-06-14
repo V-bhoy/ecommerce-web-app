@@ -7,7 +7,7 @@ import {LuGitCompareArrows} from "react-icons/lu";
 export default function ProductCard({product}){
     return <div className={"productCard rounded-md bg-orange-50"}>
         <div className={"group imageWrapper h-[220px] rounded-t-md relative overflow-hidden"}>
-            <Link to={"/"}>
+            <Link to={`/products/${product.category}/${product.subCategory}/${product.id}`}>
                 <img className={"w-full h-full rounded-t-md overflow-hidden transition"}
                      src={product.imageUrl}
                      alt={"poster-image"}

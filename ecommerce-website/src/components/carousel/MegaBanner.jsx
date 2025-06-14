@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 
 export default function MegaBanner({banner}){
     const navigate = useNavigate();
-    return <div className={"w-full h-[55vh] rounded-[20px] relative overflow-hidden"}>
+    return <div className={"w-full h-[48vh] rounded-[20px] relative overflow-hidden"}>
         <img
             className={"object-cover w-full h-full"}
             src={banner.imageUrl}
