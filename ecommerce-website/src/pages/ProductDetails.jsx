@@ -9,6 +9,7 @@ import ReviewSlider from "../components/review/ReviewSlider.jsx";
 import ProductDetailsTab from "../components/tabs/ProductDetailsTab.jsx";
 import {productDetails} from "../mock-data/products.js";
 import ReviewForm from "../components/review/ReviewForm.jsx";
+import ProductSlider from "../components/carousel/ProductSlider.jsx";
 
 export default function ProductDetails(){
     const [activeSizeIndex, setActiveSizeIndex] = useState(0);
@@ -124,6 +125,16 @@ export default function ProductDetails(){
                     </div>
                 }
             </div>
+        </div>
+        <div className={"container py-3"}>
+            <h3 className={"text-[15px] font-[500] pl-5"}>You Might Also Like</h3>
+            <p className={"text-[13px] text-gray-500 pl-5"}>Look at what most people bought aong with this product!</p>
+            <ProductSlider/>
+        </div>
+        <div className={"container py-3"}>
+            <h3 className={"text-[15px] font-[500] pl-5"}>Similar Products</h3>
+            <p className={"text-[13px] text-gray-500 pl-5"}>Want more choices, have a look!</p>
+            <ProductSlider/>
         </div>
     </section>
 }

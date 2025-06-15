@@ -38,8 +38,7 @@ export default function ReviewForm(){
             <MenuItem value={5}>Excellent</MenuItem>
         </FormSelect>
         <div className={"flex justify-end"}>
-            <Button size={"small"} className={"!w-[5rem] !bg-primary"} variant={"contained"}>Submit</Button>
+            <Button size={"small"} className={"!w-[10rem] !capitalize !bg-primary"} variant={"contained"}>Submit Review</Button>
         </div>
-
     </form>
 }
