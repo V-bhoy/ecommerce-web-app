@@ -6,6 +6,7 @@ import Products from "../pages/Products.jsx";
 import ProductDetails from "../pages/ProductDetails.jsx";
 import Register from "../pages/Register.jsx";
 import Login from "../pages/Login.jsx";
+import ForgotPassword from "../pages/ForgotPassword.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
             {
                 path: "login",
                 Component: Login
+            },
+            {
+                path: "login/forgot-password",
+                Component: ForgotPassword
             },
             {
                 path: "products/:category",

@@ -1,8 +1,9 @@
 import {Button, TextField} from "@mui/material";
-import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {FcGoogle} from "react-icons/fc";
 
 export default function Login(){
+    const navigate = useNavigate();
     return <section className={"pages p-10"}>
         <div className={"container flex items-center justify-center"}>
            <div className={"bg-white shadow-md p-5 border border-gray-200 rounded-md w-[40%]"}>
@@ -10,12 +11,12 @@ export default function Login(){
                <div className={"flex flex-col gap-3 !my-5"}>
                    <TextField type={"email"} className={"w-full"} size={"small"} placeholder={"Email Address"}/>
                    <TextField type={"password"} className={"w-full"} size={"small"} placeholder={"Password"}/>
-                   <Link to={"#"}><p className={"text-[12px] px-2 text-blue-700 hover:underline"}>Forgot Password?</p></Link>
+                   <p onClick={()=>navigate("/login/forgot-password")} className={"text-[12px] px-2 text-blue-700 hover:underline cursor-pointer"}>Forgot Password?</p>
                    <Button variant={"contained"} className={"!bg-primary !text-white"} size={"small"}>Login</Button>
                </div>
                <p className={"text-center"}>
                    <span className={"text-[13px] px-2"}>Not Registered?</span>
-                   <span className={"text-[12px] text-blue-700 hover:underline cursor-pointer"}>
+                   <span onClick={()=>navigate("/register")} className={"text-[12px] text-blue-700 hover:underline cursor-pointer"}>
                      Click here to register.
                    </span>
                </p>
