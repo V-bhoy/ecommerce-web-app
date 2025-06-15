@@ -1,10 +1,14 @@
 import {Link} from "react-router-dom";
-import {Button, Rating} from "@mui/material";
+import {Box, Button, Modal, Rating} from "@mui/material";
 import {MdZoomOutMap} from "react-icons/md";
 import {FaRegHeart} from "react-icons/fa6";
 import {LuGitCompareArrows} from "react-icons/lu";
+import {useState} from "react";
+import ProductDetailsSection from "../product-details/ProductDetailsSection.jsx";
 
 export default function ProductCard({product}){
+    const [openModal, setOpenModal] = useState(false);
+
     return <div className={"productCard rounded-md bg-orange-50"}>
         <div className={"group imageWrapper h-[220px] rounded-t-md relative overflow-hidden"}>
             <Link to={`/products/${product.category}/${product.subCategory}/${product.id}`}>
@@ -17,9 +21,14 @@ export default function ProductCard({product}){
                 {product.discount}%
             </span>
             <div className={"actions absolute top-[-200px] right-3 z-50 flex flex-col items-center gap-4  transition-all duration-400 group-hover:top-3"}>
-                <Button className={"!text-black hover:!text-white !h-[30px] !w-[30px] !min-w-[30px] !rounded-full !bg-white hover:!bg-primary"}>
+                <Button onClick={()=>setOpenModal(true)} className={"!text-black hover:!text-white !h-[30px] !w-[30px] !min-w-[30px] !rounded-full !bg-white hover:!bg-primary"}>
                     <MdZoomOutMap/>
                 </Button>
+                <Modal open={openModal} onClose={()=>setOpenModal(false)}>
+                    <Box sx={{position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "80%"}}>
+                        <ProductDetailsSection/>
+                    </Box>
+                </Modal>
                 <Button className={"!text-black hover:!text-white !h-[30px] !w-[30px] !min-w-[30px] !rounded-full !bg-white hover:!bg-primary"}>
                     <FaRegHeart/>
                 </Button>

@@ -19,8 +19,8 @@ export default function MainHeader(){
             <div className={"col3 w-[30%]"}>
                 <ul className={"flex items-center justify-center gap-3"}>
                     <li className={"!mr-8"}>
-                        <Link to={"#"} className={"link transition text-[14px]"}>Login</Link> &nbsp; | &nbsp;<Link
-                        to={"#"} className={"link transition text-[14px]"}>Register</Link>
+                        <Link to={"/login"} className={"link transition text-[14px]"}>Login</Link> &nbsp; | &nbsp;<Link
+                        to={"/register"} className={"link transition text-[14px]"}>Register</Link>
                     </li>
                     <li>
                         <Tooltip title={"Compare"}>
