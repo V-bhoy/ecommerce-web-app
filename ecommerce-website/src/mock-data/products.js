@@ -287,3 +287,17 @@ export const products = [
         isFeatured: true
     },
 ]
+
+export const productDetails = {
+    info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit\n" +
+        "                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco.\n" +
+        "                Duis aute irure dolor in reprehenderit in voluptate velit esse.",
+    sizeAndFit: "The model (height 5'8) is wearing a size S",
+    material: "96% Chiffon 4% Georgette",
+    care: "Machine Wash",
+    specifications: {
+        neck: "round",
+        sleeves: "half",
+        length: "mini"
+    }
+}

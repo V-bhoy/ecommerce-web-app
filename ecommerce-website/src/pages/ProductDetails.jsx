@@ -1,8 +1,14 @@
 import MagnifyProduct from "../components/magnify-product/MagnifyProduct.jsx";
-import {Button, Rating, Slider} from "@mui/material";
+import {Button, Rating} from "@mui/material";
 import {useState} from "react";
-import {FaCartShopping, FaRegHeart, FaRegThumbsDown, FaRegThumbsUp, FaThumbsUp} from "react-icons/fa6";
+import {FaCartShopping, FaRegHeart} from "react-icons/fa6";
 import {IoShareSocial} from "react-icons/io5";
+import {reviews} from "../mock-data/reviews.js";
+import Review from "../components/review/Review.jsx";
+import ReviewSlider from "../components/review/ReviewSlider.jsx";
+import ProductDetailsTab from "../components/tabs/ProductDetailsTab.jsx";
+import {productDetails} from "../mock-data/products.js";
+import ReviewForm from "../components/review/ReviewForm.jsx";
 
 export default function ProductDetails(){
     const [activeSizeIndex, setActiveSizeIndex] = useState(0);
@@ -17,7 +23,7 @@ export default function ProductDetails(){
                         <h3 className={"text-[1.8rem] text-primary font-[300]"}>White Chiffon Top</h3>
                         <div className={"flex gap-3"}>
                             <Rating size={"small"} value={4}/>
-                            <span className={"text-[13px] text-gray-400"}>Review (5)</span>
+                            <span className={"text-[13px] text-gray-400"}>Reviews (5)</span>
                         </div>
                     </div>
                     <p className={"text-[14px] font-[500]"}>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -91,106 +97,30 @@ export default function ProductDetails(){
                 </p>
                 }
                 {
-                    activeTab === 1 && <div className={"py-2"}>
-                        <div>
-                            <p className={"text-[14px] font-[500] px-4"}>Details</p>
-                            <p className={"text-[14px] font-[400] text-gray-500 p-4"}>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-                                Duis aute irure dolor in reprehenderit in voluptate velit esse.
-                            </p>
-                        </div>
-                        <div>
-                            <p className={"text-[14px] font-[500] px-4"}>Size & Fit</p>
-                            <p className={"text-[14px] font-[400] text-gray-500 p-4"}>
-                                The model (height 5'8) is wearing a size S
-                            </p>
-                        </div>
-                        <div>
-                            <p className={"text-[14px] font-[500] px-4"}>Material & Care</p>
-                            <p className={"text-[14px] font-[400] text-gray-500 p-4"}>
-                                <span>96% Chiffon 4% Georgette, Machine Wash</span>
-                            </p>
-                        </div>
-                        <div>
-                            <p className={"text-[14px] font-[500] px-4"}>Specifications</p>
-                            <table className={"border border-gray-200 !m-4"}>
-                                <thead>
-                                <tr className={"text-[13px] text-center font-[400]"}>
-                                    <th className={"w-[10rem] p-1 border border-gray-200"}>Neck</th>
-                                    <th className={"w-[10rem] p-1 border border-gray-200"}>Sleeves</th>
-                                    <th className={"w-[10rem] p-1 border border-gray-200"}>Length</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                   <tr className={"text-[13px] text-center font-[400]"}>
-                                       <td className={"w-[10rem] p-1 border border-gray-200"}>Round</td>
-                                       <td className={"w-[10rem] p-1 border border-gray-200"}>Half</td>
-                                       <td className={"w-[10rem] p-1 border border-gray-200"}>Mini</td>
-                                   </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    activeTab === 1 && <ProductDetailsTab details={productDetails}/>
                 }
                 {
                     activeTab===2 && <div className={"py-2"}>
-                        <div>
+                    <div className={"flex gap-4"}>
+                        <div className={"flex-1"}>
                             <p className={"text-[14px] font-[500] px-4 !mb-2"}>What customers said</p>
-                            <div className={"w-[40%] px-5 py-2"}>
-                                <p  className={"text-[13px] font-[500] text-gray-600"}>Fit</p>
-                                <div className={"flex gap-4"}>
-                                    <Slider size={"small"}/>
-                                    <p className={"text-[13px] w-[40%] font-[500]"}>85% - Just Right</p>
-                                </div>
-                            </div>
-                            <div className={"w-[40%] px-5 py-2"}>
-                                <p  className={"text-[13px] font-[500] text-gray-600"}>Length</p>
-                                <div className={"flex gap-4"}>
-                                    <Slider size={"small"}/>
-                                    <p className={"text-[13px] w-[40%] font-[500]"}>85% - Just Right</p>
-                                </div>
-                            </div>
-                            <div className={"w-[40%] px-5 py-2"}>
-                                <p  className={"text-[13px] font-[500] text-gray-600"}>Transparency</p>
-                                <div className={"flex gap-4"}>
-                                    <Slider size={"small"}/>
-                                    <p className={"text-[13px] w-[40%] font-[500]"}>85% - Just Right</p>
-                                </div>
+                            <div className={"flex flex-col gap-4"}>
+                                {[{id: 1, title: "Fit", value: 80}, {id: 2, title: "Length", value: 70}, {id: 3, title: "Transparency", value: 80}]
+                                    .map((productSuggestion)=><ReviewSlider key={productSuggestion.id} title={productSuggestion.title} value={productSuggestion.value}/>)}
                             </div>
                             <div>
-                                <p className={"text-[14px] font-[500] px-4 !my-2"}>Customer Reviews</p>
-                                <div className={"flex flex-col gap-4"}>
-                                    <div className={"border border-gray-200 py-2 pr-5 !mx-4"}>
-                                        <div className={"flex justify-between"}>
-                                            <p className={"text-[13px] font-[400] text-gray-500 p-4"}>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-                                                Duis aute irure dolor in reprehenderit in voluptate velit esse.
-                                            </p>
-                                            <Rating size={"small"} value={4}/>
-                                        </div>
-                                        <span className={"text-[12px] font-[400] p-4"}>
-                                            Shreya Bhansal | 3 June 2025
-                                        </span>
-                                    </div>
-                                    <div className={"border border-gray-200 py-2 pr-5 !mx-4"}>
-                                        <div className={"flex justify-between"}>
-                                            <p className={"text-[13px] font-[400] text-gray-500 p-4"}>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco.
-                                                Duis aute irure dolor in reprehenderit in voluptate velit esse.
-                                            </p>
-                                            <Rating size={"small"} value={4}/>
-                                        </div>
-                                        <span className={"text-[12px] font-[400] p-4"}>
-                                            Shreya Bhansal | 3 June 2025
-                                        </span>
-                                    </div>
+                                <p className={"text-[14px] font-[500] px-4 !my-2"}>Customer Reviews (5)</p>
+                                <div className={"flex flex-col gap-4 h-[25vh] overflow-scroll p-2 py-4 border border-gray-300 overflow-hidden !mx-3"}>
+                                    {reviews.map((review)=><Review key={review.id} review={review}/>)}
                                 </div>
-
                             </div>
                         </div>
+                        <div className={"flex-1 py-2"}>
+                            <p className={"text-[14px] font-[500] px-4 !mb-2"}>Add Your Review</p>
+                            <ReviewForm/>
+                        </div>
+
+                    </div>
                     </div>
                 }
             </div>

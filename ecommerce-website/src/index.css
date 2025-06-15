@@ -169,7 +169,17 @@ nav button {
     border: none !important;
 }
 
+.MuiInputLabel-outlined {
+    font-size: 15px !important;
+}
 
+.MuiOutlinedInput-root {
+    font-size: 13px !important;
+}
+
+.MuiMenuItem-root {
+    font-size: 13px !important;
+}
 
 
 
