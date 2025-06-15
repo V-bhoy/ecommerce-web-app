@@ -1,5 +1,6 @@
 import {Button, TextField} from "@mui/material";
 import {Link} from "react-router-dom";
+import {FcGoogle} from "react-icons/fc";
 
 export default function Login(){
     return <section className={"pages p-10"}>
@@ -11,6 +12,17 @@ export default function Login(){
                    <TextField type={"password"} className={"w-full"} size={"small"} placeholder={"Password"}/>
                    <Link to={"#"}><p className={"text-[12px] px-2 text-blue-700 hover:underline"}>Forgot Password?</p></Link>
                    <Button variant={"contained"} className={"!bg-primary !text-white"} size={"small"}>Login</Button>
+               </div>
+               <p className={"text-center"}>
+                   <span className={"text-[13px] px-2"}>Not Registered?</span>
+                   <span className={"text-[12px] text-blue-700 hover:underline cursor-pointer"}>
+                     Click here to register.
+                   </span>
+               </p>
+
+               <p className={"text-[14px] text-center text-gray-800 !my-2 font-[500]"}>Or continue with google account</p>
+               <div className={"flex justify-center"}>
+                   <Button size={"small"} className={"!capitalize gap-2 !px-3 hover:!bg-orange-100 hover:!text-primary transition"}><FcGoogle/>Sign In With Google</Button>
                </div>
 
            </div>
