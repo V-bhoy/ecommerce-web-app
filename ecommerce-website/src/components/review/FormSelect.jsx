@@ -4,6 +4,7 @@ export default function FormSelect({value, handleChange, label, children}){
     return <FormControl fullWidth className={"!my-2"}>
         <InputLabel id="simple-select-label">{label}</InputLabel>
         <Select
+            className={"select"}
             required
             variant={"outlined"}
             size={"small"}

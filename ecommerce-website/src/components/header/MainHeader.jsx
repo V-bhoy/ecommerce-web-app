@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import logo from "../../assets/logo.jpeg";
 import SearchInput from "./SearchInput.jsx";
 import {Badge, IconButton, Tooltip} from "@mui/material";
@@ -6,6 +6,7 @@ import {LuGitCompareArrows, LuShoppingCart} from "react-icons/lu";
 import {FaRegHeart} from "react-icons/fa6";
 
 export default function MainHeader(){
+    const navigate = useNavigate();
     return  <div className={"border-b-1 border-gray-200"}>
         <div className={"container flex items-center justify-between"}>
             <div className={"col1 h-[5.2rem]"}>
@@ -42,7 +43,7 @@ export default function MainHeader(){
                     </li>
                     <li>
                         <Tooltip title={"Cart"}>
-                            <IconButton aria-label={"cart"}>
+                            <IconButton aria-label={"cart"} onClick={()=>navigate("/cart")}>
                                 <Badge anchorOrigin={{vertical: "bottom"}} badgeContent={4} color={"primary"}>
                                     <LuShoppingCart size={"1.4rem"}/>
                                 </Badge>

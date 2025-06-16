@@ -174,11 +174,19 @@ nav button {
 }
 
 .MuiOutlinedInput-root {
-    font-size: 13px !important;
+    font-size: 12px !important;
+}
+
+.qty-input>.MuiInputBase-root {
+    height: 1.9rem !important;
+}
+
+.MuiOutlinedInput-root.select {
+    height: 1.9rem !important;
 }
 
 .MuiMenuItem-root {
-    font-size: 13px !important;
+    font-size: 12px !important;
 }
 
 

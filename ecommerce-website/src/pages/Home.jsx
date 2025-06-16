@@ -5,7 +5,6 @@ import {Tab, Tabs} from "@mui/material";
 import ProductSlider from "../components/carousel/ProductSlider.jsx";
 import BannerSlider from "../components/carousel/BannerSlider.jsx";
 import BlogsSlider from "../components/carousel/BlogsSlider.jsx";
-import Footer from "../components/footer/Footer.jsx";
 
 
 export default function Home(){

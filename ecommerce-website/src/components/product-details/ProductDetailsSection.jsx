@@ -3,9 +3,11 @@ import {Button, Rating} from "@mui/material";
 import {FaCartShopping, FaRegHeart} from "react-icons/fa6";
 import {IoShareSocial} from "react-icons/io5";
 import {useState} from "react";
+import SelectSize from "./SelectSize.jsx";
+import SelectQty from "./SelectQty.jsx";
 
 export default function ProductDetailsSection(){
-    const [activeSizeIndex, setActiveSizeIndex] = useState(0);
+
     return   <div className={"container flex px-6 py-5 gap-4 bg-white"}>
         <MagnifyProduct/>
         <div className={"product-details p-2 flex flex-col gap-2 w-[50%]"}>
@@ -35,30 +37,8 @@ export default function ProductDetailsSection(){
                                 Free Shipping - Delivery estimated in 2-3 days.
                             </span>
                 </div>
-                <div className={"flex items-center gap-4"}>
-                    <span className={"text-[15px] font-[500] text-primary"}>Size: </span>
-                    <div className={"flex items-center gap-2"}>
-                        <Button onClick={()=>setActiveSizeIndex(0)}
-                                className={`transition sizeBtn ${activeSizeIndex===0 ? "active" : ""}`}>S</Button>
-                        <Button onClick={()=>setActiveSizeIndex(1)}
-                                className={`transition sizeBtn ${activeSizeIndex===1 ? "active" : ""}`} >M</Button>
-                        <Button onClick={() =>setActiveSizeIndex(2)}
-                                className={`transition sizeBtn ${activeSizeIndex===2 ? "active" : ""}`} >L</Button>
-                        <Button onClick={()=>setActiveSizeIndex(3)}
-                                className={`transition sizeBtn ${activeSizeIndex===3? "active" : ""}`} >XL</Button>
-                        <Button onClick={()=>setActiveSizeIndex(4)}
-                                className={`transition sizeBtn ${activeSizeIndex===4 ? "active" : ""}`} >XXL</Button>
-                    </div>
-                </div>
-                <div className={"flex items-center gap-4"}>
-                    <span className={"text-[15px] font-[500] text-primary"}>Qty: </span>
-                    <div className={"h-[34px] w-[5rem] pt-1 border border-gray-200 rounded-sm"}>
-                        <input defaultValue={1}
-                               className={"px-3 w-full text-gray-600 text-[13px] focus:outline-none"}
-                               type={"number"}
-                               min={0}/>
-                    </div>
-                </div>
+                <SelectSize/>
+                <SelectQty/>
             </div>
             <div className={"py-4 px-2 flex gap-4"}>
                 <Button className={"!bg-primary !text-[13px] !font-[500]"} variant={"contained"} size={"small"}>

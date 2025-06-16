@@ -7,6 +7,7 @@ import ProductDetails from "../pages/ProductDetails.jsx";
 import Register from "../pages/Register.jsx";
 import Login from "../pages/Login.jsx";
 import ForgotPassword from "../pages/ForgotPassword.jsx";
+import Cart from "../pages/Cart.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ export const router = createBrowserRouter([
             {
                 path: "products/:category/:subCategory/:id",
                 Component: ProductDetails
+            },
+            {
+                path: "cart",
+                Component: Cart
             }
         ]
     },

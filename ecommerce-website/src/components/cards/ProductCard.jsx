@@ -5,6 +5,7 @@ import {FaRegHeart} from "react-icons/fa6";
 import {LuGitCompareArrows} from "react-icons/lu";
 import {useState} from "react";
 import ProductDetailsSection from "../product-details/ProductDetailsSection.jsx";
+import {IoClose} from "react-icons/io5";
 
 export default function ProductCard({product}){
     const [openModal, setOpenModal] = useState(false);
@@ -24,8 +25,9 @@ export default function ProductCard({product}){
                 <Button onClick={()=>setOpenModal(true)} className={"!text-black hover:!text-white !h-[30px] !w-[30px] !min-w-[30px] !rounded-full !bg-white hover:!bg-primary"}>
                     <MdZoomOutMap/>
                 </Button>
-                <Modal open={openModal} onClose={()=>setOpenModal(false)}>
-                    <Box sx={{position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "80%"}}>
+                <Modal open={openModal}>
+                    <Box className={"relative"} sx={{position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "80%"}}>
+                        <IoClose onClick={()=>setOpenModal(false)} size={"1.3rem"} className={"absolute top-3 right-15  cursor-pointer text-gray-600"}/>
                         <ProductDetailsSection/>
                     </Box>
                 </Modal>
