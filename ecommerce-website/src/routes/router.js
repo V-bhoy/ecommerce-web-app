@@ -8,6 +8,7 @@ import Register from "../pages/Register.jsx";
 import Login from "../pages/Login.jsx";
 import ForgotPassword from "../pages/ForgotPassword.jsx";
 import Cart from "../pages/Cart.jsx";
+import Checkout from "../pages/Checkout.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -45,6 +46,10 @@ export const router = createBrowserRouter([
             {
                 path: "cart",
                 Component: Cart
+            },
+            {
+                path: "/checkout",
+                Component: Checkout
             }
         ]
     },

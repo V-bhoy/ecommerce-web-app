@@ -1,7 +1,9 @@
 import CartCard from "../components/cards/CartCard.jsx";
 import {Button} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 export default function Cart(){
+    const navigate = useNavigate();
     return <section className={"pages"}>
         <div className={"container p-5"}>
             <h3 className={"font-[400] text-[1.5rem] text-primary px-4"}>Shopping Cart (3)</h3>
@@ -42,7 +44,7 @@ export default function Cart(){
                                 <p>₹ 3020</p>
                             </div>
                         </div>
-                        <Button variant={"contained"} className={"!w-full !bg-primary !my-2"} size={"small"}>Checkout</Button>
+                        <Button onClick={()=>navigate("/checkout")} variant={"contained"} className={"!w-full !bg-primary !my-2"} size={"small"}>Checkout</Button>
                     </div>
                 </div>
             </div>
