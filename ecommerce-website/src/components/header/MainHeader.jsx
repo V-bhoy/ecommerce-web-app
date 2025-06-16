@@ -1,13 +1,16 @@
 import {Link, useNavigate} from "react-router-dom";
 import logo from "../../assets/logo.jpeg";
 import SearchInput from "./SearchInput.jsx";
-import {Badge, IconButton, Tooltip} from "@mui/material";
+import {Badge, Button, IconButton, Tooltip} from "@mui/material";
 import {LuGitCompareArrows, LuShoppingCart} from "react-icons/lu";
 import {FaRegHeart} from "react-icons/fa6";
+import {RiAccountCircleFill} from "react-icons/ri";
+import UserAccount from "./UserAccount.jsx";
 
-export default function MainHeader(){
+export default function MainHeader() {
+    const loggedIn = false;
     const navigate = useNavigate();
-    return  <div className={"border-b-1 border-gray-200"}>
+    return <div className={"border-b-1 border-gray-200"}>
         <div className={"container flex items-center justify-between"}>
             <div className={"col1 h-[5.2rem]"}>
                 <Link to={"/"}>
@@ -19,10 +22,11 @@ export default function MainHeader(){
             </div>
             <div className={"col3 w-[30%]"}>
                 <ul className={"flex items-center justify-center gap-3"}>
-                    <li className={"!mr-8"}>
-                        <Link to={"/login"} className={"link transition text-[14px]"}>Login</Link> &nbsp; | &nbsp;<Link
-                        to={"/register"} className={"link transition text-[14px]"}>Register</Link>
-                    </li>
+                    {loggedIn || <li className={"!mr-8"}>
+                        <Link to={"/login"} className={"link transition text-[14px]"}>Login</Link>
+                        &nbsp; | &nbsp;
+                        <Link to={"/register"} className={"link transition text-[14px]"}>Register</Link>
+                    </li>}
                     <li>
                         <Tooltip title={"Compare"}>
                             <IconButton aria-label={"compare"}>
@@ -43,13 +47,18 @@ export default function MainHeader(){
                     </li>
                     <li>
                         <Tooltip title={"Cart"}>
-                            <IconButton aria-label={"cart"} onClick={()=>navigate("/cart")}>
+                            <IconButton aria-label={"cart"} onClick={() => navigate("/cart")}>
                                 <Badge anchorOrigin={{vertical: "bottom"}} badgeContent={4} color={"primary"}>
                                     <LuShoppingCart size={"1.4rem"}/>
                                 </Badge>
                             </IconButton>
                         </Tooltip>
                     </li>
+                    {loggedIn &&
+                        <li>
+                            <UserAccount/>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
