@@ -4,11 +4,11 @@ import {useNavigate} from "react-router-dom";
 
 export default function Cart(){
     const navigate = useNavigate();
-    return <section className={"pages"}>
+    return <section>
         <div className={"container p-5"}>
             <h3 className={"font-[400] text-[1.5rem] text-primary px-4"}>Shopping Cart (3)</h3>
             <div className={"flex gap-5 !my-5"}>
-                <div className={"shadow-md rounded-sm flex flex-col gap-3 h-[60vh] cart-items-wrapper p-5 bg-white w-[75%] overflow-hidden overflow-y-scroll"}>
+                <div className={"shadow-md rounded-sm flex flex-col gap-3 h-[60vh] cart-items-wrapper p-5 bg-white w-[75%] overflow-hidden overflow-y-scroll border border-gray-200"}>
                     <CartCard/>
                     <CartCard/>
                     <CartCard/>

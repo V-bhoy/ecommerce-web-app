@@ -9,6 +9,10 @@ import Login from "../pages/Login.jsx";
 import ForgotPassword from "../pages/ForgotPassword.jsx";
 import Cart from "../pages/Cart.jsx";
 import Checkout from "../pages/Checkout.jsx";
+import MyAccount from "../pages/MyAccount.jsx";
+import Orders from "../pages/Orders.jsx";
+import Wishlist from "../pages/Wishlist.jsx";
+import CreateNewPassword from "../pages/CreateNewPassword.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -32,6 +36,22 @@ export const router = createBrowserRouter([
                 Component: ForgotPassword
             },
             {
+                path: "/user/:id",
+                Component: MyAccount
+            },
+            {
+                path: "/user/create-new-password",
+                Component: CreateNewPassword
+            },
+            {
+                path: "/orders",
+                Component: Orders
+            },
+            {
+                path: "/wishlist",
+                Component: Wishlist
+            },
+            {
                 path: "products/:category",
                 Component: Products
             },
@@ -44,7 +64,7 @@ export const router = createBrowserRouter([
                 Component: ProductDetails
             },
             {
-                path: "cart",
+                path: "/cart",
                 Component: Cart
             },
             {

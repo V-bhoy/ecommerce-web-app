@@ -8,7 +8,7 @@ import {RiAccountCircleFill} from "react-icons/ri";
 import UserAccount from "./UserAccount.jsx";
 
 export default function MainHeader() {
-    const loggedIn = false;
+    const loggedIn = true;
     const navigate = useNavigate();
     return <div className={"border-b-1 border-gray-200"}>
         <div className={"container flex items-center justify-between"}>
@@ -38,7 +38,7 @@ export default function MainHeader() {
                     </li>
                     <li>
                         <Tooltip title={"Wish List"}>
-                            <IconButton aria-label={"wishlist"}>
+                            <IconButton onClick={()=>navigate("/wishlist")} aria-label={"wishlist"}>
                                 <Badge anchorOrigin={{vertical: "bottom"}} badgeContent={4} color={"primary"}>
                                     <FaRegHeart size={"1.3rem"}/>
                                 </Badge>

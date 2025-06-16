@@ -3,14 +3,17 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import {RiAccountCircleFill} from "react-icons/ri";
+import {useNavigate} from "react-router-dom";
 
 export default function UserAccount() {
+    const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
-    const handleClose = () => {
+    const handleLink = (path) => {
+        navigate(path);
         setAnchorEl(null);
     };
 
@@ -31,16 +34,16 @@ export default function UserAccount() {
                 id="basic-menu"
                 anchorEl={anchorEl}
                 open={open}
-                onClose={handleClose}
+                onClose={()=>setAnchorEl(null)}
                 slotProps={{
                     list: {
                         'aria-labelledby': 'basic-button',
                     },
                 }}
             >
-                <MenuItem onClick={handleClose}>My Account</MenuItem>
-                <MenuItem onClick={handleClose}>Orders</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={()=>handleLink("/user/1")}>My Account</MenuItem>
+                <MenuItem onClick={()=>handleLink("/orders")}>Orders</MenuItem>
+                <MenuItem onClick={()=>setAnchorEl(null)}>Logout</MenuItem>
             </Menu>
         </div>
     );

@@ -7,7 +7,7 @@ import {TiStarFullOutline} from "react-icons/ti";
 import {IoClose} from "react-icons/io5";
 
 export default function CartCard(){
-    return <div className={"p-2 border border-gray-200 h-[20vh] rounded-md flex gap-4 relative bg-white"}>
+    return <div className={"border border-gray-200 h-[20vh] rounded-md flex gap-4 relative bg-white"}>
         <div className={"group imageWrapper w-[25%] rounded-l-md relative overflow-hidden"}>
             <Link to={"/products/women/tops/1"}>
                 <img className={"w-full h-full rounded-l-md overflow-hidden transition"}
@@ -19,7 +19,7 @@ export default function CartCard(){
                 10% off
             </span>
         </div>
-        <div className={"info px-2 flex flex-col gap-1 w-[75%]"}>
+        <div className={"p-2 info px-2 flex flex-col gap-1 w-[75%]"}>
            <h3 className={"text-[15px] text-primary font-[400]"}>Checked Casual Top</h3>
             <span className={"text-[12px] font-[500]"}>Cotton top, full sleeves, for women</span>
             <div className={"flex gap-5 !my-2"}>

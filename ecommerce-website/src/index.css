@@ -189,6 +189,27 @@ nav button {
     font-size: 12px !important;
 }
 
+.orders-table, .orders-table th, .orders-table td {
+    border: 1px solid var(--color-gray-300);
+    font-size: 12px;
+    width: max-content;
+}
+
+.orders-table th, .orders-table td  {
+    min-width: 200px;
+    text-align: center;
+    padding: 5px;
+}
+
+.orders-table td:nth-child(1){
+    text-align: left;
+}
+
+.orders-table th {
+    background-color: var(--color-orange-400);
+    color: white;
+    font-weight: 500;
+}
 
 
 
