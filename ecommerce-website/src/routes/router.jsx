@@ -13,6 +13,8 @@ import MyAccount from "../pages/MyAccount.jsx";
 import Orders from "../pages/Orders.jsx";
 import Wishlist from "../pages/Wishlist.jsx";
 import CreateNewPassword from "../pages/CreateNewPassword.jsx";
+import PublicRoute from "../pages/PublicRoute.jsx";
+import PrivateRoute from "../pages/PrivateRoute.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -25,31 +27,31 @@ export const router = createBrowserRouter([
             },
             {
                 path: "register",
-                Component: Register
+                element: <PublicRoute><Register/></PublicRoute>
             },
             {
                 path: "login",
-                Component: Login
+                element: <PublicRoute><Login/></PublicRoute>
             },
             {
                 path: "login/forgot-password",
-                Component: ForgotPassword
+                element: <PublicRoute><ForgotPassword/></PublicRoute>
             },
             {
                 path: "/user/:id",
-                Component: MyAccount
+                element: <PrivateRoute><MyAccount/></PrivateRoute>
             },
             {
                 path: "/user/create-new-password",
-                Component: CreateNewPassword
+                element: <PrivateRoute><CreateNewPassword/></PrivateRoute>
             },
             {
                 path: "/orders",
-                Component: Orders
+                element: <PrivateRoute><Orders/></PrivateRoute>
             },
             {
                 path: "/wishlist",
-                Component: Wishlist
+                element: <PrivateRoute><Wishlist/></PrivateRoute>
             },
             {
                 path: "products/:category",
@@ -65,11 +67,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/cart",
-                Component: Cart
+                element: <PrivateRoute><Cart/></PrivateRoute>
             },
             {
                 path: "/checkout",
-                Component: Checkout
+                element: <PrivateRoute><Checkout/></PrivateRoute>
             }
         ]
     },

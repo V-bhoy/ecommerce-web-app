@@ -4,9 +4,13 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import {RiAccountCircleFill} from "react-icons/ri";
 import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {logoutUser} from "../../redux/features/auth/authThunk.js";
 
 export default function UserAccount() {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const {user} = useSelector((state)=>state.auth);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
@@ -28,7 +32,7 @@ export default function UserAccount() {
                 className={"gap-2 !capitalize !ml-5 hover:!underline hover:!bg-white"}
                 size={"small"}>
                 <RiAccountCircleFill className={"cursor-pointer !text-secondary"} size={"2rem"}/>
-                Hi, Vaishali
+                Hi, {user?.firstName || "Guest User"}
             </Button>
             <Menu
                 id="basic-menu"
@@ -43,7 +47,7 @@ export default function UserAccount() {
             >
                 <MenuItem onClick={()=>handleLink("/user/1")}>My Account</MenuItem>
                 <MenuItem onClick={()=>handleLink("/orders")}>Orders</MenuItem>
-                <MenuItem onClick={()=>setAnchorEl(null)}>Logout</MenuItem>
+                <MenuItem onClick={()=>dispatch(logoutUser())}>Logout</MenuItem>
             </Menu>
         </div>
     );
