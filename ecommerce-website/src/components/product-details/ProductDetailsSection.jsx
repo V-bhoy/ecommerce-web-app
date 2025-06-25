@@ -2,13 +2,12 @@ import MagnifyProduct from "../magnify-product/MagnifyProduct.jsx";
 import {Button, Rating} from "@mui/material";
 import {FaCartShopping, FaRegHeart} from "react-icons/fa6";
 import {IoShareSocial} from "react-icons/io5";
-import {useState} from "react";
 import SelectSize from "./SelectSize.jsx";
 import SelectQty from "./SelectQty.jsx";
 
 export default function ProductDetailsSection(){
 
-    return   <div className={"container flex px-6 py-5 gap-4 bg-white"}>
+    return  <div className={"container flex px-6 py-5 gap-4 bg-white"}>
         <MagnifyProduct/>
         <div className={"product-details p-2 flex flex-col gap-2 w-[50%]"}>
             <div className={"py-2"}>

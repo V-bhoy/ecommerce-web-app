@@ -12,6 +12,7 @@ export default function createAxiosInstance({store}){
     })
 
     axiosInstance.interceptors.request.use((config)=>{
+        console.log("REQUEST URL: ", config.url);
         const accessToken = store.getState().auth.accessToken;
         if(accessToken){
             config.headers.Authorization = `Bearer ${accessToken}`;

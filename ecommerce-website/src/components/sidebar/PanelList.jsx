@@ -3,9 +3,11 @@ import {IoClose} from "react-icons/io5";
 import {FaAngleDown, FaAngleUp} from "react-icons/fa6";
 import SubLinks from "./SubLinks.jsx";
 import {useState} from "react";
-import {navigation} from "../../constants/navigation.js";
+import {useSelector} from "react-redux";
 
 export default function PanelList({toggleDrawer}) {
+    const subCategories = useSelector((state)=>state.products.subCategories);
+    const categories = subCategories ? Object.keys(subCategories) : [];
     const [sectionIndex, setSectionIndex] = useState([]);
 
     const switchSection = (index) => {
@@ -27,18 +29,18 @@ export default function PanelList({toggleDrawer}) {
         </div>
         <div>
             {
-                navigation?.categories?.map((link, index) => {
+                categories?.map((link, index) => {
                         const isIndexPresent = sectionIndex?.includes(index);
-                        return <div key={link.id}>
+                        return <div key={link}>
                             <Button
                                     color={"black"}
                                     onClick={() => switchSection(index)}
                                     className={`link !px-5 w-full !justify-between !text-[12px] ${isIndexPresent ? "active" : ""}`}
                             >
-                                {link?.title}
+                                {link.toLowerCase()}
                                 {isIndexPresent ? <FaAngleUp size={"0.7rem"}/> : <FaAngleDown size={"0.7rem"}/>}
                             </Button>
-                            {isIndexPresent && <SubLinks links={link?.subCategories} category={link.id} closeDrawer={toggleDrawer}/>}
+                            {isIndexPresent && <SubLinks links={subCategories[link]} category={link.toLowerCase()} closeDrawer={toggleDrawer}/>}
                         </div>
                     }
                 )

@@ -14,7 +14,7 @@ export default function ProductCard({product}){
         <div className={"group imageWrapper h-[220px] rounded-t-md relative overflow-hidden"}>
             <Link to={`/products/${product.category}/${product.subCategory}/${product.id}`}>
                 <img className={"w-full h-full rounded-t-md overflow-hidden transition"}
-                     src={product.imageUrl}
+                     src={product.image_url}
                      alt={"poster-image"}
                 />
             </Link>
@@ -34,17 +34,14 @@ export default function ProductCard({product}){
                 <Button className={"!text-black hover:!text-white !h-[30px] !w-[30px] !min-w-[30px] !rounded-full !bg-white hover:!bg-primary"}>
                     <FaRegHeart/>
                 </Button>
-                <Button className={"!text-black hover:!text-white !h-[30px] !w-[30px] !min-w-[30px] !rounded-full !bg-white hover:!bg-primary"}>
-                    <LuGitCompareArrows/>
-                </Button>
             </div>
         </div>
         <div className={"info py-3 px-2 flex flex-col gap-1"}>
             <Link className={"link"} to={"/"}><h3 className={"text-[14px] font-[500]"}>{product.title}</h3></Link>
-            <p className={"text-[12px] text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis"}>{product.info}</p>
-            <Rating size={"small"} defaultValue={4} readOnly/>
+            <p className={"text-[12px] text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis"}>{product.short_info}</p>
+            <Rating size={"small"} defaultValue={0} readOnly/>
             <div>
-                <span className={"text-[13px] text-gray-500 line-through font-[500] !mr-2"}>₹{product.originalPrice}</span>
+                <span className={"text-[13px] text-gray-500 line-through font-[500] !mr-2"}>₹{product.mrp}</span>
                 <span className={"text-[13px] font-[500] text-primary"}>₹{product.priceAfterDiscount}</span>
             </div>
         </div>

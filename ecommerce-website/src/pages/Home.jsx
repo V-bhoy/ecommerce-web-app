@@ -5,32 +5,51 @@ import {Tab, Tabs} from "@mui/material";
 import ProductSlider from "../components/carousel/ProductSlider.jsx";
 import BannerSlider from "../components/carousel/BannerSlider.jsx";
 import BlogsSlider from "../components/carousel/BlogsSlider.jsx";
-
+import {useDispatch, useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {getAllPopularProducts, getHomePageProducts} from "../redux/features/products/productThunk.js";
+import Shimmer from "../components/loading-skeleton/Shimmer.jsx";
+import CardsCarouselShimmer from "../components/loading-skeleton/CardsCarouselShimmer.jsx";
 
 export default function Home(){
+    const {products: {homepage: {popular, latest, featured}}, categories, isLoading} = useSelector(state=>state.products);
+    const [activeTab, setActiveTab] = useState(null);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getHomePageProducts());
+    }, []);
+
+    useEffect(()=>{
+       if(categories){
+           setActiveTab(categories?.[0].id)
+       }
+    },[categories])
+
+    useEffect(() => {
+        if(activeTab){
+            dispatch(getAllPopularProducts(activeTab));
+        }
+    }, [activeTab]);
+
     return <div className={"pages"}>
         <Slider/>
         <CategorySlider/>
         <section className={"py-8 bg-white"}>
             <div className={"container"}>
-                <div className={" flex items-center justify-between"}>
+                {!activeTab ? <Shimmer/> : <><div className={" flex items-center justify-between"}>
                    <div className={"leftSection"}>
                       <h3 className={"text-[15px] font-[500]"}>Popular Products</h3>
                        <p className={"text-[13px] text-gray-500"}>Do not miss the current offers until the end of {new Date().toLocaleString('default', { month: 'long' })}!</p>
                    </div>
-                    <div className={"rightSection w-[60%]"}>
-                        <Tabs value={1} variant={"scrollable"} scrollButtons={"auto"}>
-                            <Tab className={"tab"} label={"Men Wear"} value={1} />
-                            <Tab className={"tab"} label={"Women Wear"} value={2}/>
-                            <Tab className={"tab"} label={"Kids Wear"} value={3}/>
-                            <Tab className={"tab"} label={"Foot Wear"} value={4}/>
-                            <Tab className={"tab"} label={"Bags"} value={5}/>
-                            <Tab className={"tab"} label={"Watches"} value={6}/>
-                            <Tab className={"tab"} label={"Jewellery"} value={7}/>
+                    <div className={"rightSection w-[50%] flex justify-center"}>
+                        <Tabs value={activeTab} onChange={(e, value)=>setActiveTab(value)} variant={"scrollable"} scrollButtons={"auto"}>
+                            {categories?.map((category)=><Tab className={"tab"} key={category.id} label={category.name} value={category.id}/>)}
                         </Tabs>
                     </div>
                 </div>
-                <ProductSlider/>
+                {isLoading ?  <CardsCarouselShimmer/> : <ProductSlider products={popular}/>}
+                </>}
             </div>
         </section>
         <section className={"py-10 !my-5 bg-white"}>
@@ -52,7 +71,7 @@ export default function Home(){
             <div className={"container"}>
                 <h3 className={"text-[15px] font-[500] pl-5"}>Latest Products</h3>
                 <p className={"text-[13px] text-gray-500 pl-5"}>Try new trends to add to your look!</p>
-                <ProductSlider/>
+                {isLoading ? <CardsCarouselShimmer/> :<ProductSlider products={latest}/>}
             </div>
         </section>
         <section className={"py-5 !mb-5"}>
@@ -65,7 +84,7 @@ export default function Home(){
             <div className={"container"}>
                 <h3 className={"text-[15px] font-[500] pl-5"}>Featured Products</h3>
                 <p className={"text-[13px] text-gray-500 pl-5"}>Pick what most trendy from your favourite brands!</p>
-                <ProductSlider/>
+                {isLoading ? <CardsCarouselShimmer/> : <ProductSlider products={featured}/>}
             </div>
         </section>
         <section className={" py-5 "}>

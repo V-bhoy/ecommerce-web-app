@@ -1,13 +1,24 @@
 import ReactRangeSliderInput from "react-range-slider-input";
 import 'react-range-slider-input/dist/style.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {setFilters} from "../../redux/features/products/productSlice.js";
 
 
 export default function PriceFilter() {
+    const dispatch = useDispatch();
+    const {filters: {filterBy}} = useSelector(state => state.products);
     const [priceValue, setPriceValue] = useState([0, 50000])
+
+    useEffect(() => {
+        if(filterBy === null){
+          setPriceValue([0, 50000]);
+        }
+    }, [filterBy]);
 
     const handleChange = (val) => {
         setPriceValue(val);
+        dispatch(setFilters({minPrice: val[0], maxPrice: val[1]}));
     };
 
     return <div className={"size-filter border-t border-t-gray-200 px-5"}>
