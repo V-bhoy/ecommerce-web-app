@@ -1,21 +1,24 @@
 import {Button} from "@mui/material";
-import {useState} from "react";
 
-export default function SelectSize(){
-    const [activeSizeIndex, setActiveSizeIndex] = useState(0);
+export default function SelectSize({sizes, size, handleSize, variants}){
+    const sizeAvailability = variants?.reduce((acc, variant) => {
+        acc[variant.size] = variant.qty > 0;
+        return acc;
+    }, {});
+
+
     return <div className={"flex items-center gap-4"}>
         <span className={"text-[15px] font-[500] text-primary"}>Size: </span>
         <div className={"flex items-center gap-2"}>
-            <Button onClick={()=>setActiveSizeIndex(0)}
-                    className={`transition sizeBtn ${activeSizeIndex===0 ? "active" : ""}`}>S</Button>
-            <Button onClick={()=>setActiveSizeIndex(1)}
-                    className={`transition sizeBtn ${activeSizeIndex===1 ? "active" : ""}`} >M</Button>
-            <Button onClick={() =>setActiveSizeIndex(2)}
-                    className={`transition sizeBtn ${activeSizeIndex===2 ? "active" : ""}`} >L</Button>
-            <Button onClick={()=>setActiveSizeIndex(3)}
-                    className={`transition sizeBtn ${activeSizeIndex===3? "active" : ""}`} >XL</Button>
-            <Button onClick={()=>setActiveSizeIndex(4)}
-                    className={`transition sizeBtn ${activeSizeIndex===4 ? "active" : ""}`} >XXL</Button>
+            {sizes.map((s, index)=>
+            {     const disabled = !sizeAvailability?.[s];
+                return <Button key={index}
+                        onClick={()=>handleSize(s)}
+                        disabled={disabled}
+                        className={`${disabled ? "!bg-gray-100 !text-gray-300" : ""} transition sizeBtn ${s===size? "active" : ""}`}>
+                    {s}
+                </Button>
+            })}
         </div>
     </div>
 }

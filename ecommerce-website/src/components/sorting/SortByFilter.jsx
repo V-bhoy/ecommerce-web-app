@@ -3,14 +3,31 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import {FaAngleDown, FaAngleUp} from "react-icons/fa6";
+import {useState} from "react";
+import {sortingOptions} from "../../constants/sorting-options.js";
+import {removeFilters, setFilters} from "../../redux/features/products/productSlice.js";
+import {useDispatch} from "react-redux";
 
 export default function SortByFilter() {
+    const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [sortItem, setSortItem] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
-    const handleClose = () => {
+    const handleClose = (selectSort) => {
+        if(selectSort.id === sortItem?.id){
+            setSortItem(null);
+            setAnchorEl(null);
+            dispatch(removeFilters({filterName: "sortBy"}));
+            return;
+        }
+        setSortItem(selectSort);
+        dispatch(setFilters({sortBy: {
+            name: selectSort.name,
+                value: selectSort.value
+            }}))
         setAnchorEl(null);
     };
 
@@ -24,7 +41,7 @@ export default function SortByFilter() {
                 onClick={handleClick}
                 className={"!bg-white !h-[30px] !text-[13px] !font-[500] !capitalize !text-[black] !border-1 !border-gray-200 transition"}
             >
-                Default {open ? <FaAngleUp size={"0.8rem"} className={"!ml-5"}/> : <FaAngleDown size={"0.8rem"} className={"!ml-5"}/>}
+                {sortItem?.label || "Default"} {open ? <FaAngleUp size={"0.8rem"} className={"!ml-5"}/> : <FaAngleDown size={"0.8rem"} className={"!ml-5"}/>}
             </Button>
             <Menu
                 id="basic-menu"
@@ -37,12 +54,12 @@ export default function SortByFilter() {
                     },
                 }}
             >
-                <MenuItem className={"!text-[13px] !font-[500] link"} onClick={handleClose}>Price: Low To High</MenuItem>
-                <MenuItem className={"!text-[13px] !font-[500] link"} onClick={handleClose}>Price: High To Low</MenuItem>
-                <MenuItem className={"!text-[13px] !font-[500] link"} onClick={handleClose}>Rating: Low To High</MenuItem>
-                <MenuItem className={"!text-[13px] !font-[500] link"} onClick={handleClose}>Rating: High To Low</MenuItem>
-                <MenuItem className={"!text-[13px] !font-[500] link"} onClick={handleClose}>Title: A To Z</MenuItem>
-                <MenuItem className={"!text-[13px] !font-[500] link"} onClick={handleClose}>Title: Z To A</MenuItem>
+                {sortingOptions.map((s)=> <MenuItem
+                    key={s.id}
+                    name={s.name}
+                    value={s.value}
+                    className={`!text-[13px] !font-[500] link ${sortItem?.id == s.id ? "!bg-orange-200 !text-primary" : ""}`}
+                    onClick={()=>handleClose(s)}>{s.label}</MenuItem>)}
             </Menu>
         </div>
     );

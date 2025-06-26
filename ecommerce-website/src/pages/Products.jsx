@@ -6,35 +6,48 @@ import {FaListUl} from "react-icons/fa6";
 import SortByFilter from "../components/sorting/SortByFilter.jsx";
 import {useEffect, useState} from "react";
 import ProductCardListView from "../components/cards/ProductCardListView.jsx";
-import {products} from "../mock-data/products.js";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
-import {getProductsByCategory, getProductsBySubCategory} from "../redux/features/products/productThunk.js";
-import {clearFilters} from "../redux/features/products/productSlice.js";
+import {getIdByCategoryAndSubCategory, getProductsByCategory} from "../redux/features/products/productThunk.js";
+import {clearFilters, setFilters} from "../redux/features/products/productSlice.js";
+import ProductListShimmer from "../components/loading-skeleton/ProductListShimmer.jsx";
 
 export default function Products() {
-    const {category, subCategory} = useParams();
     const dispatch = useDispatch();
-    const {products: {originalList, filteredList, totalPages, totalCount}, filters: {filterBy}} = useSelector(state => state.products);
+    const {category, subCategory} = useParams();
     const [itemView, setItemView] = useState("grid");
     const [page, setPage] = useState(1);
 
+    const {isLoading, products: {originalList, filteredList, totalPages, totalCount}, filters: {sortBy, filterBy}} = useSelector(state => state.products);
+
     useEffect(()=>{
-        dispatch(clearFilters());
+        if(subCategory){
+            handleSubCategoryUrl();
+        }else{
+            dispatch(clearFilters());
+        }
         setPage(1);
-    },[category])
+    },[category, subCategory])
 
     useEffect(() => {
-        if(subCategory){
-            dispatch(getProductsBySubCategory({category, subCategory}));
-        }else{
-            dispatch(getProductsByCategory({category, page, filters: filterBy}));
+        dispatch(getProductsByCategory({category, page, filters: {...filterBy, sortBy} }));
+    }, [page, filterBy, sortBy]);
+
+    const handleSubCategoryUrl = async()=>{
+        let subCategoryId;
+        const response = await dispatch(getIdByCategoryAndSubCategory({category, subCategory}));
+        if(getIdByCategoryAndSubCategory.fulfilled.match(response)){
+            subCategoryId = response.payload.subCategoryId;
+            dispatch(setFilters({filterBy:{subCategoryIds: [subCategoryId]}}));
         }
-    }, [subCategory, page, filterBy]);
+    }
+
+    const productsToRender = filteredList || originalList;
 
 
     return <div className={"pages"}>
         <section className={"bg-white w-full py-5 pt-10"}>
+            { isLoading ? <ProductListShimmer/> :
             <div className={"container flex gap-3"}>
                 <div className={"filterWrapper w-[20%] h-full"}>
                     <Filters/>
@@ -58,16 +71,15 @@ export default function Products() {
                         </div>
                     </div>
                     <div className={`grid ${itemView === "grid" ? "grid-cols-4 md:grid-cols-4" : "grid-cols-1 md:grid-cols-1"} gap-4`}>
-                        {itemView === "grid" ? (filteredList || originalList)?.map(product=><ProductCard key={product.id} product={product}/>):
-                            products?.map(product=><ProductCardListView key={product.id} product={product}/>)
+                        {itemView === "grid" ? productsToRender?.map(product=><ProductCard key={product.id} product={product}/>):
+                            productsToRender?.map(product=><ProductCardListView key={product.id} product={product}/>)
                         }
                     </div>
                     <div className={"flex items-center justify-center py-5 !mt-5"}>
                         <Pagination page={page} onChange={(e, value)=>setPage(value)} count={totalPages || 1} size={"small"} variant={"text"}/>
                     </div>
-
                 </div>
-            </div>
+            </div>}
         </section>
 
     </div>

@@ -29,7 +29,12 @@ export const getProductsByCategory = createAsyncThunk("categoryProducts", async(
     return response.data;
 })
 
-export const getProductsBySubCategory = createAsyncThunk("subCategoryProducts", async({category, subCategory})=>{
-    const response = await axiosInstance.get(`products/${category}/${subCategory}/all`);
+export const getIdByCategoryAndSubCategory = createAsyncThunk("categoryAndSubCategoryId", async({category, subCategory})=>{
+    const response = await axiosInstance.get(`products/id/?category=${category}&subCategory=${subCategory}`);
+    return response.data;
+})
+
+export const getProductDetailsById = createAsyncThunk("getProductDetails", async(productId)=>{
+    const response = await axiosInstance.get(`products/${productId}`);
     return response.data;
 })

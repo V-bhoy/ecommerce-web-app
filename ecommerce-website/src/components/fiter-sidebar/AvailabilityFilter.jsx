@@ -21,16 +21,16 @@ export default function AvailabilityFilter(){
         const {name, checked: isChecked} = e.target;
         if(name === "inStock" && isChecked){
             setChecked({inStock: true, outOfStock: false});
-            dispatch(setFilters({inStock: true}));
+            dispatch(setFilters({filterBy: {inStock: true}}));
             return;
         }
         if(name === "outOfStock" && isChecked){
             setChecked({inStock: false, outOfStock: true});
-            dispatch(setFilters({inStock: false}));
+            dispatch(setFilters({filterBy: {inStock: false}}));
             return;
         }
         setChecked(initialState);
-        dispatch(setFilters({inStock: null}));
+        dispatch(setFilters({filterBy: {inStock: null}}));
     }
 
     return <div className={"availability-filter"}>

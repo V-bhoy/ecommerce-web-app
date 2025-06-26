@@ -1,4 +1,5 @@
-export default function ProductDetailsTab({details}){
+export default function ProductDetailsTab({productDetails}){
+    const {details , specifications} = productDetails;
     return <div className={"py-2"}>
         <div>
             <p className={"text-[14px] font-[500] px-4"}>Details</p>
@@ -20,7 +21,7 @@ export default function ProductDetailsTab({details}){
                 </span>
             </p>
         </div>
-        <div>
+        {specifications && <div>
             <p className={"text-[14px] font-[500] px-4"}>Specifications</p>
             <table className={"border border-gray-200 !m-4"}>
                 <thead>
@@ -32,12 +33,12 @@ export default function ProductDetailsTab({details}){
                 </thead>
                 <tbody>
                 <tr className={"text-[13px] text-center font-[400]"}>
-                    <td className={"w-[10rem] p-1 border border-gray-200"}>{details?.specifications?.neck}</td>
-                    <td className={"w-[10rem] p-1 border border-gray-200"}>{details?.specifications?.sleeves}</td>
-                    <td className={"w-[10rem] p-1 border border-gray-200"}>{details?.specifications?.length}</td>
+                    <td className={"w-[10rem] p-1 border border-gray-200"}>{specifications?.neck || "-"}</td>
+                    <td className={"w-[10rem] p-1 border border-gray-200"}>{specifications?.sleeves || "-"}</td>
+                    <td className={"w-[10rem] p-1 border border-gray-200"}>{specifications?.length || "-"}</td>
                 </tr>
                 </tbody>
             </table>
-        </div>
+        </div>}
     </div>
 }

@@ -7,9 +7,9 @@ import {LuGitCompareArrows} from "react-icons/lu";
 export default function ProductCardListView({product}){
     return <div className={"productCard rounded-md bg-orange-50 flex gap-3 h-[220px]"}>
         <div className={"group imageWrapper w-[30%] rounded-l-md relative overflow-hidden"}>
-            <Link to={"/"}>
+            <Link to={`products/details/${product.id}`}>
                 <img className={"w-full h-full rounded-l-md overflow-hidden transition"}
-                     src={product.imageUrl}
+                     src={product.image_url}
                      alt={"poster-image"}
                 />
             </Link>
@@ -23,13 +23,10 @@ export default function ProductCardListView({product}){
                 <Button className={"!text-black hover:!text-white !h-[30px] !w-[30px] !min-w-[30px] !rounded-full !bg-white hover:!bg-primary"}>
                     <FaRegHeart/>
                 </Button>
-                <Button className={"!text-black hover:!text-white !h-[30px] !w-[30px] !min-w-[30px] !rounded-full !bg-white hover:!bg-primary"}>
-                    <LuGitCompareArrows/>
-                </Button>
             </div>
         </div>
         <div className={"info px-2 py-6 flex flex-col gap-1"}>
-            <Link className={"link"} to={"/"}><h3 className={"text-[14px] font-[500]"}>{product.title}</h3></Link>
+            <Link className={"link"} to={`/products/details/${product.id}`}><h3 className={"text-[14px] font-[500]"}>{product.title}</h3></Link>
             <p className={"text-[12px] text-primary font-[500]"}>{product.info}</p>
             <p className={"text-[11px] text-gray-500"}>{product.description}</p>
             <Rating size={"small"} defaultValue={4} readOnly/>

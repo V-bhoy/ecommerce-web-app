@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {FaAngleDown, FaAngleUp} from "react-icons/fa6";
 import {Checkbox, Collapse, FormControlLabel} from "@mui/material";
 import {useParams} from "react-router-dom";
@@ -12,26 +12,16 @@ export default  function SizeFilter(){
     const dispatch = useDispatch();
     const {filters: {filterBy}} = useSelector((state)=>state.products);
     const [open, setOpen] = useState(false);
-    const [checked, setChecked] = useState(filterBy?.sizes || []);
-
-    useEffect(() => {
-        if(filterBy == null){
-            setChecked(filterBy?.sizes || []);
-        }
-    }, [filterBy]);
 
     const handleChange = (e) =>{
         const {name, checked: isChecked} = e.target;
         const size = filterBy?.sizes || [];
         if(isChecked){
-            setChecked((prev)=>([...prev, name]));
-            dispatch(setFilters({sizes: [...size, name]}));
+            dispatch(setFilters({filterBy: {sizes: [...size, name]}}));
         }else{
-            setChecked((prev)=>(prev.filter(item=>item!==name)));
             dispatch(removeFilters({filterName: "sizes", data: name}));
         }
     }
-
 
     return <div className={"size-filter"}>
         <div onClick={() => setOpen(!open)}
@@ -43,7 +33,7 @@ export default  function SizeFilter(){
             <div className={"flex flex-col px-5"}>
                 {sizes.map((size, index)=> <FormControlLabel key={index}
                     control={<Checkbox name={size}
-                        checked={checked.includes(size)}
+                        checked={filterBy?.sizes?.includes(size) || false}
                                        onChange={handleChange}
                                        size={"small"}/>}
                                                              label={size} className={"w-full"}/>)}

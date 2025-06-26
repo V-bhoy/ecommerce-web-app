@@ -1,32 +1,23 @@
 import {FaAngleDown, FaAngleUp} from "react-icons/fa6";
 import {Checkbox, Collapse, FormControlLabel} from "@mui/material";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import {removeFilters, setFilters} from "../../redux/features/products/productSlice.js";
 
 export default function CategoryFilter() {
-    const {category} = useParams();
+    const {category, subCategory} = useParams();
     const dispatch = useDispatch();
     const {subCategories, filters: {filterBy}} = useSelector((state)=>state.products);
-    const [open, setOpen] = useState(false);
-    const [checked, setChecked] = useState(filterBy?.subCategoryIds || []);
-
-    useEffect(() => {
-        if(filterBy == null){
-            setChecked(filterBy?.subCategoryIds || []);
-        }
-    }, [filterBy]);
+    const [open, setOpen] = useState( subCategory || false);
 
     const handleChange = (e) =>{
         const {checked: isChecked} = e.target;
         const name = +e.target.name;
         const subCategoryIds = filterBy?.subCategoryIds || [];
         if(isChecked){
-            setChecked((prev)=>([...prev, name]));
-            dispatch(setFilters({subCategoryIds: [...subCategoryIds, name]}));
+            dispatch(setFilters({filterBy: {subCategoryIds: [...subCategoryIds, name]}}));
         }else{
-            setChecked((prev)=>(prev.filter(item=>item!==name)));
             dispatch(removeFilters({filterName: "subCategoryIds", data: name}));
         }
     }
@@ -39,9 +30,9 @@ export default function CategoryFilter() {
         </div>
         <Collapse in={open}>
             <div className={"flex flex-col px-5"}>
-                {subCategories?.[category.toUpperCase()].map((c)=>
+                {subCategories?.[category.toUpperCase()]?.map((c)=>
                     <FormControlLabel key={c.id}
-                                      control={<Checkbox name={c.id} checked={checked.includes(c.id) || false} onChange={handleChange}  size={"small"}/>}
+                                      control={<Checkbox name={c.id} checked={filterBy?.subCategoryIds.includes(c.id) || false} onChange={handleChange}  size={"small"}/>}
                                       label={c.name}
                                       className={"w-full"}/>)}
             </div>

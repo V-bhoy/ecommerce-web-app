@@ -8,17 +8,9 @@ import {setFilters} from "../../redux/features/products/productSlice.js";
 export default function PriceFilter() {
     const dispatch = useDispatch();
     const {filters: {filterBy}} = useSelector(state => state.products);
-    const [priceValue, setPriceValue] = useState([0, 50000])
-
-    useEffect(() => {
-        if(filterBy === null){
-          setPriceValue([0, 50000]);
-        }
-    }, [filterBy]);
 
     const handleChange = (val) => {
-        setPriceValue(val);
-        dispatch(setFilters({minPrice: val[0], maxPrice: val[1]}));
+        dispatch(setFilters({filterBy: {minPrice: val[0], maxPrice: val[1]}}));
     };
 
     return <div className={"size-filter border-t border-t-gray-200 px-5"}>
@@ -26,12 +18,12 @@ export default function PriceFilter() {
         <div className={"py-3"}>
             <ReactRangeSliderInput className={"!h-[4px]"}
                                    min={0} max={50000}
-                                   value={priceValue}
+                                   value={[filterBy?.minPrice || 0, filterBy?.maxPrice || 50000]}
                                    onInput={handleChange}
             />
             <div className={"flex items-center justify-between p-3 text-[13px] font-[500]"}>
-                <p>From:&nbsp;<span className={"font-[600]"}>₹{priceValue[0]}</span></p>
-                <p>To:&nbsp;<span className={"font-[600]"}>₹{priceValue[1]}</span></p>
+                <p>From:&nbsp;<span className={"font-[600]"}>₹{filterBy?.minPrice || 0}</span></p>
+                <p>To:&nbsp;<span className={"font-[600]"}>₹{filterBy?.maxPrice || 50000}</span></p>
             </div>
         </div>
     </div>

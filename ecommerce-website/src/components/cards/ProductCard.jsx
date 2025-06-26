@@ -12,7 +12,7 @@ export default function ProductCard({product}){
 
     return <div className={"productCard rounded-md bg-orange-50"}>
         <div className={"group imageWrapper h-[220px] rounded-t-md relative overflow-hidden"}>
-            <Link to={`/products/${product.category}/${product.subCategory}/${product.id}`}>
+            <Link to={`/products/details/${product.id}`}>
                 <img className={"w-full h-full rounded-t-md overflow-hidden transition"}
                      src={product.image_url}
                      alt={"poster-image"}
@@ -37,7 +37,7 @@ export default function ProductCard({product}){
             </div>
         </div>
         <div className={"info py-3 px-2 flex flex-col gap-1"}>
-            <Link className={"link"} to={"/"}><h3 className={"text-[14px] font-[500]"}>{product.title}</h3></Link>
+            <Link className={"link"} to={`/products/details/${product.id}`}><h3 className={"text-[14px] font-[500]"}>{product.title}</h3></Link>
             <p className={"text-[12px] text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis"}>{product.short_info}</p>
             <Rating size={"small"} defaultValue={0} readOnly/>
             <div>

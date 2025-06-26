@@ -62,7 +62,7 @@ export const router = createBrowserRouter([
                 Component: Products
             },
             {
-                path: "products/:category/:subCategory/:id",
+                path: "products/details/:id",
                 Component: ProductDetails
             },
             {

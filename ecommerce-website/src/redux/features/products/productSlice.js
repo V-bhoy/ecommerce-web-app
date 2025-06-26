@@ -2,8 +2,8 @@ import {createSlice} from "@reduxjs/toolkit";
 import {
     getAllCategoriesAndSubCategories,
     getAllPopularProducts,
-    getHomePageProducts,
-    getProductsByCategory, getProductsBySubCategory
+    getHomePageProducts, getIdByCategoryAndSubCategory, getProductDetailsById,
+    getProductsByCategory,
 } from "./productThunk.js";
 
 const initialState = {
@@ -20,7 +20,7 @@ const initialState = {
         totalPages: null,
         totalCount: null
     },
-    productDetail: {
+    productDetails: {
         details: null,
         similarProducts: null,
         alsoLikedProducts: null
@@ -51,7 +51,10 @@ const productSlice = createSlice({
         setFilters: (state, action)=>{
             state.filters.filterBy = {
                 ...state.filters.filterBy,
-                ...action.payload
+                ...action.payload.filterBy
+            }
+            state.filters.sortBy = {
+                ...action.payload.sortBy
             }
         },
         removeFilters: (state, action)=>{
@@ -64,12 +67,15 @@ const productSlice = createSlice({
             if(sizes && filterName==="sizes"){
                 state.filters.filterBy.sizes = sizes.filter((item)=>item!==data);
             }
+            if(filterName === "sortBy"){
+                state.filters.sortBy = null;
+            }
         },
-        clearFilters: (state)=>{
+        clearFilters: (state, action)=>{
            state.filters = {
                search: null,
                sortBy: null,
-               filterBy: null
+               filterBy: action.payload || null
            }
         }
     },
@@ -104,10 +110,10 @@ const productSlice = createSlice({
         builder.addCase(getProductsByCategory.pending, loadProductState);
         builder.addCase(getProductsByCategory.fulfilled,(state, action)=>{
             state.isLoading = false;
-            const hasFilters = action.meta.arg?.filters;
+            const hasFilters = action.meta.arg?.filters && Object.keys(action.meta.arg.filters).length > 0;
             const {products, totalPages, totalCount} = action.payload;
             if(hasFilters){
-                state.products.filteredList = products;
+               state.products.filteredList = products;
             }else{
                 state.products.originalList = products;
                 state.products.filteredList = null;
@@ -116,17 +122,19 @@ const productSlice = createSlice({
             state.products.totalPages = totalPages;
         })
         builder.addCase(getProductsByCategory.rejected, setProductsError);
-        builder.addCase(getProductsBySubCategory.pending, loadProductState);
-        builder.addCase(getProductsBySubCategory.fulfilled,(state, action)=>{
+        builder.addCase(getIdByCategoryAndSubCategory.pending, loadProductState);
+        builder.addCase(getIdByCategoryAndSubCategory.fulfilled,(state)=>{
             state.isLoading = false;
-            if(state.filters.filterBy?.subCategory){
-                state.products.filteredList = action.payload?.products;
-            }
-            else{
-                state.products.originalList = action.payload?.products;
-            }
         })
-        builder.addCase(getProductsBySubCategory.rejected, setProductsError);
+        builder.addCase(getIdByCategoryAndSubCategory.rejected, setProductsError);
+        builder.addCase(getProductDetailsById.pending, loadProductState);
+        builder.addCase(getProductDetailsById.fulfilled, (state, action)=>{
+            state.isLoading = false;
+            state.productDetails.details = action.payload.productDetails;
+            state.productDetails.similarProducts = action.payload.similarProducts;
+            state.productDetails.alsoLikedProducts = action.payload.complementaryProducts;
+        })
+        builder.addCase(getProductDetailsById.rejected, setProductsError);
     }
 })
 
