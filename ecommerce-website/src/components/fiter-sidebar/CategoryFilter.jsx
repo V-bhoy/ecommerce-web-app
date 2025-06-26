@@ -9,7 +9,7 @@ export default function CategoryFilter() {
     const {category, subCategory} = useParams();
     const dispatch = useDispatch();
     const {subCategories, filters: {filterBy}} = useSelector((state)=>state.products);
-    const [open, setOpen] = useState( subCategory || false);
+    const [open, setOpen] = useState( true);
 
     const handleChange = (e) =>{
         const {checked: isChecked} = e.target;
@@ -32,7 +32,7 @@ export default function CategoryFilter() {
             <div className={"flex flex-col px-5"}>
                 {subCategories?.[category.toUpperCase()]?.map((c)=>
                     <FormControlLabel key={c.id}
-                                      control={<Checkbox name={c.id} checked={filterBy?.subCategoryIds.includes(c.id) || false} onChange={handleChange}  size={"small"}/>}
+                                      control={<Checkbox name={c.id} checked={filterBy?.subCategoryIds?.includes(c.id) || false} onChange={handleChange}  size={"small"}/>}
                                       label={c.name}
                                       className={"w-full"}/>)}
             </div>

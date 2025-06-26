@@ -9,7 +9,7 @@ import ProductCardListView from "../components/cards/ProductCardListView.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import {getIdByCategoryAndSubCategory, getProductsByCategory} from "../redux/features/products/productThunk.js";
-import {clearFilters, setFilters} from "../redux/features/products/productSlice.js";
+import {clearFilters} from "../redux/features/products/productSlice.js";
 import ProductListShimmer from "../components/loading-skeleton/ProductListShimmer.jsx";
 
 export default function Products() {
@@ -21,12 +21,16 @@ export default function Products() {
     const {isLoading, products: {originalList, filteredList, totalPages, totalCount}, filters: {sortBy, filterBy}} = useSelector(state => state.products);
 
     useEffect(()=>{
+        setPage(1);
         if(subCategory){
             handleSubCategoryUrl();
         }else{
-            dispatch(clearFilters());
+            if(!filterBy && !sortBy){
+                dispatch(getProductsByCategory({category, page, filters: {...filterBy, sortBy} }));
+            }else{
+                dispatch(clearFilters());
+            }
         }
-        setPage(1);
     },[category, subCategory])
 
     useEffect(() => {
@@ -38,7 +42,7 @@ export default function Products() {
         const response = await dispatch(getIdByCategoryAndSubCategory({category, subCategory}));
         if(getIdByCategoryAndSubCategory.fulfilled.match(response)){
             subCategoryId = response.payload.subCategoryId;
-            dispatch(setFilters({filterBy:{subCategoryIds: [subCategoryId]}}));
+            dispatch(clearFilters({subCategoryIds: [subCategoryId]}));
         }
     }
 

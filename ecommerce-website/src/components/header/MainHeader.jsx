@@ -28,15 +28,6 @@ export default function MainHeader() {
                         <Link to={"/register"} className={"link transition text-[14px]"}>Register</Link>
                     </li>}
                     <li>
-                        <Tooltip title={"Compare"}>
-                            <IconButton aria-label={"compare"}>
-                                <Badge anchorOrigin={{vertical: "bottom"}} badgeContent={4} color={"primary"}>
-                                    <LuGitCompareArrows size={"1.4rem"}/>
-                                </Badge>
-                            </IconButton>
-                        </Tooltip>
-                    </li>
-                    <li>
                         <Tooltip title={"Wish List"}>
                             <IconButton onClick={()=>navigate("/wishlist")} aria-label={"wishlist"}>
                                 <Badge anchorOrigin={{vertical: "bottom"}} badgeContent={4} color={"primary"}>

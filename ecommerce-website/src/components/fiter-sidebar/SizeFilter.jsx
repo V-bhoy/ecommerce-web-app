@@ -11,7 +11,7 @@ export default  function SizeFilter(){
     const sizes = category === "footwear" ? footWearSize : clothingSize;
     const dispatch = useDispatch();
     const {filters: {filterBy}} = useSelector((state)=>state.products);
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(filterBy?.sizes?.length || false);
 
     const handleChange = (e) =>{
         const {name, checked: isChecked} = e.target;
