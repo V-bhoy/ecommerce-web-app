@@ -75,11 +75,12 @@ const productSlice = createSlice({
            state.filters = {
                search: null,
                sortBy: null,
-               filterBy: action.payload || null
+               filterBy: action.payload || null // this is to keep the selected subcategory, on clear filter when linked to subcategory url
            }
         }
     },
     extraReducers: (builder)=>{
+        // get homepage products
         builder.addCase(getHomePageProducts.pending, loadProductState);
         builder.addCase(getHomePageProducts.fulfilled, (state, action)=>{
             state.isLoading = false;
@@ -88,8 +89,10 @@ const productSlice = createSlice({
                     latest: action.payload?.data?.latestProducts,
                     featured: action.payload?.data?.featuredProducts
             };
-        })
+        });
         builder.addCase(getHomePageProducts.rejected, setProductsError);
+
+        // get categories and sub categories for navigation
         builder.addCase(getAllCategoriesAndSubCategories.pending, loadProductState);
         builder.addCase(getAllCategoriesAndSubCategories.fulfilled, (state, action)=>{
             state.isLoading = false;
@@ -98,6 +101,8 @@ const productSlice = createSlice({
             state.subCategories = action.payload.subCategories?.subCategories;
         });
         builder.addCase(getAllCategoriesAndSubCategories.rejected, setProductsError);
+
+        // get popular products on homepage
         builder.addCase(getAllPopularProducts.pending, loadProductState);
         builder.addCase(getAllPopularProducts.fulfilled, (state, action)=>{
             state.isLoading = false;
@@ -107,6 +112,8 @@ const productSlice = createSlice({
             }
         })
         builder.addCase(getAllPopularProducts.rejected, setProductsError);
+
+        // get products list
         builder.addCase(getProductsByCategory.pending, loadProductState);
         builder.addCase(getProductsByCategory.fulfilled,(state, action)=>{
             state.isLoading = false;
@@ -122,11 +129,15 @@ const productSlice = createSlice({
             state.products.totalPages = totalPages;
         })
         builder.addCase(getProductsByCategory.rejected, setProductsError);
+
+        // get id from parameters of category and sub category
         builder.addCase(getIdByCategoryAndSubCategory.pending, loadProductState);
         builder.addCase(getIdByCategoryAndSubCategory.fulfilled,(state)=>{
             state.isLoading = false;
         })
         builder.addCase(getIdByCategoryAndSubCategory.rejected, setProductsError);
+
+        // get product details
         builder.addCase(getProductDetailsById.pending, loadProductState);
         builder.addCase(getProductDetailsById.fulfilled, (state, action)=>{
             state.isLoading = false;
