@@ -50,7 +50,7 @@ export default function ProductCard({product, category}){
                 <Button onClick={handleOpenModal} className={"!text-black hover:!text-white !h-[30px] !w-[30px] !min-w-[30px] !rounded-full !bg-white hover:!bg-primary"}>
                     <MdZoomOutMap/>
                 </Button>
-                <Modal open={openModal || isLoading}>
+                <Modal open={openModal || isLoading} onClose={()=>dispatch(clearViewProductModal())}>
                     <Box className={"relative"} sx={{position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "80%"}}>
                         <IoClose onClick={()=>dispatch(clearViewProductModal())} size={"1.3rem"} className={"absolute top-3 right-15  cursor-pointer text-gray-600"}/>
                         {isLoading ? <ProductDetailsShimmer/> : <ProductDetailsSection details={viewProductModal}/>}

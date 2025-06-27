@@ -1,16 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
 
-const initialState = {
-    isLoading: false,
-    error: null,
-    cartItems: localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [],
-    totalQty: 0,
-    totalMrp: 0,
-    totalDiscount: 0,
-    totalAmount: 0
-}
-
-
 const calculateTotals = (cartItems) => {
     return cartItems.reduce(
         (acc, item) => {
@@ -22,6 +11,24 @@ const calculateTotals = (cartItems) => {
         { totalQty: 0, totalMrp: 0, totalDiscount: 0 }
     );
 };
+
+
+const storedItems = localStorage.getItem("cartItems")
+    ? JSON.parse(localStorage.getItem("cartItems"))
+    : [];
+
+const { totalQty, totalMrp, totalDiscount } = calculateTotals(storedItems);
+
+const initialState = {
+    isLoading: false,
+    error: null,
+    cartItems: storedItems,
+    totalQty,
+    totalMrp,
+    totalDiscount,
+    totalAmount: totalMrp - totalDiscount
+}
+
 
 const isSameCartItem = (a, b) => {
     // both without variant — match by product ID only

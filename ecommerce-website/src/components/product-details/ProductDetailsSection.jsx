@@ -10,6 +10,7 @@ import {clothingSize, footWearSize} from "../../constants/sizes.js";
 import {addToCart} from "../../redux/features/cart/cartSlice.js";
 import {mapCartItem} from "../../utils/map-cart-item.js";
 import {useNavigate} from "react-router-dom";
+import {clearViewProductModal} from "../../redux/features/products/productSlice.js";
 
 export default function ProductDetailsSection({details}){
     const dispatch = useDispatch();
@@ -37,8 +38,9 @@ export default function ProductDetailsSection({details}){
         setQty(value);
     }
 
-    const handleAddToCart = ()=>{
+    const handleAddToCart = async()=>{
         const cartItem = mapCartItem({...details, cartVariant, cartQty: qty})
+        await dispatch(clearViewProductModal());
         dispatch(addToCart(cartItem));
         navigate("/cart");
     }

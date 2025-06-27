@@ -1,16 +1,22 @@
 import CartCard from "../components/cards/CartCard.jsx";
 import {Button} from "@mui/material";
-import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {IoClose} from "react-icons/io5";
 import {clearCart} from "../redux/features/cart/cartSlice.js";
+import {createPayment} from "../redux/features/checkout/checkoutThunk.js";
+import {mapCheckoutItems} from "../utils/map-checkout-item.js";
 
 export default function Cart(){
     const {cartItems, totalMrp, totalDiscount, totalAmount} = useSelector(state => state.cart);
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const enableCheckout = cartItems.length>0 && cartItems.every(item => item.cartVariant !== null);
+
+    const handleCheckout = ()=>{
+        const checkoutItems = mapCheckoutItems(cartItems);
+        console.log(checkoutItems);
+        dispatch(createPayment(checkoutItems))
+    }
 
     return <section>
         <div className={"container p-5"}>
@@ -42,16 +48,19 @@ export default function Cart(){
                                 <p>Free</p>
                             </div>
                             <div className={"flex justify-between items-center"}>
-                                <p>GST: </p>
-                                <p>₹ 20</p>
+                                <p>Other Taxes: </p>
+                                <p>5%</p>
                             </div>
                             <hr/>
-                            <div className={"flex justify-between items-center"}>
-                                <p>Total: </p>
-                                <p>₹ {totalAmount}</p>
+                            <div className={"flex justify-between items-start"}>
+                                <p>Sub Total: </p>
+                                <div>
+                                    <p className={"text-end"}>₹ {totalAmount}</p>
+                                    <p className={"text-xs text-red-600"}>(taxes excluded)</p>
+                                </div>
                             </div>
                         </div>
-                        <Button disabled={!enableCheckout} onClick={()=>navigate("/checkout")} variant={"contained"} className={`!w-full  ${!enableCheckout ? "!bg-gray-200" : "!bg-primary"} !my-2`} size={"small"}>Checkout</Button>
+                        <Button disabled={!enableCheckout} onClick={handleCheckout} variant={"contained"} className={`!w-full  ${!enableCheckout ? "!bg-gray-200" : "!bg-primary"} !my-2`} size={"small"}>Checkout</Button>
                     </div>
                 </div>
             </div>
