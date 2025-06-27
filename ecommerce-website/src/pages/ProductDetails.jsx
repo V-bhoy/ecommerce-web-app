@@ -6,26 +6,27 @@ import ProductDetailsTab from "../components/product-details/ProductDetailsTab.j
 import ReviewForm from "../components/review/ReviewForm.jsx";
 import ProductSlider from "../components/carousel/ProductSlider.jsx";
 import ProductDetailsSection from "../components/product-details/ProductDetailsSection.jsx";
-import {getProductDetailsById} from "../redux/features/products/productThunk.js";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 import Shimmer from "../components/loading-skeleton/Shimmer.jsx";
+import ProductDetailsShimmer from "../components/loading-skeleton/ProductDetailsShimmer.jsx";
+import {getProductDetailsById} from "../redux/features/products/productThunk.js";
 
 export default function ProductDetails() {
-    const dispatch = useDispatch();
     const {id} = useParams();
+    const dispatch = useDispatch();
     const [activeTab, setActiveTab] = useState(0);
 
     const {isLoading, productDetails: {details, similarProducts, alsoLikedProducts}} = useSelector(state => state.products);
 
     useEffect(() => {
-        if (id) {
+        if(id){
             dispatch(getProductDetailsById(id));
         }
-    }, [id])
+    }, [id]);
 
     return <section>
-        <ProductDetailsSection/>
+        {isLoading ? <ProductDetailsShimmer/> : <ProductDetailsSection details={details}/>}
         {isLoading ? <div className={"container"}><Shimmer/><Shimmer/></div> : <>
             <div className={"container product-info !mb-5"}>
                 <div className={"flex items-center gap-4 text-[14px] font-[500] p-3"}>

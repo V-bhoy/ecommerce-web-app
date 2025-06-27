@@ -2,13 +2,14 @@ import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import storageSession from 'redux-persist/lib/storage/session';
 import authReducer from "./features/auth/authSlice.js";
 import productsReducer from "./features/products/productSlice.js";
+import cartReducer from "./features/cart/cartSlice.js";
 import {persistReducer, persistStore} from "redux-persist";
-import createFilter, {createWhitelistFilter} from "redux-persist-transform-filter";
 import {FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE} from "redux-persist/es/constants";
 
 const rootReducer = combineReducers({
     auth: authReducer,
-    products: productsReducer
+    products: productsReducer,
+    cart: cartReducer
 })
 
 // const productFilter = createWhitelistFilter("products", ["filters", "categories", "subCategories"]);

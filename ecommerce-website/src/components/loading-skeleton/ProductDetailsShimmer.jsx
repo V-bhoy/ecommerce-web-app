@@ -2,8 +2,8 @@ import React from "react";
 
 export default function ProductDetailsShimmer() {
     return (
-        <div className="animate-pulse bg-white py-10 px-5">
-            <div className="container flex flex-col md:flex-row gap-10">
+        <div className="animate-pulse  bg-white py-10 px-5">
+            <div className="container h-[65vh] flex flex-col md:flex-row gap-10">
                 {/* Left Side - Image */}
                 <div className="w-full md:w-1/2 bg-gray-200 h-[400px] rounded-xl"></div>
 

@@ -3,8 +3,9 @@ import {
     getAllCategoriesAndSubCategories,
     getAllPopularProducts,
     getHomePageProducts, getIdByCategoryAndSubCategory, getProductDetailsById,
-    getProductsByCategory,
+    getProductsByCategory, getProductVariants, viewProductDetailsById,
 } from "./productThunk.js";
+import {act} from "react";
 
 const initialState = {
     isLoading: false,
@@ -31,7 +32,8 @@ const initialState = {
         filterBy: null
     },
     categories: null,
-    subCategories: null
+    subCategories: null,
+    viewProductModal: null
 }
 
 const loadProductState = (state)=>{
@@ -77,6 +79,9 @@ const productSlice = createSlice({
                sortBy: null,
                filterBy: action.payload || null // this is to keep the selected subcategory, on clear filter when linked to subcategory url
            }
+        },
+        clearViewProductModal: (state)=>{
+            state.viewProductModal = null;
         }
     },
     extraReducers: (builder)=>{
@@ -146,8 +151,28 @@ const productSlice = createSlice({
             state.productDetails.alsoLikedProducts = action.payload.complementaryProducts;
         })
         builder.addCase(getProductDetailsById.rejected, setProductsError);
+
+        // view product details
+        builder.addCase(viewProductDetailsById.pending, (state, action)=>{
+            state.viewProductModal = action.meta.arg;
+            state.error = null;
+        });
+        builder.addCase(viewProductDetailsById.fulfilled,(state, action)=>{
+            state.viewProductModal = action.payload.productDetails
+        })
+        builder.addCase(viewProductDetailsById.rejected, (state, action)=>{
+            state.viewProductModal = null;
+            state.error = action?.error?.message || "Request failed!";
+        });
+
+        // get product variants
+        builder.addCase(getProductVariants.pending, loadProductState);
+        builder.addCase(getProductVariants.fulfilled,(state)=>{
+            state.isLoading = false;
+        })
+        builder.addCase(getProductVariants.rejected, setProductsError);
     }
 })
 
-export const {setFilters, removeFilters, clearFilters} = productSlice.actions;
+export const {setFilters, removeFilters, clearFilters, clearViewProductModal} = productSlice.actions;
 export default productSlice.reducer;

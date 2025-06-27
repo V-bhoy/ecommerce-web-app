@@ -1,14 +1,17 @@
 import Filters from "../components/fiter-sidebar/Filters.jsx";
 import ProductCard from "../components/cards/ProductCard.jsx";
 import {Button, Pagination} from "@mui/material";
-import {IoGrid} from "react-icons/io5";
+import { IoGrid} from "react-icons/io5";
 import {FaListUl} from "react-icons/fa6";
 import SortByFilter from "../components/sorting/SortByFilter.jsx";
 import {useEffect, useState} from "react";
 import ProductCardListView from "../components/cards/ProductCardListView.jsx";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
-import {getIdByCategoryAndSubCategory, getProductsByCategory} from "../redux/features/products/productThunk.js";
+import {
+    getIdByCategoryAndSubCategory,
+    getProductsByCategory,
+} from "../redux/features/products/productThunk.js";
 import {clearFilters} from "../redux/features/products/productSlice.js";
 import ProductListShimmer from "../components/loading-skeleton/ProductListShimmer.jsx";
 
@@ -48,7 +51,6 @@ export default function Products() {
 
     const productsToRender = filteredList || originalList;
 
-
     return <div className={"pages"}>
         <section className={"bg-white w-full py-5 pt-10"}>
             { isLoading ? <ProductListShimmer/> :
@@ -75,8 +77,8 @@ export default function Products() {
                         </div>
                     </div>
                     <div className={`grid ${itemView === "grid" ? "grid-cols-4 md:grid-cols-4" : "grid-cols-1 md:grid-cols-1"} gap-4`}>
-                        {itemView === "grid" ? productsToRender?.map(product=><ProductCard key={product.id} product={product}/>):
-                            productsToRender?.map(product=><ProductCardListView key={product.id} product={product}/>)
+                        {itemView === "grid" ? productsToRender?.map(product=><ProductCard key={product.id} product={product} category={category}/>):
+                            productsToRender?.map(product=><ProductCardListView key={product.id} product={product} category={category}/>)
                         }
                     </div>
                     <div className={"flex items-center justify-center py-5 !mt-5"}>

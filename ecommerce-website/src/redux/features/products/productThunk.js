@@ -38,3 +38,13 @@ export const getProductDetailsById = createAsyncThunk("getProductDetails", async
     const response = await axiosInstance.get(`products/${productId}`);
     return response.data;
 })
+
+export const viewProductDetailsById = createAsyncThunk("viewProductDetails", async(productId)=>{
+    const response = await axiosInstance.get(`products/${productId}?viewOnly=true`);
+    return response.data;
+})
+
+export const getProductVariants = createAsyncThunk("getProductVariants", async(id)=>{
+    const response = await axiosInstance.get(`/variants/inStock/${id}`);
+    return response.data;
+})

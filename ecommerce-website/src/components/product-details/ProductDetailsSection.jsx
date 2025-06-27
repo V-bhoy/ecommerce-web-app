@@ -4,25 +4,43 @@ import {FaCartShopping, FaRegHeart} from "react-icons/fa6";
 import {IoShareSocial} from "react-icons/io5";
 import SelectSize from "./SelectSize.jsx";
 import SelectQty from "./SelectQty.jsx";
-import {useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {useState} from "react";
 import {clothingSize, footWearSize} from "../../constants/sizes.js";
-import ProductDetailsShimmer from "../loading-skeleton/ProductDetailsShimmer.jsx";
+import {addToCart} from "../../redux/features/cart/cartSlice.js";
+import {mapCartItem} from "../../utils/map-cart-item.js";
+import {useNavigate} from "react-router-dom";
 
-export default function ProductDetailsSection(){
-    const {isLoading, productDetails: {details}} = useSelector((state)=>state.products);
-    const showSizes = details?.category === "FOOTWEAR" ? footWearSize : clothingSize;
+export default function ProductDetailsSection({details}){
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const sizes = details?.category === "FOOTWEAR" ? footWearSize : details?.category==="ACCESSORIES" ? null:  clothingSize;
+    const availableSizes = details?.variants?.map((sku)=>sku?.size);
+    const [cartVariant, setCartVariant] = useState(null);
     const [size, setSize] = useState(null);
     const [qty, setQty] = useState(0);
 
-    const selectedVariantQty = size ? details?.variants?.reduce((acc, v)=>{if(v.size === size){
-        acc = acc + (+v.qty);
-    } return acc; },0) : null;
+    const selectedVariantQty = cartVariant ? cartVariant.qty : null;
     const totalAvailableQty = details?.variants?.reduce((acc, v)=>acc+(+v.qty), 0);
     const availableQty = selectedVariantQty || totalAvailableQty;
 
-    if(isLoading){
-        return <ProductDetailsShimmer/>
+    const handleSize = (e)=>{
+        setSize(e.target.value);
+        const sku = details?.variants?.find(sku=>sku.size === e.target.value);
+        if(qty > sku.qty) setQty(1);
+        setCartVariant(sku);
+    }
+
+    const handleQty = (e)=>{
+        let value = e.target.value;
+        if(value) value = Math.max(1, Math.min(availableQty, Number(e.target.value)));
+        setQty(value);
+    }
+
+    const handleAddToCart = ()=>{
+        const cartItem = mapCartItem({...details, cartVariant, cartQty: qty})
+        dispatch(addToCart(cartItem));
+        navigate("/cart");
     }
 
     return  <div className={"container flex px-6 py-5 gap-4 bg-white"}>
@@ -55,11 +73,11 @@ export default function ProductDetailsSection(){
                                 Free Shipping - Delivery estimated in 2-3 days.
                             </span>
                 </div>
-                {details?.category !== "ACCESSORIES" && <SelectSize size={size} handleSize={setSize} sizes={showSizes} variants={details?.variants}/>}
-                <SelectQty availableQty={availableQty} qty={qty} setQty={setQty}/>
+                {sizes && <SelectSize size={size} handleSize={handleSize} sizes={sizes} available={availableSizes}/>}
+                <SelectQty qty={qty} handleQty={handleQty}/>
             </div>
             <div className={"py-4 px-2 flex gap-4"}>
-                <Button className={"!bg-primary !text-[13px] !font-[500]"} variant={"contained"} size={"small"}>
+                <Button disabled={details?.inStock === false} onClick={handleAddToCart} className={"!bg-primary !text-[13px] !font-[500]"} variant={"contained"} size={"small"}>
                     <FaCartShopping className={"!mr-2"}/>Add To Cart
                 </Button>
                 <div className={"shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),0px_1px_3px_1px_rgba(60,64,67,0.15)] flex items-center gap-2 cursor-pointer bg-orange-100 text-primary text-[14px] p-1 px-3 rounded-md hover:bg-secondary hover:text-white transition"}>
