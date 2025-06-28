@@ -26,6 +26,7 @@ const initialState = {
     totalQty,
     totalMrp,
     totalDiscount,
+    gst: 20,
     totalAmount: totalMrp - totalDiscount
 }
 

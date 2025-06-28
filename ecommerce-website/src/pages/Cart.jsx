@@ -3,20 +3,14 @@ import {Button} from "@mui/material";
 import {useDispatch, useSelector} from "react-redux";
 import {IoClose} from "react-icons/io5";
 import {clearCart} from "../redux/features/cart/cartSlice.js";
-import {createPayment} from "../redux/features/checkout/checkoutThunk.js";
-import {mapCheckoutItems} from "../utils/map-checkout-item.js";
+import {useNavigate} from "react-router-dom";
 
 export default function Cart(){
-    const {cartItems, totalMrp, totalDiscount, totalAmount} = useSelector(state => state.cart);
+    const {cartItems, totalMrp, totalDiscount, totalAmount, gst} = useSelector(state => state.cart);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const enableCheckout = cartItems.length>0 && cartItems.every(item => item.cartVariant !== null);
-
-    const handleCheckout = ()=>{
-        const checkoutItems = mapCheckoutItems(cartItems);
-        console.log(checkoutItems);
-        dispatch(createPayment(checkoutItems))
-    }
 
     return <section>
         <div className={"container p-5"}>
@@ -48,19 +42,19 @@ export default function Cart(){
                                 <p>Free</p>
                             </div>
                             <div className={"flex justify-between items-center"}>
-                                <p>Other Taxes: </p>
-                                <p>5%</p>
+                                <p>GST: </p>
+                                <p>₹ {gst}</p>
                             </div>
                             <hr/>
                             <div className={"flex justify-between items-start"}>
                                 <p>Sub Total: </p>
                                 <div>
-                                    <p className={"text-end"}>₹ {totalAmount}</p>
-                                    <p className={"text-xs text-red-600"}>(taxes excluded)</p>
+                                    <p className={"text-end"}>₹ {totalAmount + gst}</p>
+                                    <p className={"text-xs text-red-600"}>(taxes included)</p>
                                 </div>
                             </div>
                         </div>
-                        <Button disabled={!enableCheckout} onClick={handleCheckout} variant={"contained"} className={`!w-full  ${!enableCheckout ? "!bg-gray-200" : "!bg-primary"} !my-2`} size={"small"}>Checkout</Button>
+                        <Button disabled={!enableCheckout} onClick={()=>navigate("/checkout")} variant={"contained"} className={`!w-full  ${!enableCheckout ? "!bg-gray-200" : "!bg-primary"} !my-2`} size={"small"}>Checkout</Button>
                     </div>
                 </div>
             </div>

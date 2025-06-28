@@ -1,16 +1,10 @@
 export function mapCheckoutItems(cartItems){
     return cartItems.map(item=>({
-        price_data : {
-            currency: "usd",
-            product_data: {
-                name: item.title,
-                metadata: {
-                    productId: item.id,
-                    sku: item.cartVariant.sku_id,
-                }
-            },
-            unit_amount: Math.round(item.priceAfterDiscount / 89)*100,
-        },
-        quantity: item.cartQty
+        id: item.id,
+        mrp: item.mrp,
+        discount: item.discount,
+        priceAfterDiscount: item.priceAfterDiscount,
+        sku_id: item.cartVariant.sku_id,
+        cartQty: item.cartQty
     }))
 }

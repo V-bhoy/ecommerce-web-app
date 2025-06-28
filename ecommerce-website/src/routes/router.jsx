@@ -15,7 +15,6 @@ import Wishlist from "../pages/Wishlist.jsx";
 import CreateNewPassword from "../pages/CreateNewPassword.jsx";
 import PublicRoute from "../pages/PublicRoute.jsx";
 import PrivateRoute from "../pages/PrivateRoute.jsx";
-import CheckoutSuccess from "../pages/CheckoutSuccess.jsx";
 
 export const router = createBrowserRouter([
     {
@@ -68,17 +67,12 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/cart",
-                // element: <PrivateRoute><Cart/></PrivateRoute>
-                element: <Cart/>
+                element: <PrivateRoute><Cart/></PrivateRoute>
             },
             {
                 path: "/checkout",
                 element: <PrivateRoute><Checkout/></PrivateRoute>
             },
-            {
-                path:"/checkout/success",
-                element: <CheckoutSuccess/>
-            }
         ]
     },
     {

@@ -9,6 +9,7 @@ import {useSelector} from "react-redux";
 
 export default function MainHeader() {
     const {isLoggedIn} = useSelector(state=>state.auth);
+    const {cartItems} = useSelector(state=>state.cart);
     const navigate = useNavigate();
     return <div className={"border-b-1 border-gray-200"}>
         <div className={"container flex items-center justify-between"}>
@@ -39,7 +40,7 @@ export default function MainHeader() {
                     <li>
                         <Tooltip title={"Cart"}>
                             <IconButton aria-label={"cart"} onClick={() => navigate("/cart")}>
-                                <Badge anchorOrigin={{vertical: "bottom"}} badgeContent={4} color={"primary"}>
+                                <Badge anchorOrigin={{vertical: "bottom"}} badgeContent={cartItems.length} color={"primary"}>
                                     <LuShoppingCart size={"1.4rem"}/>
                                 </Badge>
                             </IconButton>
