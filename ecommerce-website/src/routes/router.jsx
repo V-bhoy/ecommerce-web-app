@@ -54,6 +54,14 @@ export const router = createBrowserRouter([
                 element: <PrivateRoute><Wishlist/></PrivateRoute>
             },
             {
+                path: "products",
+                Component: Products
+            },
+            {
+                path: "products/wishlist",
+                element: <PrivateRoute><Products/></PrivateRoute>
+            },
+            {
                 path: "products/:category",
                 Component: Products
             },

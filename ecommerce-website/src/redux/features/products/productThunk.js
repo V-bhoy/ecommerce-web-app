@@ -29,6 +29,12 @@ export const getProductsByCategory = createAsyncThunk("categoryProducts", async(
     return response.data;
 })
 
+export const getAllProducts = createAsyncThunk("allProducts", async({filters, page=1, limit=12, wishlist= false})=>{
+   const url = `${wishlist ? "wishlist" : "products"}/all/?page=${page}&limit=${limit}`
+    const response = await axiosInstance.post(url, filters);
+    return response.data;
+})
+
 export const getIdByCategoryAndSubCategory = createAsyncThunk("categoryAndSubCategoryId", async({category, subCategory})=>{
     const response = await axiosInstance.get(`products/id/?category=${category}&subCategory=${subCategory}`);
     return response.data;
@@ -46,5 +52,15 @@ export const viewProductDetailsById = createAsyncThunk("viewProductDetails", asy
 
 export const getProductVariants = createAsyncThunk("getProductVariants", async(id)=>{
     const response = await axiosInstance.get(`/variants/inStock/${id}`);
+    return response.data;
+})
+
+export const addWishlistProduct = createAsyncThunk("addWishlistProduct", async(productId)=>{
+    const response = await axiosInstance.post(`/wishlist/add`, {productId} );
+    return response.data;
+})
+
+export const removeWishlistProduct = createAsyncThunk("removeWishlistProduct", async(productId)=>{
+    const response = await axiosInstance.post(`/wishlist/remove`, {productId} );
     return response.data;
 })

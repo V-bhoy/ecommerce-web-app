@@ -5,24 +5,50 @@ import {FaRegHeart} from "react-icons/fa6";
 import {mapCartItem} from "../../utils/map-cart-item.js";
 import {addToCart} from "../../redux/features/cart/cartSlice.js";
 import {useDispatch, useSelector} from "react-redux";
-import {viewProductDetailsById} from "../../redux/features/products/productThunk.js";
+import {
+    addWishlistProduct,
+    removeWishlistProduct,
+    viewProductDetailsById
+} from "../../redux/features/products/productThunk.js";
 import {IoClose} from "react-icons/io5";
 import {clearViewProductModal} from "../../redux/features/products/productSlice.js";
 import ProductDetailsShimmer from "../loading-skeleton/ProductDetailsShimmer.jsx";
 import ProductDetailsSection from "../product-details/ProductDetailsSection.jsx";
+import {FaHeart} from "react-icons/fa";
 
-export default function ProductCardListView({product, category}){
+export default function ProductCardListView({product, category, refetch, enableWishlist=false}){
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {viewProductModal} = useSelector(state=>state.products);
+    const {isLoggedIn} = useSelector(state => state.auth);
 
     const handleAddToCart = ()=>{
-        // const userLoggedIn = localStorage.getItem("isLoggedIn");
-        // if(userLoggedIn){
+        if(!isLoggedIn){
+            navigate("/login");
+            return;
+        }
         const productItem = mapCartItem({...product, category});
         dispatch(addToCart(productItem));
-        // }
         navigate("/cart");
+    }
+
+    const handleWishlist = async()=>{
+        if(!isLoggedIn){
+            navigate("/login");
+            return;
+        }
+        if(!product?.isWishlisted){
+            const result = await dispatch(addWishlistProduct(product.id));
+            if(addWishlistProduct.fulfilled.match(result)){
+                refetch();
+            }
+        }else {
+            const result = await dispatch(removeWishlistProduct(product.id));
+            if(removeWishlistProduct.fulfilled.match(result)){
+                refetch();
+            }
+        }
+
     }
 
     const handleOpenModal = ()=>{
@@ -54,9 +80,9 @@ export default function ProductCardListView({product, category}){
                         {isLoading ? <ProductDetailsShimmer/> : <ProductDetailsSection details={viewProductModal}/>}
                     </Box>
                 </Modal>
-                <Button className={"!text-black hover:!text-white !h-[30px] !w-[30px] !min-w-[30px] !rounded-full !bg-white hover:!bg-primary"}>
-                    <FaRegHeart/>
-                </Button>
+                {enableWishlist && <Button onClick={handleWishlist} className={`!text-black hover:!text-red-700 !h-[30px] !w-[30px] !min-w-[30px] !rounded-full !bg-white hover:!bg-orange-100`}>
+                    {product?.isWishlisted ? <FaHeart  color={"red"}/> : <FaRegHeart/>}
+                </Button>}
             </div>
         </div>
         <div className={"info px-2 py-6 flex flex-col gap-1"}>

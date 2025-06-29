@@ -1,11 +1,11 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {createOrder, updateOrderPaymentFailed, verifyOrderPayment} from "./checkoutThunk.js";
+import {createOrder, getAllOrders, updateOrderPaymentFailed, verifyOrderPayment} from "./checkoutThunk.js";
 
 
 const initialState = {
     isLoading: false,
     error: null,
-    data: null
+    orders: null
 }
 
 const checkoutSlice = createSlice({
@@ -37,6 +37,13 @@ const checkoutSlice = createSlice({
         builder.addCase(updateOrderPaymentFailed.rejected, (state, action)=>{
             console.log(action.error);
         });
+        builder.addCase(getAllOrders.pending, (state)=>{
+            state.isLoading = true;
+        });
+        builder.addCase(getAllOrders.fulfilled, (state, action)=>{
+            state.isLoading = false;
+            state.orders = action.payload.orders;
+        })
     }
 })
 

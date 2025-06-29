@@ -14,7 +14,7 @@ export default function TopHeader(){
                             <Link to={"#"} className={"link"}>Help Center</Link>
                         </li>
                         <li className={"list-none text-[13px] font-[500]"}>
-                            <Link to={"#"} className={"link"}>Orders</Link>
+                            <Link to={"/orders"} className={"link"}>Orders</Link>
                         </li>
                     </ul>
                 </div>

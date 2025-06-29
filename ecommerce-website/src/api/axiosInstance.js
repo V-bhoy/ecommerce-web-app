@@ -1,7 +1,5 @@
 import axios from "axios";
 import {setAccessToken} from "../redux/features/auth/authSlice.js";
-import {logoutUser} from "../redux/features/auth/authThunk.js";
-
 const BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080/api";
 
 
@@ -14,6 +12,7 @@ export default function createAxiosInstance({store}){
     axiosInstance.interceptors.request.use((config)=>{
         console.log("REQUEST URL: ", config.url);
         const accessToken = store.getState().auth.accessToken;
+        console.log("ACCESS TOKEN", accessToken)
         if(accessToken){
             config.headers.Authorization = `Bearer ${accessToken}`;
         }

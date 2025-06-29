@@ -6,6 +6,7 @@ import {LuGitCompareArrows, LuShoppingCart} from "react-icons/lu";
 import {FaRegHeart} from "react-icons/fa6";
 import UserAccount from "./UserAccount.jsx";
 import {useSelector} from "react-redux";
+import {FaHeart} from "react-icons/fa";
 
 export default function MainHeader() {
     const {isLoggedIn} = useSelector(state=>state.auth);
@@ -30,10 +31,8 @@ export default function MainHeader() {
                     </li>}
                     <li>
                         <Tooltip title={"Wish List"}>
-                            <IconButton onClick={()=>navigate("/wishlist")} aria-label={"wishlist"}>
-                                <Badge anchorOrigin={{vertical: "bottom"}} badgeContent={4} color={"primary"}>
-                                    <FaRegHeart size={"1.3rem"}/>
-                                </Badge>
+                            <IconButton onClick={()=>navigate("/products/wishlist")} aria-label={"wishlist"}>
+                                    <FaHeart color={"red"} size={"1.3rem"}/>
                             </IconButton>
                         </Tooltip>
                     </li>

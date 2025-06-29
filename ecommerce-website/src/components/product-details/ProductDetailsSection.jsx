@@ -4,17 +4,21 @@ import {FaCartShopping, FaRegHeart} from "react-icons/fa6";
 import {IoShareSocial} from "react-icons/io5";
 import SelectSize from "./SelectSize.jsx";
 import SelectQty from "./SelectQty.jsx";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useState} from "react";
 import {clothingSize, footWearSize} from "../../constants/sizes.js";
 import {addToCart} from "../../redux/features/cart/cartSlice.js";
 import {mapCartItem} from "../../utils/map-cart-item.js";
 import {useNavigate} from "react-router-dom";
 import {clearViewProductModal} from "../../redux/features/products/productSlice.js";
+import {addWishlistProduct, removeWishlistProduct} from "../../redux/features/products/productThunk.js";
+import {notifySuccessToast} from "../toasts/toasts.js";
+import {FaHeart} from "react-icons/fa";
 
-export default function ProductDetailsSection({details}){
+export default function ProductDetailsSection({details, refetch}){
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const {isLoggedIn} = useSelector(state=>state.auth);
     const sizes = details?.category === "FOOTWEAR" ? footWearSize : details?.category==="ACCESSORIES" ? null:  clothingSize;
     const availableSizes = details?.variants?.map((sku)=>sku?.size);
     const [cartVariant, setCartVariant] = useState(null);
@@ -43,6 +47,27 @@ export default function ProductDetailsSection({details}){
         await dispatch(clearViewProductModal());
         dispatch(addToCart(cartItem));
         navigate("/cart");
+    }
+
+    const handleWishlist = async()=>{
+        if(!isLoggedIn){
+            navigate("/login");
+            return;
+        }
+        if(!details?.isWishlisted){
+            const result = await dispatch(addWishlistProduct(details.id));
+            if(addWishlistProduct.fulfilled.match(result)){
+                notifySuccessToast("Added  to wishlist successfully!")
+                refetch(details.id);
+            }
+        }else {
+            const result = await dispatch(removeWishlistProduct(details.id));
+            if(removeWishlistProduct.fulfilled.match(result)){
+                notifySuccessToast("Removed from wishlist successfully!");
+                refetch(details.id);
+            }
+        }
+
     }
 
     return  <div className={"container flex px-6 py-5 gap-4 bg-white"}>
@@ -82,8 +107,8 @@ export default function ProductDetailsSection({details}){
                 <Button disabled={details?.inStock === false} onClick={handleAddToCart} className={"!bg-primary !text-[13px] !font-[500]"} variant={"contained"} size={"small"}>
                     <FaCartShopping className={"!mr-2"}/>Add To Cart
                 </Button>
-                <div className={"shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),0px_1px_3px_1px_rgba(60,64,67,0.15)] flex items-center gap-2 cursor-pointer bg-orange-100 text-primary text-[14px] p-1 px-3 rounded-md hover:bg-secondary hover:text-white transition"}>
-                    <FaRegHeart/><span>Add To Wishlist</span>
+                <div onClick={handleWishlist} className={"shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),0px_1px_3px_1px_rgba(60,64,67,0.15)] flex items-center gap-2 cursor-pointer bg-orange-100 text-primary text-[14px] p-1 px-3 rounded-md hover:bg-secondary hover:text-white transition"}>
+                    {details?.isWishlisted ? <FaHeart color={"red"}/> : <FaRegHeart/>}<span>{details?.isWishlisted ? "Remove From" : "Add To"} Wishlist</span>
                 </div>
                 <div className={"shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),0px_1px_3px_1px_rgba(60,64,67,0.15)] flex items-center gap-2 cursor-pointer bg-orange-100 text-primary text-[14px] p-1 px-3 rounded-md hover:bg-secondary hover:text-white transition"}>
                     <IoShareSocial/><span>Share</span>

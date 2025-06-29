@@ -29,7 +29,7 @@ export default function Filters(){
       <div className={"flex items-center justify-end text-sm px-5"}>
           <p onClick={clearAppliedFilters} className={"cursor-pointer text-red-600 bg-red-100 px-3 py-1 rounded-sm hover:underline"}>Clear Filters</p>
       </div>
-      <CategoryFilter/>
+      {category && <CategoryFilter/>}
       <AvailabilityFilter/>
       {category === "accessories" ? null : <SizeFilter/>}
       <PriceFilter/>

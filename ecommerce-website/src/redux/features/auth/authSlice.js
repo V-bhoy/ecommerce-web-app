@@ -11,7 +11,7 @@ import {
 // initial auth state
 const initialState = {
     isLoading: false,
-    isLoggedIn: false,
+    isLoggedIn: localStorage.getItem("isLoggedIn") || false,
     accessToken: null,
     user: null,
     error: null,

@@ -7,10 +7,11 @@ import ReviewForm from "../components/review/ReviewForm.jsx";
 import ProductSlider from "../components/carousel/ProductSlider.jsx";
 import ProductDetailsSection from "../components/product-details/ProductDetailsSection.jsx";
 import {useDispatch, useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Shimmer from "../components/loading-skeleton/Shimmer.jsx";
 import ProductDetailsShimmer from "../components/loading-skeleton/ProductDetailsShimmer.jsx";
 import {getProductDetailsById} from "../redux/features/products/productThunk.js";
+
 
 export default function ProductDetails() {
     const {id} = useParams();
@@ -18,6 +19,8 @@ export default function ProductDetails() {
     const [activeTab, setActiveTab] = useState(0);
 
     const {isLoading, productDetails: {details, similarProducts, alsoLikedProducts}} = useSelector(state => state.products);
+    const refetch = (id)=>dispatch(getProductDetailsById(id));
+
 
     useEffect(() => {
         if(id){
@@ -26,7 +29,7 @@ export default function ProductDetails() {
     }, [id]);
 
     return <section>
-        {isLoading ? <ProductDetailsShimmer/> : <ProductDetailsSection details={details}/>}
+        {isLoading ? <ProductDetailsShimmer/> : <ProductDetailsSection details={details} refetch={refetch}/>}
         {isLoading ? <div className={"container"}><Shimmer/><Shimmer/></div> : <>
             <div className={"container product-info !mb-5"}>
                 <div className={"flex items-center gap-4 text-[14px] font-[500] p-3"}>

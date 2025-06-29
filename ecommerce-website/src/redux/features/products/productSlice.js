@@ -1,11 +1,10 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {
     getAllCategoriesAndSubCategories,
-    getAllPopularProducts,
+    getAllPopularProducts, getAllProducts,
     getHomePageProducts, getIdByCategoryAndSubCategory, getProductDetailsById,
     getProductsByCategory, getProductVariants, viewProductDetailsById,
 } from "./productThunk.js";
-import {act} from "react";
 
 const initialState = {
     isLoading: false,
@@ -29,7 +28,7 @@ const initialState = {
     filters: {
         search: null,
         sortBy: null,
-        filterBy: null
+        filterBy: null,
     },
     categories: null,
     subCategories: null,
@@ -51,12 +50,16 @@ const productSlice = createSlice({
     initialState,
     reducers: {
         setFilters: (state, action)=>{
+            const {filterBy, sortBy, search} = action.payload;
             state.filters.filterBy = {
                 ...state.filters.filterBy,
-                ...action.payload.filterBy
+                ...filterBy
             }
             state.filters.sortBy = {
-                ...action.payload.sortBy
+                ...sortBy
+            }
+            if(search){
+                state.filters.search = search
             }
         },
         removeFilters: (state, action)=>{
@@ -72,6 +75,10 @@ const productSlice = createSlice({
             if(filterName === "sortBy"){
                 state.filters.sortBy = null;
             }
+            if(filterName === "search"){
+                state.filters.search = null;
+            }
+            state.filters.activePage = 1;;
         },
         clearFilters: (state, action)=>{
            state.filters = {
@@ -135,6 +142,23 @@ const productSlice = createSlice({
         })
         builder.addCase(getProductsByCategory.rejected, setProductsError);
 
+        // get all products
+        builder.addCase(getAllProducts.pending, loadProductState);
+        builder.addCase(getAllProducts.fulfilled,(state, action)=>{
+            state.isLoading = false;
+            const hasFilters = action.meta.arg?.filters && Object.keys(action.meta.arg.filters).length > 0;
+            const {products, totalPages, totalCount} = action.payload;
+            if(hasFilters){
+                state.products.filteredList = products;
+            }else{
+                state.products.originalList = products;
+                state.products.filteredList = null;
+            }
+            state.products.totalCount = totalCount;
+            state.products.totalPages = totalPages;
+        })
+        builder.addCase(getAllProducts.rejected, setProductsError);
+
         // get id from parameters of category and sub category
         builder.addCase(getIdByCategoryAndSubCategory.pending, loadProductState);
         builder.addCase(getIdByCategoryAndSubCategory.fulfilled,(state)=>{
@@ -171,6 +195,7 @@ const productSlice = createSlice({
             state.isLoading = false;
         })
         builder.addCase(getProductVariants.rejected, setProductsError);
+
     }
 })
 

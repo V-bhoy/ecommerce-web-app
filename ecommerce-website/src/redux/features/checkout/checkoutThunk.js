@@ -16,3 +16,8 @@ export const updateOrderPaymentFailed = createAsyncThunk("updateOrderPaymentFail
     const response = await axiosInstance.post("/orders/payment/failed", {orderId});
     return response.data;
 })
+
+export const getAllOrders = createAsyncThunk("getAllOrders", async()=>{
+    const response = await axiosInstance.get("/orders/all");
+    return response.data;
+})
