@@ -76,8 +76,8 @@ export default function ProductDetailsSection({details, refetch}){
             <div className={"py-2"}>
                 <h3 className={"text-[1.8rem] text-primary font-[300]"}>{details?.title}</h3>
                 <div className={"flex gap-3"}>
-                    <Rating size={"small"} value={0}/>
-                    <span className={"text-[13px] text-gray-400"}>Reviews (0)</span>
+                    <Rating size={"small"} value={details?.rating || 0} readOnly/>
+                    <span className={"text-[13px] text-gray-400"}>Reviews ({details?.totalReviews})</span>
                 </div>
             </div>
             <p className={"text-[14px] font-[500]"}>{details?.short_info}</p>

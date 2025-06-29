@@ -89,7 +89,7 @@ export default function ProductCardListView({product, category, refetch, enableW
             <Link className={"link"} to={`/products/details/${product.id}`}><h3 className={"text-[14px] font-[500]"}>{product.title}</h3></Link>
             <p className={"text-[12px] text-primary font-[500]"}>{product.short_info}</p>
             <p className={"text-[11px] text-gray-500"}>{product.description}</p>
-            <Rating size={"small"} defaultValue={4} readOnly/>
+            <Rating size={"small"} defaultValue={product?.rating || 0} readOnly/>
             <div>
                 <span className={"text-[13px] text-gray-500 line-through font-[500] !mr-2"}>₹{product.mrp}</span>
                 <span className={"text-[13px] font-[500] text-primary"}>₹{product.priceAfterDiscount}</span>

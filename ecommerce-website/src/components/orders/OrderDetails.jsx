@@ -1,3 +1,5 @@
+import {formatDate} from "../../utils/format-date.js";
+
 export default function OrderDetails({openOrder}) {
     return <div className={"bg-white p-5 h-[50vh] overflow-auto"}>
         <h3 className={"text-primary font-[400] !mb-3"}>Order Details: </h3>
@@ -46,15 +48,11 @@ export default function OrderDetails({openOrder}) {
                 </div>
                 <div className={"p-1 flex gap-5 items-center"}>
                     <p className={"text-[13px] font-[500]"}>Ordered At: </p>
-                    <p className={"text-[13px] text-gray-500"}>{new Date(openOrder?.created_at).toLocaleString("en-US", {
-                        timeZone: "Asia/Kolkata",
-                    })}</p>
+                    <p className={"text-[13px] text-gray-500"}>{formatDate(openOrder?.created_at)}</p>
                 </div>
                 <div className={"p-1 flex gap-5 items-center"}>
                     <p className={"text-[13px] font-[500]"}>Delivered At: </p>
-                    <p className={"text-[13px] text-gray-500"}>{openOrder?.paid_at ? new Date(openOrder?.paid_at).toLocaleString("en-US", {
-                        timeZone: "Asia/Kolkata",
-                    }) : "-"}</p>
+                    <p className={"text-[13px] text-gray-500"}>{openOrder?.paid_at ? formatDate(openOrder.paid_at) : "-"}</p>
                 </div>
             </div>
             <div className={"flex flex-col gap-1"}>

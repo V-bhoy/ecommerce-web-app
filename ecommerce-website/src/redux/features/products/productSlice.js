@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import {
     getAllCategoriesAndSubCategories,
     getAllPopularProducts, getAllProducts,
-    getHomePageProducts, getIdByCategoryAndSubCategory, getProductDetailsById,
+    getHomePageProducts, getIdByCategoryAndSubCategory, getProductDetailsById, getProductReviews,
     getProductsByCategory, getProductVariants, viewProductDetailsById,
 } from "./productThunk.js";
 
@@ -195,6 +195,7 @@ const productSlice = createSlice({
             state.isLoading = false;
         })
         builder.addCase(getProductVariants.rejected, setProductsError);
+
 
     }
 })

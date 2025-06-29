@@ -64,3 +64,18 @@ export const removeWishlistProduct = createAsyncThunk("removeWishlistProduct", a
     const response = await axiosInstance.post(`/wishlist/remove`, {productId} );
     return response.data;
 })
+
+export const addProductReview = createAsyncThunk("addReview", async(reviewData)=>{
+    const response = await axiosInstance.post("/review/create", reviewData);
+    return response.data;
+})
+
+export const getProductReviews = createAsyncThunk("getProductReviews", async(productId)=>{
+    const response = await axiosInstance.get(`/review/all/${productId}`);
+    return response.data;
+})
+
+export const getReviewStats = createAsyncThunk("reviewStats", async(productId)=>{
+    const response = await axiosInstance.get(`/review/stats/${productId}`);
+    return response.data;
+})

@@ -170,7 +170,8 @@ nav button {
 }
 
 .MuiInputLabel-outlined {
-    font-size: 15px !important;
+    font-size: 12px !important;
+    top: -6px !important;
 }
 
 .MuiOutlinedInput-root {
@@ -178,10 +179,6 @@ nav button {
 }
 
 .qty-input>.MuiInputBase-root {
-    height: 1.9rem !important;
-}
-
-.MuiOutlinedInput-root.select {
     height: 1.9rem !important;
 }
 

@@ -6,12 +6,14 @@ import {FaAngleDown, FaAngleUp} from "react-icons/fa6";
 import {useState} from "react";
 import {sortingOptions} from "../../constants/sorting-options.js";
 import {removeFilters, setFilters} from "../../redux/features/products/productSlice.js";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 export default function SortByFilter() {
     const dispatch = useDispatch();
+    const {filters: {sortBy}} = useSelector(state => state.products);
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [sortItem, setSortItem] = useState(null);
+    const initialSort = sortingOptions.find(item=>(item.name === sortBy?.name) && (item.value === sortBy?.value));
+    const [sortItem, setSortItem] = useState(initialSort || null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);

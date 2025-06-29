@@ -4,6 +4,7 @@ import {getAllOrders} from "../redux/features/checkout/checkoutThunk.js";
 import {Box, Modal} from "@mui/material";
 import {IoClose} from "react-icons/io5";
 import OrderDetails from "../components/orders/OrderDetails.jsx";
+import {formatDate} from "../utils/format-date.js";
 
 export default function Orders(){
     const dispatch = useDispatch();
@@ -43,12 +44,8 @@ export default function Orders(){
                         <td>
                             <p onClick={()=>setOpenOrder(order)} className={"cursor-pointer text-blue-700 hover:underline"}>Click to view details</p>
                         </td>
-                        <td>{new Date(order?.created_at).toLocaleString("en-US", {
-                            timeZone: "Asia/Kolkata",
-                        })}</td>
-                        <td>{order?.paidAt ? new Date(order?.paid_at).toLocaleString("en-US", {
-                            timeZone: "Asia/Kolkata",
-                        }) : "-"}</td>
+                        <td>{formatDate(order?.created_at)}</td>
+                        <td>{order?.paid_at ? formatDate(order.paid_at) : "-"}</td>
                     </tr>)}
                     </tbody>
                 </table>
