@@ -24,8 +24,6 @@
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.2",
     "react-toastify": "^11.0.5",
-    "redux-persist": "^6.0.0",
-    "redux-persist-transform-filter": "^0.0.22",
     "swiper": "^11.2.8",
     "tailwindcss": "^4.1.8"
   },

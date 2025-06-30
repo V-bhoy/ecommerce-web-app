@@ -3,7 +3,7 @@ import {
     getAllCategoriesAndSubCategories,
     getAllPopularProducts, getAllProducts,
     getHomePageProducts, getIdByCategoryAndSubCategory, getProductDetailsById, getProductReviews,
-    getProductsByCategory, getProductVariants, viewProductDetailsById,
+    getProductsByCategory, getProductVariants, getReviewStats, viewProductDetailsById,
 } from "./productThunk.js";
 
 const initialState = {
@@ -67,10 +67,10 @@ const productSlice = createSlice({
             let categoryIds = state.filters.filterBy?.subCategoryIds;
             let sizes = state.filters.filterBy?.sizes;
             if(categoryIds && filterName === "subCategoryIds"){
-                state.filters.filterBy.subCategoryIds = categoryIds.filter((item)=>item!==data);
+                state.filters.filterBy.subCategoryIds = categoryIds.filter(item=>item!==data);
             }
             if(sizes && filterName==="sizes"){
-                state.filters.filterBy.sizes = sizes.filter((item)=>item!==data);
+                state.filters.filterBy.sizes = sizes.filter(item=>item!==data);
             }
             if(filterName === "sortBy"){
                 state.filters.sortBy = null;
@@ -78,7 +78,6 @@ const productSlice = createSlice({
             if(filterName === "search"){
                 state.filters.search = null;
             }
-            state.filters.activePage = 1;;
         },
         clearFilters: (state, action)=>{
            state.filters = {
@@ -196,6 +195,13 @@ const productSlice = createSlice({
         })
         builder.addCase(getProductVariants.rejected, setProductsError);
 
+        // get product reviews
+        builder.addCase(getProductReviews.pending, loadProductState);
+        builder.addCase(getProductReviews.rejected, setProductsError);
+
+        // get product review stats
+        builder.addCase(getReviewStats.pending, loadProductState);
+        builder.addCase(getReviewStats.rejected, setProductsError);
 
     }
 })

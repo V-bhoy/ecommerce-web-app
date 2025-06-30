@@ -27,7 +27,22 @@ export const requestOtp = createAsyncThunk("requestOtp", async(userData)=>{
     return response.data;
 })
 
-export const resetPasswordByVerifyOtp = createAsyncThunk("resetPassword", async(userData)=>{
+export const resetPasswordByVerifyOtp = createAsyncThunk("resetPasswordByOtp", async(userData)=>{
     const response = await axiosInstance.post("/auth/reset-password", userData);
+    return response.data;
+})
+
+export const getCustomerAddress = createAsyncThunk("getAddress", async()=>{
+    const response = await axiosInstance.get("/customer/address");
+    return response.data;
+})
+
+export const updateCustomerAddress = createAsyncThunk("updateAddress", async(address)=>{
+    const response = await axiosInstance.post("/customer/address/update", {address});
+    return response.data;
+})
+
+export const resetPassword = createAsyncThunk("resetPassword", async(password)=>{
+    const response = await axiosInstance.post("/customer/password/reset", {password});
     return response.data;
 })

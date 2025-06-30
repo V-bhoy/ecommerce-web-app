@@ -1,6 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {createOrder, getAllOrders, updateOrderPaymentFailed, verifyOrderPayment} from "./checkoutThunk.js";
-
+import { getAllOrders } from "./checkoutThunk.js";
 
 const initialState = {
     isLoading: false,
@@ -13,36 +12,18 @@ const checkoutSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: (builder)=>{
-        builder.addCase(createOrder.pending, ()=>{});
-        builder.addCase(createOrder.fulfilled,(state, action)=>{
-            //console.log(action);
-           // window.location.href=action.payload.url;
-        });
-        builder.addCase(createOrder.rejected, (state, action)=>{
-            console.log(action.error);
-        });
-        builder.addCase(verifyOrderPayment.pending, ()=>{});
-        builder.addCase(verifyOrderPayment.fulfilled,(state, action)=>{
-            //console.log(action);
-            // window.location.href=action.payload.url;
-        });
-        builder.addCase(verifyOrderPayment.rejected, (state, action)=>{
-            console.log(action.error);
-        });
-        builder.addCase(updateOrderPaymentFailed.pending, ()=>{});
-        builder.addCase(updateOrderPaymentFailed.fulfilled,(state, action)=>{
-            //console.log(action);
-            // window.location.href=action.payload.url;
-        });
-        builder.addCase(updateOrderPaymentFailed.rejected, (state, action)=>{
-            console.log(action.error);
-        });
+        // get all orders
         builder.addCase(getAllOrders.pending, (state)=>{
             state.isLoading = true;
+            state.error = null;
         });
         builder.addCase(getAllOrders.fulfilled, (state, action)=>{
             state.isLoading = false;
             state.orders = action.payload.orders;
+        })
+        builder.addCase(getAllOrders.rejected, (state, action)=>{
+            state.isLoading = false;
+            state.error = action.error?.message || "Request failed!";
         })
     }
 })

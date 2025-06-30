@@ -43,6 +43,10 @@ export default function ProductDetailsSection({details, refetch}){
     }
 
     const handleAddToCart = async()=>{
+        if(!isLoggedIn){
+            navigate("/login");
+            return;
+        }
         const cartItem = mapCartItem({...details, cartVariant, cartQty: qty})
         await dispatch(clearViewProductModal());
         dispatch(addToCart(cartItem));

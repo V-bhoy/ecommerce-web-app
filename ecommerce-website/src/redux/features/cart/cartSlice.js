@@ -74,8 +74,7 @@ const cartSlice = createSlice({
             const { id, cartVariant, newCartVariant, cartQty} = action.payload;
             const itemIndex = state.cartItems.findIndex((item)=>isSameCartItem(item, {id, cartVariant}));
             const itemIndexAlreadyPresent = state.cartItems.findIndex((item)=>isSameCartItem(item, {id, cartVariant: newCartVariant}));
-            console.log(cartVariant, newCartVariant);
-            console.log(itemIndex, itemIndexAlreadyPresent);
+
             if(itemIndexAlreadyPresent !== -1){
                 state.cartItems = state.cartItems.filter((item, index)=>index!==itemIndex);
             }
@@ -83,6 +82,7 @@ const cartSlice = createSlice({
                 if(cartQty) state.cartItems[itemIndex].cartQty = cartQty;
                 if(newCartVariant) state.cartItems[itemIndex].cartVariant = newCartVariant; // update variant too
             }
+
             const { totalQty, totalMrp, totalDiscount } = calculateTotals(state.cartItems);
             state.totalQty = totalQty;
             state.totalMrp = totalMrp;

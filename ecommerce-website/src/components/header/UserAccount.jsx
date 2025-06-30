@@ -45,7 +45,7 @@ export default function UserAccount() {
                     },
                 }}
             >
-                <MenuItem onClick={()=>handleLink("/user/1")}>My Account</MenuItem>
+                <MenuItem onClick={()=>handleLink("/profile")}>My Account</MenuItem>
                 <MenuItem onClick={()=>handleLink("/orders")}>Orders</MenuItem>
                 <MenuItem onClick={()=>dispatch(logoutUser())}>Logout</MenuItem>
             </Menu>

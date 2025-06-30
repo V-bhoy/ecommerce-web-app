@@ -11,7 +11,6 @@ import Cart from "../pages/Cart.jsx";
 import Checkout from "../pages/Checkout.jsx";
 import MyAccount from "../pages/MyAccount.jsx";
 import Orders from "../pages/Orders.jsx";
-import Wishlist from "../pages/Wishlist.jsx";
 import CreateNewPassword from "../pages/CreateNewPassword.jsx";
 import PublicRoute from "../pages/PublicRoute.jsx";
 import PrivateRoute from "../pages/PrivateRoute.jsx";
@@ -38,20 +37,16 @@ export const router = createBrowserRouter([
                 element: <PublicRoute><ForgotPassword/></PublicRoute>
             },
             {
-                path: "/user/:id",
+                path: "/profile",
                 element: <PrivateRoute><MyAccount/></PrivateRoute>
             },
             {
-                path: "/user/create-new-password",
+                path: "/profile/create-new-password",
                 element: <PrivateRoute><CreateNewPassword/></PrivateRoute>
             },
             {
                 path: "/orders",
                 element: <PrivateRoute><Orders/></PrivateRoute>
-            },
-            {
-                path: "/wishlist",
-                element: <PrivateRoute><Wishlist/></PrivateRoute>
             },
             {
                 path: "products",

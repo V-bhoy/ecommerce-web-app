@@ -49,14 +49,20 @@ export default function useProductData({category, subCategory, pathname}) {
             handleSubCategoryUrl();
         }
         if(prevCategory.current && prevCategory.current !== category) {
-           dispatch(clearFilters());
+            if(!sortBy && !filterBy && !search){
+               fetchProductsByCategory();
+            }else{
+                dispatch(clearFilters());
+            }
         }
         prevCategory.current = category;
     }, [category, subCategory]);
 
+
     useEffect(()=>{
         setPage(1);
     },[filterBy, sortBy, search])
+
 
     useEffect(()=>{
         if(allProductsPage){
