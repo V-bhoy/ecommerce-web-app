@@ -1,4 +1,4 @@
-import Filters from "../components/fiter-sidebar/Filters.jsx";
+import Filters from "../components/filter-sidebar/Filters.jsx";
 import ProductCard from "../components/cards/ProductCard.jsx";
 import {Button, Pagination} from "@mui/material";
 import { IoGrid} from "react-icons/io5";
