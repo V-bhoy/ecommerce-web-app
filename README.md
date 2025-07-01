@@ -19,6 +19,7 @@ A full-stack **E-Commerce platform** built with **React**, **Node.js**, **Expres
 
 ## 📌 Features
 
+```
 ✅ **Modern Frontend** — React + Redux Toolkit + Vite  
 ✅ **Robust Backend** — Node.js + Express + Knex.js (SQL builder)  
 ✅ **Database** — PostgreSQL with migrations & seeds  
@@ -29,11 +30,13 @@ A full-stack **E-Commerce platform** built with **React**, **Node.js**, **Expres
 ✅ **Error Handling** — Global error middleware + Redux error state  
 ✅ **Loading Skeletons** — Smooth UX during API calls  
 ✅ **Responsive** — Works on Desktop & Tablet
+```
 
 ---
 
-📌 Key Features in Detail
+## 📌 Key Features in Detail
 
+```
 ✅ Authentication
 •	JWT-based login, register, logout.
 •	Refresh token stored in HttpOnly cookie.
@@ -54,10 +57,13 @@ A full-stack **E-Commerce platform** built with **React**, **Node.js**, **Expres
 •	Express global error middleware.
 •	Frontend error boundary.
 •	Redux error state for API failures.
+```
 
-🧩 Improvements & TODOs
+## 🧩 Improvements & TODOs
+```
 •	✅ Add Google Sign-In / OAuth
 •	✅ Add tests
+```
 
 Separate repository for backend - https://github.com/V-bhoy/ecommerce-backend
 
