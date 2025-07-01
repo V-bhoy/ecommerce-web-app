@@ -20,16 +20,16 @@ export default function CartCard({item}){
     const [size, setSize] = useState(cartVariant?.size || "");
     const [qty, setQty] = useState(cartQty);
 
-    useEffect(()=>{
-        getVariants();
-    }, [])
-
     const getVariants = async ()=>{
         const response = await dispatch(getProductVariants(item.id));
         if(getProductVariants.fulfilled.match(response)){
             setVariants(response.payload.variants);
         }
     }
+
+    useEffect(()=>{
+        getVariants();
+    }, [])
 
     const selectedVariantQty = cartVariant ? cartVariant.qty : null;
     const totalAvailableQty = variants?.reduce((acc, v)=>acc+(+v.qty), 0);
