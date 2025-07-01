@@ -88,7 +88,7 @@ const productSlice = createSlice({
         },
         clearViewProductModal: (state)=>{
             state.viewProductModal = null;
-        }
+        },
     },
     extraReducers: (builder)=>{
         // get homepage products

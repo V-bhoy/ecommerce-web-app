@@ -1,5 +1,10 @@
 import axios from "axios";
 import {setAccessToken} from "../redux/features/auth/authSlice.js";
+import {logoutUser} from "../redux/features/auth/authThunk.js";
+import {clearCart} from "../redux/features/cart/cartSlice.js";
+import {clearOrders} from "../redux/features/checkout/checkoutSlice.js";
+import {notifyErrorToast} from "../components/toasts/toasts.js";
+import {globalLogout} from "../redux/features/auth/globalLogout.js";
 const BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080/api";
 
 
@@ -35,6 +40,8 @@ export default function createAxiosInstance({store}){
                 originalRequest.headers.Authorization = `Bearer ${res.data.accessToken}`;
                 return axiosInstance(originalRequest);
             }catch(err){
+                globalLogout(store.dispatch);
+                notifyErrorToast("Session expired! Please login again to continue!");
                 return Promise.reject({
                     message: (err?.response?.data?.message || "Refresh token request failed!"),
                     code:`${err?.response?.status} - `+err?.response?.statusText,

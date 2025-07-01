@@ -10,7 +10,13 @@ const initialState = {
 const checkoutSlice = createSlice({
     name: "checkout",
     initialState,
-    reducers: {},
+    reducers: {
+        clearOrders :(state)=>{
+            state.isLoading = false;
+            state.error = null;
+            state.orders = null;
+        }
+    },
     extraReducers: (builder)=>{
         // get all orders
         builder.addCase(getAllOrders.pending, (state)=>{
@@ -28,4 +34,5 @@ const checkoutSlice = createSlice({
     }
 })
 
+export const {clearOrders} = checkoutSlice.actions;
 export default checkoutSlice.reducer;

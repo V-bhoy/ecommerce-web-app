@@ -1,11 +1,13 @@
 import './styles/index.css'
-import {RouterProvider} from "react-router-dom";
+import {RouterProvider, useNavigate} from "react-router-dom";
 import {router} from "./routes/router.jsx";
 import {useDispatch} from "react-redux";
 import {useEffect, useState} from "react";
 import {refreshToken} from "./redux/features/auth/authThunk.js";
 import {getAllCategoriesAndSubCategories} from "./redux/features/products/productThunk.js";
 import AppSkeleton from "./components/loading-skeleton/AppSkeleton.jsx";
+import {globalLogout} from "./redux/features/auth/globalLogout.js";
+import {notifyErrorToast} from "./components/toasts/toasts.js";
 
 function App() {
     const dispatch = useDispatch();
@@ -14,7 +16,11 @@ function App() {
     const handleRefreshToken = async () => {
         const userLoggedIn = localStorage.getItem("isLoggedIn");
         if (userLoggedIn) {
-            await dispatch(refreshToken()).finally(() => setLoad(false));
+            const response = await dispatch(refreshToken()).finally(() => setLoad(false));
+            if(refreshToken.rejected.match(response)){
+                globalLogout(dispatch);
+                notifyErrorToast("Session expired! Please login again!");
+            }
         } else {
             setLoad(false);
         }

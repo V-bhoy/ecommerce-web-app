@@ -6,6 +6,7 @@ import {RiAccountCircleFill} from "react-icons/ri";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutUser} from "../../redux/features/auth/authThunk.js";
+import {globalLogout} from "../../redux/features/auth/globalLogout.js";
 
 export default function UserAccount() {
     const dispatch = useDispatch();
@@ -47,7 +48,7 @@ export default function UserAccount() {
             >
                 <MenuItem onClick={()=>handleLink("/profile")}>My Account</MenuItem>
                 <MenuItem onClick={()=>handleLink("/orders")}>Orders</MenuItem>
-                <MenuItem onClick={()=>dispatch(logoutUser())}>Logout</MenuItem>
+                <MenuItem onClick={()=>globalLogout(dispatch)}>Logout</MenuItem>
             </Menu>
         </div>
     );
