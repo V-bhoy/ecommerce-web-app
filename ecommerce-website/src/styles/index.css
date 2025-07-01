@@ -1,0 +1,110 @@
+@import "tailwindcss";
+@import "./mui.css";
+@import "./sliders.css";
+
+@theme {
+    --color-primary: #ff5722;
+    --color-secondary: #ff9800;
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1)
+}
+
+.pages {
+    background-color: #fff7ed;
+}
+.container {
+    width: 95%;
+    margin: auto;
+}
+
+.link:hover {
+    color: var(--color-primary);
+}
+
+nav button {
+    text-transform: capitalize !important;
+}
+
+.item:hover {
+    transform: scale(1.1);
+}
+
+.tab {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+}
+
+.tab:hover {
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.productCard, .blogCard {
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+.imageWrapper img:hover{
+    transform: scale(1.1);
+    opacity: 0.8;
+}
+
+.navlink:hover .submenu {
+    display: block;
+}
+
+.sizeBtn {
+    width: 35px !important;
+    min-width: 35px !important;
+    height: 35px !important;
+    color: var(--color-blue-500) !important;
+    border: 1px solid var(--color-gray-200) !important;
+}
+
+.sizeBtn:hover {
+    background-color: var(--color-blue-50) !important;
+}
+
+.sizeBtn.active {
+    background-color: var(--color-primary) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.orders-table, .orders-table th, .orders-table td {
+    border: 1px solid var(--color-gray-300);
+    font-size: 12px;
+    width: max-content;
+}
+
+.orders-table th, .orders-table td  {
+    min-width: 200px;
+    text-align: center;
+    padding: 5px;
+}
+
+.orders-table td:nth-child(1){
+    text-align: left;
+}
+
+.orders-table th {
+    background-color: var(--color-orange-400);
+    color: white;
+    font-weight: 500;
+}
+
+
+

@@ -1,0 +1,51 @@
+.MuiBadge-badge {
+    background-color: var(--color-primary) !important;
+    height: 1.2rem !important;
+    width: 1.2rem !important;
+    min-width: 1.2rem !important;
+    font-size: 12px !important;
+}
+
+.MuiDrawer-paper{
+    background-color: oklch(98% 0.016 73.684) !important;
+}
+
+.MuiButton-root.active {
+    color: #ff5722 !important;
+}
+
+.MuiFormControlLabel-label {
+    font-size: 13px !important;
+    color: gray;
+}
+
+.MuiCheckbox-root.Mui-checked {
+    color: var(--color-primary) !important;
+}
+
+.Mui-selected.MuiPaginationItem-page {
+    background-color: var(--color-orange-400) !important;
+    color: white;
+}
+
+.MuiPaginationItem-page:hover, .MuiPaginationItem-previousNext:hover {
+    background-color: var(--color-orange-100) !important;
+    color: var(--color-primary);
+}
+
+.MuiInputLabel-outlined {
+    font-size: 12px !important;
+    top: -6px !important;
+}
+
+.MuiOutlinedInput-root {
+    font-size: 12px !important;
+}
+
+.qty-input>.MuiInputBase-root {
+    height: 1.9rem !important;
+}
+
+.MuiMenuItem-root {
+    font-size: 12px !important;
+}
