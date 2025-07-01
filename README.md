@@ -20,16 +20,16 @@ A full-stack **E-Commerce platform** built with **React**, **Node.js**, **Expres
 ## 📌 Features
 
 ```
-✅ **Modern Frontend** — React + Redux Toolkit + Vite  
-✅ **Robust Backend** — Node.js + Express + Knex.js (SQL builder)  
-✅ **Database** — PostgreSQL with migrations & seeds  
-✅ **Auth** — JWT access & refresh tokens with secure cookie flow  
-✅ **User Features** — Register, Login, Wishlist, Cart, Orders, Review and rating 
-✅ **Product Management** — Categories, Subcategories, Variants, Stock 
-✅ **Filters** — By category, price, size, rating, stock status with sorting and pagination
-✅ **Error Handling** — Global error middleware + Redux error state  
-✅ **Loading Skeletons** — Smooth UX during API calls  
-✅ **Responsive** — Works on Desktop & Tablet
+✅ Modern Frontend — React + Redux Toolkit + Vite  
+✅ Robust Backend — Node.js + Express + Knex.js (SQL builder)  
+✅ Database — PostgreSQL with migrations & seeds  
+✅ Auth — JWT access & refresh tokens with secure cookie flow  
+✅ User Features — Register, Login, Wishlist, Cart, Orders, Review and rating 
+✅ Product Management — Categories, Subcategories, Variants, Stock 
+✅ Filters — By category, price, size, rating, stock status with sorting and pagination
+✅ Error Handling — Global error middleware + Redux error state  
+✅ Loading Skeletons — Smooth UX during API calls  
+✅ Responsive — Works on Desktop & Tablet
 ```
 
 ---

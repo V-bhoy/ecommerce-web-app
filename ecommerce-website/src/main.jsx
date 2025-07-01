@@ -9,12 +9,12 @@ import ErrorBoundary from "./error-boundary/ErrorBoundary.jsx";
 
 export const axiosInstance = createAxiosInstance({store});
 createRoot(document.getElementById('root')).render(
-    // <StrictMode>
-    <ErrorBoundary>
+    <StrictMode>
         <Provider store={store}>
+            <ErrorBoundary>
             <App/>
             <ToastContainer/>
+            </ErrorBoundary>
         </Provider>
-    </ErrorBoundary>
-    // </StrictMode>,
+    </StrictMode>,
 )
