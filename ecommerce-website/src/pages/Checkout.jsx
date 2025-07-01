@@ -8,10 +8,12 @@ import {useNavigate} from "react-router-dom";
 import {notifyErrorToast, notifySuccessToast} from "../components/toasts/toasts.js";
 import {clearCart} from "../redux/features/cart/cartSlice.js";
 import BillingForm from "../components/billing-form/BillingForm.jsx";
+import {MdError} from "react-icons/md";
 
 export default function Checkout(){
     const [billingDetails, setBillingDetails] = useState(null);
     const {cartItems, totalAmount, gst} = useSelector(state => state.cart);
+    const {user} = useSelector(state => state.auth);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -19,20 +21,32 @@ export default function Checkout(){
         setBillingDetails(data);
     }
 
-    const handleCheckout = async()=>{
-        const checkoutItems = mapCheckoutItems(cartItems);
-        const response = await dispatch(createOrder({items: checkoutItems, billingDetails}));
-        if(createOrder.fulfilled.match(response)){
-            const {orderId, amount, currency} = response.payload;
-            handlePayment({
-                orderId,
-                amount,
-                currency
-            })
+    async function onSuccessfulPayment(response){
+        const {razorpay_order_id, razorpay_payment_id, razorpay_signature} = response;
+        const result = await dispatch(verifyOrderPayment({razorpay_order_id, razorpay_payment_id, razorpay_signature}))
+        if(verifyOrderPayment.fulfilled.match(result)){
+            await dispatch(clearCart());
+            notifySuccessToast(result.payload.message);
+            notifySuccessToast("You cart has been cleared!");
+            navigate("/");
+        }
+        if(verifyOrderPayment.rejected.match(result)){
+            notifyErrorToast(result.error?.message || "Failed to initiate transaction!")
         }
     }
 
-    const handlePayment = async({orderId, amount, currency})=>{
+    async function onIncompletePayment({orderId}){
+        const response = await dispatch(updateOrderPaymentFailed(orderId));
+        if(updateOrderPaymentFailed.fulfilled.match(response)){
+            notifyErrorToast(`Order Payment failed! - ${orderId}`);
+            navigate("/cart");
+        }
+        if(updateOrderPaymentFailed.rejected.match(response)){
+            notifyErrorToast(response.error?.message || "Failed to update payment failed status!");
+        }
+    }
+
+    const handlePayment = async({orderId, amount, currency, prefill})=>{
         const options = {
             key: import.meta.env.VITE_RAZORPAY_KEY_ID,
             amount,
@@ -40,34 +54,9 @@ export default function Checkout(){
             name: "One Stop Shopping Store",
             description: "Order Payment",
             order_id: orderId,
-            handler: async function(response){
-                const {
-                    razorpay_order_id,
-                    razorpay_payment_id,
-                    razorpay_signature
-                } = response;
-                const result = await dispatch(verifyOrderPayment({razorpay_order_id,
-                    razorpay_payment_id,
-                    razorpay_signature}))
-
-                if(verifyOrderPayment.fulfilled.match(result)){
-                   notifySuccessToast(result.payload.message);
-                   dispatch(clearCart());
-                   notifySuccessToast("You cart has been cleared!");
-                   navigate("/");
-                }
-            },
-            modal: {
-                ondismiss: async function () {
-                    await dispatch(updateOrderPaymentFailed(orderId));
-                    notifyErrorToast(`Order Payment failed! - ${orderId}`);
-                    navigate("/cart");
-                }
-            },// 4111 1111 1111 1111, success@razorpay
-            prefill: {
-                name: "Vaishali Bhoyar",
-                email: "vaishubhoyar004@gmail.com",
-            },
+            handler: onSuccessfulPayment,
+            modal: { ondismiss: ()=>onIncompletePayment({orderId}) },// 4111 1111 1111 1111, success@razorpay
+            prefill,
             theme: {
                 color: "#3399cc",
             },
@@ -76,8 +65,35 @@ export default function Checkout(){
         const rzp = new window.Razorpay(options);
         rzp.open();
     }
+
+    const handleCheckout = async()=>{
+        const checkoutItems = mapCheckoutItems(cartItems);
+        const response = await dispatch(createOrder({items: checkoutItems, billingDetails}));
+        if(createOrder.fulfilled.match(response)){
+            const {orderId, amount, currency} = response.payload;
+            const prefill =  {
+                    name: user?.firstName + " "+ user?.lastName,
+                    email: user?.email
+                };
+            handlePayment({
+                orderId,
+                amount,
+                currency,
+                prefill
+            })
+        }
+        if(createOrder.rejected.match(response)){
+            notifyErrorToast(response.error?.message || "Failed to create order!");
+            navigate("/cart");
+        }
+    }
+
     return <section className={"pages py-10"}>
-        <div className={"container flex gap-5"}>
+        {!cartItems.length ? <div className={"container bg-white p-5 shadow-md rounded-sm"}>
+            <p className={"text-sm flex items-center gap-3 text-red-600"}>
+               <MdError size={"1rem"}/> Your cart is empty!
+            </p>
+        </div> :<div className={"container flex gap-5"}>
             <BillingForm onEdit={()=>setBillingDetails(null)} onSubmit={handleSubmitBillingDetails}/>
             <div className={"bg-white w-[30%] p-2 px-5 shadow-md rounded-sm"}>
                         <h3 className={"font-[500] text-[14px] text-primary p-2"}>Your Order</h3>
@@ -122,6 +138,6 @@ export default function Checkout(){
                             <FaShoppingBag size={"0.8rem"}/> Checkout</Button>
                     </div>
 
-        </div>
+        </div>}
     </section>
 }

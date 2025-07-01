@@ -5,6 +5,7 @@ import {Box, Modal} from "@mui/material";
 import {IoClose} from "react-icons/io5";
 import OrderDetails from "../components/orders/OrderDetails.jsx";
 import {formatDate} from "../utils/format-date.js";
+import OrdersPageShimmer from "../components/loading-skeleton/OrdersPageShimmer.jsx";
 
 export default function Orders(){
     const dispatch = useDispatch();
@@ -17,9 +18,7 @@ export default function Orders(){
     }, []);
 
     if(isLoading){
-        return <div className="w-screen h-screen flex items-center justify-center">
-            <span>Loading...</span>
-        </div>
+        return <OrdersPageShimmer/>
     }
     return <section className={"pages py-10"}>
         <div className={"container bg-white p-3 px-5 shadow-md rounded-sm"}>

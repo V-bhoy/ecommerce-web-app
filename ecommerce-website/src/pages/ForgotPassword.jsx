@@ -114,7 +114,6 @@ export default function ForgotPassword() {
         }
     }
 
-
     return <section className={"pages p-10"}>
         <div className={"container flex items-center justify-center"}>
             <div className={"relative bg-white shadow-md p-5 border border-gray-200 rounded-md w-[40%]"}>

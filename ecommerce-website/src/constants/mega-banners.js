@@ -21,7 +21,7 @@ export const banners = [
         offer: "Women Jewellery 20% Off",
         startingPrice: 800,
         detailsPosition: "right",
-        url: "/products/accessories/necklace"
+        url: "/products/accessories"
     },
     {
         id: "banner-4",

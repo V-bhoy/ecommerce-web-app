@@ -6,7 +6,6 @@ export default function AppSkeleton() {
 
             {/* Main Content */}
             <div className="flex flex-1 gap-3 space-x-6">
-
                 {/* Main Area */}
                 <div className="flex-1 flex flex-col gap-2 space-y-4">
                     <div className="h-8 w-1/2 bg-gray-200 rounded"></div>

@@ -2,8 +2,12 @@ import ErrorDialog from "../error-messages/ErrorDialog.jsx";
 import {Button, TextField} from "@mui/material";
 import {useState} from "react";
 import {validateEmail} from "../../utils/validate-email.js";
+import {useDispatch} from "react-redux";
+import {getCustomerAddress} from "../../redux/features/auth/authThunk.js";
+import {notifyErrorToast} from "../toasts/toasts.js";
 
 export default function BillingForm({onEdit, onSubmit}){
+    const dispatch = useDispatch();
     const [data, setData] = useState({
         name: "",
         email: "",
@@ -49,10 +53,35 @@ export default function BillingForm({onEdit, onSubmit}){
         setData(prev=>({...prev, [name]: value}));
     }
 
+    const handleRegisteredAddress = async()=>{
+        const response = await dispatch(getCustomerAddress());
+        if(getCustomerAddress.fulfilled.match(response)){
+            const {address: data}  = response.payload;
+            if(!data?.street && !data?.area){
+                setError("Please register address in your profile!");
+                return;
+            }
+            setData(prev=>({...prev,
+                street: data?.street,
+                landmark: data?.area,
+                city: data?.city,
+                state: data?.state,
+                pincode: data?.pincode,
+            }))
+        }
+        if(getCustomerAddress.rejected.match(response)){
+            notifyErrorToast(response.error?.message || "Failed to fetch customer address!");
+        }
+    }
+
     const disableInput = !edit;
 
     return <div className={"bg-white h-[50vh] w-[70%] p-3 px-5 shadow-md rounded-sm"}>
-        <h1 className={"text-primary px-2 font-[500] !my-1"}>Billing Details <span className={"text-xs text-blue-600 !mx-2"}>(Submit billing details to proceed with checkout!)</span></h1>
+        <div className={"flex items-center justify-between px-2 !my-1"}>
+            <h1 className={"text-primary font-[500]"}>Billing Details <span className={"text-xs text-blue-600 !mx-2"}>(Submit billing details to proceed with checkout!)</span></h1>
+            <p onClick={handleRegisteredAddress} className={"text-xs font-[500] text-blue-600 !mx-2 hover:underline cursor-pointer"}>Add Registered Address</p>
+        </div>
+
         <ErrorDialog error={error} clearError={()=>setError(null)}/>
         <div className={"w-full py-3 flex flex-col gap-3"}>
             <div className={"flex items-center gap-2"}>
@@ -77,7 +106,7 @@ export default function BillingForm({onEdit, onSubmit}){
                 </div>
             </div>
             <div className={"flex justify-end items-center gap-3 !my-2"}>
-                <Button className={"!bg-secondary !capitalize"} variant={"contained"} size={"small"} onClick={handleEdit}>Edit</Button>
+                {!edit && <Button className={"!bg-secondary !capitalize"} variant={"contained"} size={"small"} onClick={handleEdit}>Edit</Button>}
                 <Button className={"!bg-primary !capitalize"} variant={"contained"} size={"small"} onClick={handleData}>Submit</Button>
             </div>
         </div>

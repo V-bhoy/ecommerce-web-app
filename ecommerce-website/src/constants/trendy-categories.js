@@ -3,19 +3,19 @@ export const trendyCategories = [
         id: "trend-1",
         imageUrl: "https://cdn.pixabay.com/photo/2022/10/09/09/12/woman-7508618_1280.jpg",
         title: "Casual Tees (Women)",
-        url: "/products/women/t-shirts"
+        url: "/products/women/t-shirt"
     },
     {
         id: "trend-2",
         imageUrl: "https://cdn.pixabay.com/photo/2021/09/24/10/17/man-6652196_1280.jpg",
         title: "Casual Tees (Men)",
-        url: "/products/men/t-shirts"
+        url: "/products/men/t-shirt"
     },
     {
         id: "trend-3",
         imageUrl: "https://cdn.pixabay.com/photo/2013/07/11/15/30/male-watch-144648_1280.jpg",
         title: "Stylish watch",
-        url: "/products/accessories/watches"
+        url: "/products/accessories/watch"
     },
     {
         id: "trend-4",
@@ -27,7 +27,7 @@ export const trendyCategories = [
         id: "trend-5",
         imageUrl: "https://cdn.pixabay.com/photo/2017/05/31/20/16/ring-2361492_1280.jpg",
         title: "Rings For Special Ones",
-        url: "/products/accessories/rings"
+        url: "/products/accessories/jeweller_ring"
     },
     {
         id: "trend-6",
