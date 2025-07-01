@@ -116,7 +116,7 @@ export default function ForgotPassword() {
 
     return <section className={"pages p-10"}>
         <div className={"container flex items-center justify-center"}>
-            <div className={"relative bg-white shadow-md p-5 border border-gray-200 rounded-md w-[40%]"}>
+            <div className={"relative bg-white shadow-md p-5 border border-gray-200 rounded-md md:max-lg:w-[60%] w-[40%]"}>
                 {otpSent && <p className={"absolute top-3 right-5 text-xs font-[500]"}>* Do not refresh the page or go back!</p>}
                 <div className={"flex flex-col gap-3 !my-5"}>
                     <ErrorDialog error={error} clearError={() => dispatch(clearAuthError())}/>

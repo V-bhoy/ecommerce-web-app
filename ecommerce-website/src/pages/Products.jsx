@@ -30,10 +30,10 @@ export default function Products() {
         <section className={"bg-white w-full py-5 pt-10"}>
             { isLoading ? <ProductListShimmer/> :
             <div className={"container flex gap-3"}>
-                <div className={"filterWrapper w-[20%] h-full"}>
+                <div className={"filterWrapper md:max-lg:w-[30%] w-[20%] h-full"}>
                     <Filters/>
                 </div>
-                <div className={"productsWrapper w-[80%] h-full "}>
+                <div className={"productsWrapper md:max-lg:w-[70%] w-[80%] h-full "}>
                     <div className={"bg-orange-50 p-2 rounded-sm !mb-3 flex items-center justify-between"}>
                         <div className={"flex items-center"}>
                             <Button onClick={() => setItemView("grid")}
@@ -51,7 +51,7 @@ export default function Products() {
                             <SortByFilter/>
                         </div>
                     </div>
-                    <div className={`grid ${itemView === "grid" ? "grid-cols-4 md:grid-cols-4" : "grid-cols-1 md:grid-cols-1"} gap-4`}>
+                    <div className={`grid ${itemView === "grid" ? "grid-cols-4 md:max-lg:grid-cols-2" : "grid-cols-1 md:max-lg:grid-cols-1"} gap-4`}>
                         {itemView === "grid" ? productsToRender?.map(product=><ProductCard refetch={refetch} key={product.id} product={product} category={category} enableWishlist/>):
                             productsToRender?.map(product=><ProductCardListView key={product.id} product={product} category={category} enableWishlist/>)
                         }

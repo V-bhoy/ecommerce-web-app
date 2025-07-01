@@ -6,7 +6,7 @@ import ProductCard from "../cards/ProductCard.jsx";
 
 export default function ProductSlider({products}){
     return <div className={"py-5"}>
-      <Swiper slidesPerView={5} navigation={true} spaceBetween={10} modules={[Navigation]} className={"productSlider"}>
+      <Swiper breakpoints={{ 768: { slidesPerView: 3 }, 1024: { slidesPerView: 5 }}} slidesPerView={5} navigation={true} spaceBetween={10} modules={[Navigation]} className={"productSlider"}>
           {products?.map((product)=><SwiperSlide key={product.id}>
               <ProductCard product={product}/>
           </SwiperSlide>)}

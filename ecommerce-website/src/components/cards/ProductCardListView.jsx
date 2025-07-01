@@ -67,7 +67,7 @@ export default function ProductCardListView({product, category, refetch, enableW
 
 
     return <div className={"productCard rounded-md bg-orange-50 flex gap-3 h-[220px]"}>
-        <div className={"group imageWrapper w-[30%] rounded-l-md relative overflow-hidden"}>
+        <div className={"group imageWrapper md:max-lg:w-[40%] w-[30%] rounded-l-md relative overflow-hidden"}>
             <Link to={`products/details/${product.id}`}>
                 <img className={"w-full h-full rounded-l-md overflow-hidden transition"}
                      src={product.image_url}
@@ -94,16 +94,18 @@ export default function ProductCardListView({product, category, refetch, enableW
                 </Button>}
             </div>
         </div>
-        <div className={"info px-2 py-6 flex flex-col gap-1"}>
+        <div className={"info px-2 py-6 md:max-lg:w-[60%] flex flex-col gap-1"}>
             <Link className={"link"} to={`/products/details/${product.id}`}><h3 className={"text-[14px] font-[500]"}>{product.title}</h3></Link>
             <p className={"text-[12px] text-primary font-[500]"}>{product.short_info}</p>
-            <p className={"text-[11px] text-gray-500"}>{product.description}</p>
+            <p className="text-[11px] text-gray-500 max-lg:whitespace-nowrap md:max-lg:overflow-hidden md:max-lg:text-ellipsis">
+                {product.description}
+            </p>
             <Rating size={"small"} defaultValue={product?.rating || 0} readOnly/>
             <div>
                 <span className={"text-[13px] text-gray-500 line-through font-[500] !mr-2"}>₹{product.mrp}</span>
                 <span className={"text-[13px] font-[500] text-primary"}>₹{product.priceAfterDiscount}</span>
             </div>
-            <Button onClick={handleAddToCart} disabled={!product.inStock} variant={"contained"} className={" !h-[28px] !text-[12px] !w-[15%] !min-w-[15%] !bg-primary"} size={"small"}>Add To Cart</Button>
+            <Button onClick={handleAddToCart} disabled={!product.inStock} variant={"contained"} className={" !h-[28px] !text-[12px] md:max-lg:!w-[40%] !w-[15%] !min-w-[15%] !bg-primary"} size={"small"}>Add To Cart</Button>
         </div>
     </div>
 }

@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 export default function BannerSlider({itemsPerView}) {
     return <div className={"py-4"}>
         <div className={"container"}>
-            <Swiper spaceBetween={15} slidesPerView={itemsPerView} navigation={true} modules={[Navigation]}
+            <Swiper breakpoints={{ 768: { slidesPerView: 2 }, 1024: { slidesPerView: itemsPerView }}} spaceBetween={15} slidesPerView={itemsPerView} navigation={true} modules={[Navigation]}
                     className={"bannerSlider"}>
                 <SwiperSlide className={"overflow-hidden  rounded-[20px]"}>
                     <Link to={"/"}>

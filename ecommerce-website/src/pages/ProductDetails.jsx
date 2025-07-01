@@ -9,7 +9,6 @@ import ProductDetailsShimmer from "../components/loading-skeleton/ProductDetails
 import {getProductDetailsById, getProductReviews, getReviewStats} from "../redux/features/products/productThunk.js";
 import ReviewTab from "../components/review/ReviewTab.jsx";
 import ErrorDialog from "../components/error-messages/ErrorDialog.jsx";
-import {clearOrders} from "../redux/features/checkout/checkoutSlice.js";
 import {clearProductSliceError} from "../redux/features/products/productSlice.js";
 
 

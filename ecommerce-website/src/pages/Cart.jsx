@@ -15,12 +15,12 @@ export default function Cart(){
     return <section>
         <div className={"container p-5"}>
             <h3 className={"font-[400] text-[1.5rem] text-primary px-4 !mb-4"}>Shopping Cart ({cartItems.length})</h3>
-            {cartItems.length > 0 && <p onClick={()=>dispatch(clearCart())} className={"flex items-center justify-end gap-1 w-[72%] text-sm cursor-pointer font-[500] hover:underline !mb-1 text-red-600"}>Clear Cart <IoClose/></p>}
+            {cartItems.length > 0 && <p onClick={()=>dispatch(clearCart())} className={"flex items-center justify-end gap-1  md:max-lg:w-[60%] w-[72%] text-sm cursor-pointer font-[500] hover:underline !mb-1 text-red-600"}>Clear Cart <IoClose/></p>}
             <div className={"flex gap-5 !mb-5"}>
-                <div className={"shadow-md rounded-sm flex flex-col gap-3 h-[60vh] cart-items-wrapper p-5 bg-white w-[75%] overflow-hidden overflow-y-scroll border border-gray-200"}>
+                <div className={"shadow-md rounded-sm flex flex-col gap-3 h-[60vh] cart-items-wrapper p-5 bg-white md:max-lg:w-[65%] w-[75%] overflow-hidden overflow-y-scroll border border-gray-200"}>
                     {cartItems?.map((item)=><CartCard key={item.id} item={item}/>)}
                 </div>
-                <div className={"w-[25%]"}>
+                <div className={" md:max-lg:w-[35%] w-[25%]"}>
                     <div className={"border border-gray-200 bg-white py-2 px-3 rounded-sm"}>
                         <h3 className={"font-[500] text-[14px] text-primary py-2"}>Pricing Details ({cartItems.length} item)</h3>
                         <hr className={"text-gray-300"}/>

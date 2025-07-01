@@ -5,15 +5,15 @@ export default function TopHeader(){
         <div className={"container"}>
             <div className={"flex items-center justify-between"}>
                 <div className={"col1 w-[50%]"}>
-                    <p className={"text-[14px] font-[500]"}>Get upto 50% off! New season styles, limited time
+                    <p className={"md:text-[12px] lg:text-[14px] font-[500]"}>Get upto 50% off! New season styles, limited time
                         offer!</p>
                 </div>
                 <div className={"col2 flex items-center justify-between"}>
                     <ul className={"flex items-center gap-5"}>
-                        <li className={"list-none text-[13px] font-[500]"}>
+                        <li className={"list-none md:text-[12px] lg:text-[13px] font-[500]"}>
                             <Link to={"#"} className={"link"}>Help Center</Link>
                         </li>
-                        <li className={"list-none text-[13px] font-[500]"}>
+                        <li className={"list-none md:text-[12px] lg:text-[13px] font-[500]"}>
                             <Link to={"/orders"} className={"link"}>Orders</Link>
                         </li>
                     </ul>

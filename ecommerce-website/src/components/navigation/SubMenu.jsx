@@ -8,7 +8,7 @@ export default function SubMenu({items, category}) {
                 items?.map((item) => {
                     return <li key={item.id}>
                         <Link to={`/products/${category}/${item.name.toLowerCase()}`} className={"link font-[500] w-full"}>
-                            <Button color={"black"} size={"small"} className={"w-full !text-[13px] !pl-5 !justify-start hover:!bg-orange-50"}>
+                            <Button color={"black"} size={"small"} className={"w-full md:max-lg:!text-xs !text-[13px] !pl-5 !justify-start hover:!bg-orange-50"}>
                                 {item.name.toLowerCase()}
                             </Button>
                         </Link>

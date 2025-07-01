@@ -76,15 +76,15 @@ export default function BillingForm({onEdit, onSubmit}){
 
     const disableInput = !edit;
 
-    return <div className={"bg-white h-[50vh] w-[70%] p-3 px-5 shadow-md rounded-sm"}>
+    return <div className={"bg-white md:max-lg:w-[65%] w-[70%] p-3 px-5 shadow-md rounded-sm"}>
         <div className={"flex items-center justify-between px-2 !my-1"}>
-            <h1 className={"text-primary font-[500]"}>Billing Details <span className={"text-xs text-blue-600 !mx-2"}>(Submit billing details to proceed with checkout!)</span></h1>
-            <p onClick={handleRegisteredAddress} className={"text-xs font-[500] text-blue-600 !mx-2 hover:underline cursor-pointer"}>Add Registered Address</p>
+            <h1 className={"text-primary font-[500] md:max-lg:flex md:max-lg:flex-col"}>Billing Details <span className={"text-xs text-blue-600 md:max-lg:!mx-0 !mx-2"}>(Submit billing details to proceed with checkout!)</span></h1>
+            <p onClick={handleRegisteredAddress} className={"text-xs font-[500] text-blue-600 md:max-lg:!mx-0 !mx-2 hover:underline cursor-pointer"}>Add Registered Address</p>
         </div>
 
         <ErrorDialog error={error} clearError={()=>setError(null)}/>
         <div className={"w-full py-3 flex flex-col gap-3"}>
-            <div className={"flex items-center gap-2"}>
+            <div className={"flex md:max-lg:flex-col items-center md:max-lg:items-stretch gap-2"}>
                 <TextField value={data?.name} name={"name"} onChange={handleChange} disabled={disableInput} placeholder={"Full Name"} className={"flex-1"} size={"small"}/>
                 <TextField value={data?.email} name={"email"} onChange={handleChange} disabled={disableInput} placeholder={"Email"} type={"email"} className={"flex-1"} size={"small"}/>
             </div>

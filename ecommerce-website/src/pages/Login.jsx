@@ -64,7 +64,7 @@ export default function Login(){
 
     return <section className={"pages p-10"}>
         <div className={"container flex items-center justify-center"}>
-           <div className={"bg-white shadow-md p-5 border border-gray-200 rounded-md w-[40%]"}>
+           <div className={"bg-white shadow-md p-5 border border-gray-200 rounded-md md:max-lg:w-[60%] w-[40%]"}>
               <h3 className={"text-center text-primary font-[300] text-[1.5rem]"}>Login to your account</h3>
                <div className={"flex flex-col gap-3 !my-5"}>
                    {<ErrorDialog error={authError} clearError={()=>dispatch(clearAuthError())}/>}

@@ -14,7 +14,7 @@ export default function MainHeader() {
     const navigate = useNavigate();
     return <div className={"border-b-1 border-gray-200"}>
         <div className={"container flex items-center justify-between"}>
-            <div className={"col1 h-[5.2rem]"}>
+            <div className={"col1 md:h-[5rem] h-[5.2rem]"}>
                 <Link to={"/"}>
                     <img className={"w-[250px] h-full cursor-pointer object-cover"} src={logo} alt={"website-logo"}/>
                 </Link>
@@ -22,21 +22,21 @@ export default function MainHeader() {
             <div className={"col2 w-[45%]"}>
                 <SearchInput/>
             </div>
-            <div className={"col3 w-[30%]"}>
-                <ul className={"flex items-center justify-center gap-3"}>
-                    {isLoggedIn || <li className={"!mr-8"}>
-                        <Link to={"/login"} className={"link transition text-[14px]"}>Login</Link>
+            <div className={"col3 flex-1"}>
+                <ul className={"flex items-center justify-center md:max-lg:gap-1 gap-3"}>
+                    {isLoggedIn || <li className={"md:max-lg:!mr-0 !mr-8"}>
+                        <Link to={"/login"} className={"link transition text-[14px] header-links"}>Login</Link>
                         &nbsp; | &nbsp;
-                        <Link to={"/register"} className={"link transition text-[14px]"}>Register</Link>
+                        <Link to={"/register"} className={"link transition text-[14px] header-links"}>Register</Link>
                     </li>}
-                    <li>
+                    <li className={`${!isLoggedIn ? "md:max-lg:hidden" : ""}`}>
                         <Tooltip title={"Wish List"}>
                             <IconButton onClick={()=>navigate("/products/wishlist")} aria-label={"wishlist"}>
                                     <FaHeart color={"red"} size={"1.3rem"}/>
                             </IconButton>
                         </Tooltip>
                     </li>
-                    <li>
+                    <li  className={`${!isLoggedIn ? "md:max-lg:hidden" : ""}`}>
                         <Tooltip title={"Cart"}>
                             <IconButton aria-label={"cart"} onClick={() => navigate("/cart")}>
                                 <Badge anchorOrigin={{vertical: "bottom"}} badgeContent={cartItems.length} color={"primary"}>

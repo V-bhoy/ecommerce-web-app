@@ -53,7 +53,7 @@ export default function CreateNewPassword(){
 
     return <section className={"pages p-10"}>
         <div className={"container flex items-center justify-center"}>
-            <div className={"bg-white shadow-md p-5 border border-gray-200 rounded-md w-[40%]"}>
+            <div className={"bg-white shadow-md p-5 border border-gray-200 rounded-md md:max-lg:w-[60%] w-[40%]"}>
                 <div className={"flex flex-col gap-3 !my-5"}>
                     {error && <ErrorDialog error={error} clearError={()=>setError("")}/>}
                     <PasswordInput name={"password"} value={password} handleChange={handleChange} placeholder={"New Password"}/>

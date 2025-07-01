@@ -1,0 +1,28 @@
+/* Tablet breakpoint */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .header-links {
+        font-size: 13px;
+        font-weight: 400;
+    }
+    .swiper-button-prev, .swiper-button-next{
+        width: 30px;
+        min-width: 30px;
+        height: 30px !important;
+    }
+    .swiper-button-prev:after, .swiper-button-next:after {
+        font-size: 15px !important;
+        font-weight: 800 !important;
+    }
+
+    .MuiFormControlLabel-label {
+        font-size: 12px !important;
+        color: gray;
+    }
+}
+
+/*!* Desktop breakpoint *!*/
+/*@media (min-width: 1024px) {*/
+/*    .container {*/
+/*        padding: 48px;*/
+/*    }*/
+/*}*/

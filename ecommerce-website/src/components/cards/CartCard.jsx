@@ -52,8 +52,8 @@ export default function CartCard({item}){
         dispatch(updateCartItem({id: item.id, cartVariant, cartQty: value}));
     }
 
-    return <div className={"border border-gray-200 h-[20vh] rounded-md flex gap-4 relative bg-white"}>
-        <div className={"group imageWrapper w-[25%] rounded-l-md relative overflow-hidden"}>
+    return <div className={"border border-gray-200 md:max-lg:h-[15vh] h-[20vh] rounded-md flex gap-4 relative bg-white"}>
+        <div className={"group imageWrapper md:max-lg:w-[30%] w-[25%] rounded-l-md relative overflow-hidden"}>
             <Link to={"/products/women/tops/1"}>
                 <img className={"w-full h-full rounded-l-md overflow-hidden transition"}
                      src={item.imageUrl}
@@ -66,7 +66,7 @@ export default function CartCard({item}){
         </div>
         <div className={"p-2 info px-2 flex flex-col gap-1 w-[75%]"}>
            <h3 className={"text-[15px] text-primary font-[400]"}>{item.title} ({availableQty})</h3>
-            <span className={"text-[12px] font-[500]"}>{item.shortInfo}</span>
+            <span className={"text-[12px] font-[500]  md:max-lg:hidden"}>{item.shortInfo}</span>
             <div className={"flex gap-5 !my-2"}>
                 {sizes && <div className={"flex gap-2 items-center"}>
                   <p className={"text-[13px] font-[500]"}>Size: </p>
@@ -94,7 +94,7 @@ export default function CartCard({item}){
                 <span className={"text-[12px] text-red-600 px-1"}>14 day return available</span>
             </div>
             <div className={"flex gap-2 absolute top-3 right-3 items-center"}>
-                <p className={"flex items-center gap-1 text-[13px] bg-green-600 px-2 py-1 rounded-sm text-white"}>
+                <p className={"flex items-center gap-1 text-[13px] bg-green-600  md:max-lg:p-0.5 md:max-lg:px-1  px-2 py-1 rounded-sm text-white"}>
                     4.5
                     <TiStarFullOutline/>
                 </p>

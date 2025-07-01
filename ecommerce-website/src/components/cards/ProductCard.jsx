@@ -98,7 +98,7 @@ export default function ProductCard({product, category, refetch, enableWishlist=
         <div className={"info py-3 px-2 flex-1 flex flex-col gap-4 justify-between"}>
             <div className={"flex flex-col gap-0.5"}>
                 <div className={"flex items-center justify-between"}>
-                    <Link className={"link"} to={`/products/details/${product.id}`}><h3 className={"text-[14px] font-[500]"}>{product.title}</h3></Link>
+                    <Link className={"link"} to={`/products/details/${product.id}`}><h3 className={"md:max-lg:text-[12px] text-[14px] font-[500]"}>{product.title}</h3></Link>
                     <Rating size={"small"} defaultValue={product?.rating || 0} readOnly/>
                 </div>
                 <p className={"text-[12px] text-gray-500 whitespace-nowrap overflow-hidden text-ellipsis"}>{product.short_info}</p>

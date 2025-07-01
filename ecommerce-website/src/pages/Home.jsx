@@ -37,15 +37,15 @@ export default function Home(){
     return <div className={"pages"}>
         <Slider/>
         <CategorySlider/>
-        <section className={"py-8 bg-white"}>
+        <section className={"md:max-lg:py-4 py-8 bg-white"}>
             <div className={"container"}>
                 {error && <ErrorDialog error={error || "Something went wrong..."} clearError={()=>dispatch(clearProductSliceError())}/>}
                 {!activeTab ? <Shimmer/> : <><div className={" flex items-center justify-between"}>
                    <div className={"leftSection"}>
-                      <h3 className={"text-[15px] font-[500]"}>Popular Products</h3>
-                       <p className={"text-[13px] text-gray-500"}>Do not miss the current offers until the end of {new Date().toLocaleString('default', { month: 'long' })}!</p>
+                      <h3 className={"md:max-lg:text-[13px] text-[15px] font-[500]"}>Popular Products</h3>
+                       <p className={"md:max-lg:text-[11px] text-[13px] text-gray-500"}>Do not miss the current offers until the end of {new Date().toLocaleString('default', { month: 'long' })}!</p>
                    </div>
-                    <div className={"rightSection w-[50%] flex justify-center"}>
+                    <div className={"rightSection md:max-lg:w-[60%] w-[50%] flex justify-center"}>
                         <Tabs value={activeTab} onChange={(e, value)=>setActiveTab(value)} variant={"scrollable"} scrollButtons={"auto"}>
                             {categories?.map((category)=><Tab className={"tab"} key={category.id} label={category.name} value={category.id}/>)}
                         </Tabs>
@@ -60,40 +60,40 @@ export default function Home(){
                 <div className={"freeShipping w-full p-4 border-2 border-primary rounded-[10px] flex items-center justify-between"}>
                     <div className={"col-first flex items-center gap-5 pl-5"}>
                         <FaShippingFast size={"2.5rem"}/>
-                        <span className={"text-[1.2rem] uppercase font-[500]"}>Fast Shipping</span>
+                        <span className={"md:max-lg:text-[1rem] text-[1.2rem] uppercase font-[500]"}>Fast Shipping</span>
                     </div>
-                    <div className={"col-second text-[15px] font-[500]"}>
+                    <div className={"col-second md:max-lg:text-xs text-[15px] font-[500]"}>
                         <p>Free Delivery on your first order upto 2000/- INR</p>
                     </div>
-                    <p className={"text-[1.3rem] font-[500]"}>- Only @2000/-</p>
+                    <p className={"md:max-lg:text-[1rem] text-[1.3rem] font-[500]"}>- Only @2000/-</p>
                 </div>
                 <BannerSlider itemsPerView={4}/>
             </div>
         </section>
         <section className={"bg-white py-5 !mb-5"}>
             <div className={"container"}>
-                <h3 className={"text-[15px] font-[500] pl-5"}>Latest Products</h3>
-                <p className={"text-[13px] text-gray-500 pl-5"}>Try new trends to add to your look!</p>
+                <h3 className={"md:max-lg:text-[13px] text-[15px] font-[500] pl-5"}>Latest Products</h3>
+                <p className={"md:max-lg:text-[11px] text-[13px] text-gray-500 pl-5"}>Try new trends to add to your look!</p>
                 {isLoading ? <CardsCarouselShimmer/> :<ProductSlider products={latest}/>}
             </div>
         </section>
         <section className={"py-5 !mb-5"}>
             <div className={"container"}>
-                <h3 className={"text-[24px] font-[700] text-primary text-center"}>Deals Of The Day</h3>
+                <h3 className={"md:max-lg:text-[18px] text-[24px] font-[700] text-primary text-center"}>Deals Of The Day</h3>
                 <BannerSlider itemsPerView={3}/>
             </div>
         </section>
         <section className={"bg-white py-5 !mb-5"}>
             <div className={"container"}>
-                <h3 className={"text-[15px] font-[500] pl-5"}>Featured Products</h3>
-                <p className={"text-[13px] text-gray-500 pl-5"}>Pick what most trendy from your favourite brands!</p>
+                <h3 className={"md:max-lg:text-[13px] text-[15px] font-[500] pl-5"}>Featured Products</h3>
+                <p className={"md:max-lg:text-[11px] text-[13px] text-gray-500 pl-5"}>Pick what most trendy from your favourite brands!</p>
                 {isLoading ? <CardsCarouselShimmer/> : <ProductSlider products={featured}/>}
             </div>
         </section>
         <section className={" py-5 "}>
             <div className={"container"}>
-                <h3 className={"text-[15px] font-[500] pl-5"}>From the Blog</h3>
-                <p className={"text-[13px] text-gray-500 pl-5"}>Know more about the products!</p>
+                <h3 className={"md:max-lg:text-[13px] text-[15px] font-[500] pl-5"}>From the Blog</h3>
+                <p className={"md:max-lg:text-[11px] text-[13px] text-gray-500 pl-5"}>Know more about the products!</p>
                 <BlogsSlider/>
             </div>
         </section>

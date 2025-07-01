@@ -30,7 +30,7 @@ export default function Orders(){
     return <section className={"pages py-10"}>
         <div className={"container bg-white p-3 px-5 shadow-md rounded-sm"}>
             <h1 className={"text-primary px-2 font-[500]"}>My Orders</h1>
-            {!orders.length ? <p className={"!my-5 w-full bg-white text-sm shadow-md p-3"}>No orders to display!</p> :
+            {!orders?.length ? <p className={"!my-5 w-full bg-white text-sm shadow-md p-3"}>No orders to display!</p> :
                 <div className={"!my-5 w-full overflow-x-auto shadow-md pb-4"}>
                 <table className={"table-auto orders-table"}>
                     <thead>
@@ -57,7 +57,7 @@ export default function Orders(){
                     </tbody>
                 </table>
                 <Modal open={openOrder} onClose={()=>setOpenOrder(null)} className={"focus:outline-none"}>
-                    <Box className={"relative focus:outline-none bg-white"} sx={{position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "80%"}}>
+                    <Box className={"relative focus:outline-none bg-white"} sx={{position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "80%", minWidth: "80%"}}>
                         <IoClose onClick={()=>setOpenOrder(null)} size={"1.3rem"} className={"absolute top-3 right-15  cursor-pointer text-gray-600"}/>
                         <OrderDetails openOrder={openOrder}/>
                     </Box>

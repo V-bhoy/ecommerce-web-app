@@ -113,14 +113,14 @@ export default function ProductDetailsSection({details, refetch}){
                 {sizes && <SelectSize size={size} handleSize={handleSize} sizes={sizes} available={availableSizes}/>}
                 <SelectQty qty={qty} handleQty={handleQty}/>
             </div>
-            <div className={"py-4 px-2 flex gap-4"}>
+            <div className={"py-4 px-2 flex md:max-lg:flex-col gap-4"}>
                 <Button disabled={details?.inStock === false} onClick={handleAddToCart} className={"!bg-primary !text-[13px] !font-[500]"} variant={"contained"} size={"small"}>
                     <FaCartShopping className={"!mr-2"}/>Add To Cart
                 </Button>
-                <div onClick={handleWishlist} className={"shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),0px_1px_3px_1px_rgba(60,64,67,0.15)] flex items-center gap-2 cursor-pointer bg-orange-100 text-primary text-[14px] p-1 px-3 rounded-md hover:bg-secondary hover:text-white transition"}>
+                <div onClick={handleWishlist} className={"shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),0px_1px_3px_1px_rgba(60,64,67,0.15)] flex items-center justify-center gap-2 cursor-pointer bg-orange-100 text-primary text-[14px] p-1 px-3 rounded-md hover:bg-secondary hover:text-white transition"}>
                     {details?.isWishlisted ? <FaHeart color={"red"}/> : <FaRegHeart/>}<span>{details?.isWishlisted ? "Remove From" : "Add To"} Wishlist</span>
                 </div>
-                <div className={"shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),0px_1px_3px_1px_rgba(60,64,67,0.15)] flex items-center gap-2 cursor-pointer bg-orange-100 text-primary text-[14px] p-1 px-3 rounded-md hover:bg-secondary hover:text-white transition"}>
+                <div className={"shadow-[0px_1px_2px_0px_rgba(60,64,67,0.3),0px_1px_3px_1px_rgba(60,64,67,0.15)] flex items-center justify-center gap-2 cursor-pointer bg-orange-100 text-primary text-[14px] p-1 px-3 rounded-md hover:bg-secondary hover:text-white transition"}>
                     <IoShareSocial/><span>Share</span>
                 </div>
             </div>

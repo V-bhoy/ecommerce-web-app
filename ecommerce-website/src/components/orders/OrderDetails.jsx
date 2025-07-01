@@ -3,7 +3,7 @@ import {formatDate} from "../../utils/format-date.js";
 export default function OrderDetails({openOrder}) {
     return <div className={"bg-white p-5 h-[50vh] overflow-auto"}>
         <h3 className={"text-primary font-[400] !mb-3"}>Order Details: </h3>
-        <div className={"flex gap-2 p-1 px-5 bg-orange-50 rounded-sm"}>
+        <div className={"flex md:max-lg:flex-col gap-2 p-1 px-5 bg-orange-50 rounded-sm"}>
             <div className={"flex flex-col gap-1"}>
                 <div className={"p-1 flex gap-5 items-center"}>
                     <p className={"text-[13px] font-[500]"}>Order Id: </p>

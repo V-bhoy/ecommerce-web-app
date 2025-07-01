@@ -29,7 +29,7 @@ export default function UserAccount() {
                 aria-haspopup="true"
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
-                className={"gap-2 !capitalize !ml-5 hover:!underline hover:!bg-white"}
+                className={"gap-2 md:max-lg:!text-xs !capitalize md:max-lg:!ml-0 !ml-5 hover:!underline hover:!bg-white"}
                 size={"small"}>
                 <RiAccountCircleFill className={"cursor-pointer !text-secondary"} size={"2rem"}/>
                 Hi, {user?.firstName || "Guest User"}

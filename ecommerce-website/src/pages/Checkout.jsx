@@ -95,7 +95,7 @@ export default function Checkout(){
             </p>
         </div> :<div className={"container flex gap-5"}>
             <BillingForm onEdit={()=>setBillingDetails(null)} onSubmit={handleSubmitBillingDetails}/>
-            <div className={"bg-white w-[30%] p-2 px-5 shadow-md rounded-sm"}>
+            <div className={"bg-white md:max-lg:w-[35%] w-[30%] p-2 px-5 shadow-md rounded-sm"}>
                         <h3 className={"font-[500] text-[14px] text-primary p-2"}>Your Order</h3>
                         <hr className={"text-gray-300"}/>
                         <div className={"flex flex-col py-3 font-[500] text-[12px] gap-2"}>

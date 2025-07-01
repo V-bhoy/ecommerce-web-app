@@ -1,6 +1,6 @@
 export default function Card({category}) {
     return <div
-        className={"item transition-all h-[25vh] rounded-sm bg-white " +
+        className={"item transition-all md:max-lg:h-[20vh] h-[25vh] rounded-sm bg-white " +
             "flex flex-col items-center justify-start gap-2 " +
             "text-center shadow-[0_1px_3px_#0000001f,_0_1px_2px_#0000003d]"}>
         <img className={"w-full h-[82%] rounded-t-sm object-cover"}

@@ -29,7 +29,7 @@ export default function ReviewTab({productId, reviews, stats, refetch}){
 
     return <div className={"py-2"}>
         <div className={"flex gap-4"}>
-            <div className={"flex-1"}>
+            {reviews?.length > 0 && <div className={"flex-1"}>
                 <p className={"text-[14px] font-[500] px-4 !mb-2"}>What customers said</p>
                 <div className={"flex flex-col gap-4"}>
                     {stats.map((productSuggestion, index) =>
@@ -45,12 +45,11 @@ export default function ReviewTab({productId, reviews, stats, refetch}){
                         {reviews.map((review) => <Review key={review.id} review={review}/>)}
                     </div>
                 </div>
-            </div>
+            </div>}
             <div className={"flex-1 py-2"}>
                 <p className={"text-[14px] font-[500] px-4 !mb-2"}>Add Your Review</p>
                 <ReviewForm handleReview={handleReview} productId={productId}/>
             </div>
-
         </div>
     </div>
 }
