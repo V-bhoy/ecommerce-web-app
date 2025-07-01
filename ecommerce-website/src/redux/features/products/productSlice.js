@@ -89,6 +89,7 @@ const productSlice = createSlice({
         clearViewProductModal: (state)=>{
             state.viewProductModal = null;
         },
+        clearProductSliceError: (state)=>{state.error = null;}
     },
     extraReducers: (builder)=>{
         // get homepage products
@@ -206,5 +207,9 @@ const productSlice = createSlice({
     }
 })
 
-export const {setFilters, removeFilters, clearFilters, clearViewProductModal} = productSlice.actions;
+export const {setFilters,
+    removeFilters,
+    clearFilters,
+    clearViewProductModal,
+    clearProductSliceError} = productSlice.actions;
 export default productSlice.reducer;

@@ -20,8 +20,6 @@ const storedItems = localStorage.getItem("cartItems")
 const { totalQty, totalMrp, totalDiscount } = calculateTotals(storedItems);
 
 const initialState = {
-    isLoading: false,
-    error: null,
     cartItems: storedItems,
     totalQty,
     totalMrp,

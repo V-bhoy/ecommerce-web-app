@@ -2,8 +2,6 @@ import {FormControl, InputLabel, Select} from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 
 export default function FormSelect({value, handleChange, label}){
-
-
     return <FormControl fullWidth className={"!my-2"}>
         <InputLabel id="simple-select-label">{label}</InputLabel>
         <Select

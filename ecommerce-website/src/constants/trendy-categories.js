@@ -27,7 +27,7 @@ export const trendyCategories = [
         id: "trend-5",
         imageUrl: "https://cdn.pixabay.com/photo/2017/05/31/20/16/ring-2361492_1280.jpg",
         title: "Rings For Special Ones",
-        url: "/products/accessories/jeweller_ring"
+        url: "/products/accessories/jewellery_ring"
     },
     {
         id: "trend-6",

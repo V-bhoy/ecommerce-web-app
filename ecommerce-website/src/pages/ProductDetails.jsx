@@ -8,6 +8,9 @@ import Shimmer from "../components/loading-skeleton/Shimmer.jsx";
 import ProductDetailsShimmer from "../components/loading-skeleton/ProductDetailsShimmer.jsx";
 import {getProductDetailsById, getProductReviews, getReviewStats} from "../redux/features/products/productThunk.js";
 import ReviewTab from "../components/review/ReviewTab.jsx";
+import ErrorDialog from "../components/error-messages/ErrorDialog.jsx";
+import {clearOrders} from "../redux/features/checkout/checkoutSlice.js";
+import {clearProductSliceError} from "../redux/features/products/productSlice.js";
 
 
 export default function ProductDetails() {
@@ -17,7 +20,7 @@ export default function ProductDetails() {
     const [reviews, setReviews] = useState([]);
     const [stats, setStats] = useState([]);
 
-    const {isLoading, productDetails: {details, similarProducts, alsoLikedProducts}} = useSelector(state => state.products);
+    const {isLoading, error, productDetails: {details, similarProducts, alsoLikedProducts}} = useSelector(state => state.products);
 
     const refetch = (id)=>dispatch(getProductDetailsById(id));
 
@@ -47,6 +50,12 @@ export default function ProductDetails() {
             handleReviewsAndStats(id);
         }
     }, [id]);
+
+    if(error){
+        return <div  className={"container bg-white p-3 px-5 shadow-md rounded-sm"}>
+            <ErrorDialog error={error} clearError={()=>dispatch(clearProductSliceError())}/>
+        </div>
+    }
 
     return <section>
         {isLoading ? <ProductDetailsShimmer/> : <ProductDetailsSection details={details} refetch={refetch}/>}

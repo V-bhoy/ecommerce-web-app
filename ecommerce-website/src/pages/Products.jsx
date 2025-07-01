@@ -9,12 +9,22 @@ import ProductCardListView from "../components/cards/ProductCardListView.jsx";
 import {useLocation, useParams} from "react-router-dom";
 import ProductListShimmer from "../components/loading-skeleton/ProductListShimmer.jsx";
 import useProductData from "../custom-hooks/useProductData.js";
+import ErrorDialog from "../components/error-messages/ErrorDialog.jsx";
+import {clearProductSliceError} from "../redux/features/products/productSlice.js";
+import {useDispatch} from "react-redux";
 
 export default function Products() {
     const {category, subCategory} = useParams();
     const {pathname} = useLocation();
+    const dispatch = useDispatch();
     const [itemView, setItemView] = useState("grid");
-    const {isLoading, refetch, page,setPage, productsToRender, totalCount, totalPages} = useProductData({category, subCategory, pathname});
+    const {isLoading, error, refetch, page,setPage, productsToRender, totalCount, totalPages} = useProductData({category, subCategory, pathname});
+
+    if(error){
+        return <div  className={"container bg-white p-3 px-5 shadow-md rounded-sm"}>
+            <ErrorDialog error={error} clearError={()=>dispatch(clearProductSliceError())}/>
+        </div>
+    }
 
     return <div className={"pages"}>
         <section className={"bg-white w-full py-5 pt-10"}>

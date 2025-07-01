@@ -10,9 +10,11 @@ import {useEffect, useState} from "react";
 import {getAllPopularProducts, getHomePageProducts} from "../redux/features/products/productThunk.js";
 import Shimmer from "../components/loading-skeleton/Shimmer.jsx";
 import CardsCarouselShimmer from "../components/loading-skeleton/CardsCarouselShimmer.jsx";
+import ErrorDialog from "../components/error-messages/ErrorDialog.jsx";
+import {clearProductSliceError} from "../redux/features/products/productSlice.js";
 
 export default function Home(){
-    const {products: {homepage: {popular, latest, featured}}, categories, isLoading} = useSelector(state=>state.products);
+    const {error, products: {homepage: {popular, latest, featured}}, categories, isLoading} = useSelector(state=>state.products);
     const [activeTab, setActiveTab] = useState(null);
     const dispatch = useDispatch();
 
@@ -37,6 +39,7 @@ export default function Home(){
         <CategorySlider/>
         <section className={"py-8 bg-white"}>
             <div className={"container"}>
+                {error && <ErrorDialog error={error || "Something went wrong..."} clearError={()=>dispatch(clearProductSliceError())}/>}
                 {!activeTab ? <Shimmer/> : <><div className={" flex items-center justify-between"}>
                    <div className={"leftSection"}>
                       <h3 className={"text-[15px] font-[500]"}>Popular Products</h3>

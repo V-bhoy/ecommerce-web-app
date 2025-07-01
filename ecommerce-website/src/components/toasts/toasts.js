@@ -14,6 +14,7 @@ export const notifyErrorToast=(content)=>{
 export const notifySuccessToast=(content)=>{
      toast(
         content,{
+            className: "text-xs",
             type: "success",
             autoClose: 3000,
             hideProgressBar: true

@@ -6,10 +6,12 @@ import {IoClose} from "react-icons/io5";
 import OrderDetails from "../components/orders/OrderDetails.jsx";
 import {formatDate} from "../utils/format-date.js";
 import OrdersPageShimmer from "../components/loading-skeleton/OrdersPageShimmer.jsx";
+import ErrorDialog from "../components/error-messages/ErrorDialog.jsx";
+import {clearOrders} from "../redux/features/checkout/checkoutSlice.js";
 
 export default function Orders(){
     const dispatch = useDispatch();
-    const {isLoading, orders} = useSelector(state=>state.checkout);
+    const {isLoading, error, orders} = useSelector(state=>state.checkout);
     const [openOrder, setOpenOrder] = useState(null);
 
 
@@ -20,10 +22,16 @@ export default function Orders(){
     if(isLoading){
         return <OrdersPageShimmer/>
     }
+    if(error){
+        return <div  className={"container bg-white p-3 px-5 shadow-md rounded-sm"}>
+            <ErrorDialog error={error} clearError={()=>dispatch(clearOrders())}/>
+        </div>
+    }
     return <section className={"pages py-10"}>
         <div className={"container bg-white p-3 px-5 shadow-md rounded-sm"}>
             <h1 className={"text-primary px-2 font-[500]"}>My Orders</h1>
-            <div className={"!my-5 w-full overflow-x-auto shadow-md pb-4"}>
+            {!orders.length ? <p className={"!my-5 w-full bg-white text-sm shadow-md p-3"}>No orders to display!</p> :
+                <div className={"!my-5 w-full overflow-x-auto shadow-md pb-4"}>
                 <table className={"table-auto orders-table"}>
                     <thead>
                     <tr>
@@ -54,7 +62,7 @@ export default function Orders(){
                         <OrderDetails openOrder={openOrder}/>
                     </Box>
                 </Modal>
-            </div>
+            </div>}
         </div>
     </section>
 }

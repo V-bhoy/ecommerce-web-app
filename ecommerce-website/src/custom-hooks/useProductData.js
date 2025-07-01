@@ -9,7 +9,7 @@ import {clearFilters} from "../redux/features/products/productSlice.js";
 
 export default function useProductData({category, subCategory, pathname}) {
     const dispatch = useDispatch();
-    const {isLoading, products: {originalList, filteredList, totalCount, totalPages}, filters: {filterBy, sortBy, search}} = useSelector(state => state.products);
+    const {isLoading, error, products: {originalList, filteredList, totalCount, totalPages}, filters: {filterBy, sortBy, search}} = useSelector(state => state.products);
     const [page, setPage] = useState(1);
     const isWishlistPage =  pathname?.includes("/wishlist");
     const allProductsPage = (!category && !subCategory);
@@ -75,6 +75,7 @@ export default function useProductData({category, subCategory, pathname}) {
 
     return {
         isLoading,
+        error,
         refetch: allProductsPage ? fetchProducts : fetchProductsByCategory,
         productsToRender: filteredList || originalList,
         page,

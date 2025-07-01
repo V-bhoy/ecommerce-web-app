@@ -12,7 +12,7 @@ import {mapCartItem} from "../../utils/map-cart-item.js";
 import {useNavigate} from "react-router-dom";
 import {clearViewProductModal} from "../../redux/features/products/productSlice.js";
 import {addWishlistProduct, removeWishlistProduct} from "../../redux/features/products/productThunk.js";
-import {notifySuccessToast} from "../toasts/toasts.js";
+import {notifyErrorToast, notifySuccessToast} from "../toasts/toasts.js";
 import {FaHeart} from "react-icons/fa";
 
 export default function ProductDetailsSection({details, refetch}){
@@ -64,11 +64,17 @@ export default function ProductDetailsSection({details, refetch}){
                 notifySuccessToast("Added  to wishlist successfully!")
                 refetch(details.id);
             }
+            if(addWishlistProduct.rejected.match(result)){
+                notifyErrorToast(result.error?.message || "Failed to add to wishlist!");
+            }
         }else {
             const result = await dispatch(removeWishlistProduct(details.id));
             if(removeWishlistProduct.fulfilled.match(result)){
                 notifySuccessToast("Removed from wishlist successfully!");
                 refetch(details.id);
+            }
+            if(removeWishlistProduct.rejected.match(result)){
+                notifyErrorToast(result.error?.message || "Failed to remove from wishlist!");
             }
         }
 

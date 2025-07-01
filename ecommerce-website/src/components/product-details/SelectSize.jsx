@@ -1,7 +1,6 @@
 import {Button} from "@mui/material";
 
 export default function SelectSize({sizes, size, available, handleSize}){
-
     return <div className={"flex items-center gap-4"}>
         <span className={"text-[15px] font-[500] text-primary"}>Size: </span>
         <div className={"flex items-center gap-2"}>

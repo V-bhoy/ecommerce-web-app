@@ -11,15 +11,16 @@ import {
     viewProductDetailsById
 } from "../../redux/features/products/productThunk.js";
 import {IoClose} from "react-icons/io5";
-import {clearViewProductModal} from "../../redux/features/products/productSlice.js";
+import {clearProductSliceError, clearViewProductModal} from "../../redux/features/products/productSlice.js";
 import ProductDetailsShimmer from "../loading-skeleton/ProductDetailsShimmer.jsx";
 import ProductDetailsSection from "../product-details/ProductDetailsSection.jsx";
 import {FaHeart} from "react-icons/fa";
+import ErrorDialog from "../error-messages/ErrorDialog.jsx";
 
 export default function ProductCardListView({product, category, refetch, enableWishlist=false}){
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {viewProductModal} = useSelector(state=>state.products);
+    const {viewProductModal, error} = useSelector(state=>state.products);
     const {isLoggedIn} = useSelector(state => state.auth);
 
     const handleAddToCart = ()=>{
@@ -55,6 +56,12 @@ export default function ProductCardListView({product, category, refetch, enableW
         dispatch(viewProductDetailsById(product.id));
     }
 
+    const handleCloseModal = ()=>{
+        if(error) dispatch(clearProductSliceError());
+        dispatch(clearViewProductModal());
+    }
+
+
     const openModal = viewProductModal?.id === product.id;
     const isLoading =  viewProductModal === product.id;
 
@@ -74,10 +81,12 @@ export default function ProductCardListView({product, category, refetch, enableW
                 <Button onClick={handleOpenModal} className={"!text-black hover:!text-white !h-[30px] !w-[30px] !min-w-[30px] !rounded-full !bg-white hover:!bg-primary"}>
                     <MdZoomOutMap/>
                 </Button>
-                <Modal open={openModal || isLoading}>
+                <Modal open={openModal || isLoading} onClose={handleCloseModal}>
                     <Box className={"relative"} sx={{position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: "80%"}}>
-                        <IoClose onClick={()=>dispatch(clearViewProductModal())} size={"1.3rem"} className={"absolute top-3 right-15  cursor-pointer text-gray-600"}/>
-                        {isLoading ? <ProductDetailsShimmer/> : <ProductDetailsSection details={viewProductModal}/>}
+                        <IoClose onClick={handleCloseModal} size={"1.3rem"} className={"absolute top-3 right-15  cursor-pointer text-gray-600"}/>
+                        {isLoading ? <ProductDetailsShimmer/> :
+                            error ? <ErrorDialog error={error} clearError={handleCloseModal}/> :
+                            <ProductDetailsSection details={viewProductModal}/>}
                     </Box>
                 </Modal>
                 {enableWishlist && <Button onClick={handleWishlist} className={`!text-black hover:!text-red-700 !h-[30px] !w-[30px] !min-w-[30px] !rounded-full !bg-white hover:!bg-orange-100`}>

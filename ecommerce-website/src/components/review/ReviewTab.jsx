@@ -2,7 +2,7 @@ import ReviewSlider from "./ReviewSlider.jsx";
 import Review from "./Review.jsx";
 import ReviewForm from "./ReviewForm.jsx";
 import {addProductReview} from "../../redux/features/products/productThunk.js";
-import {notifySuccessToast} from "../toasts/toasts.js";
+import {notifyErrorToast, notifySuccessToast} from "../toasts/toasts.js";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 
@@ -21,6 +21,9 @@ export default function ReviewTab({productId, reviews, stats, refetch}){
         if(addProductReview.fulfilled.match(response)){
             notifySuccessToast("Added review successfully!")
             refetch(productId);
+        }
+        if(addProductReview.rejected.match(response)){
+            notifyErrorToast(response.error?.message || "Failed to add product review!");
         }
     }
 

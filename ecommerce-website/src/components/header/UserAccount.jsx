@@ -5,7 +5,6 @@ import MenuItem from '@mui/material/MenuItem';
 import {RiAccountCircleFill} from "react-icons/ri";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {logoutUser} from "../../redux/features/auth/authThunk.js";
 import {globalLogout} from "../../redux/features/auth/globalLogout.js";
 
 export default function UserAccount() {

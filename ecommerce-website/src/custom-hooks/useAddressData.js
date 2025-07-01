@@ -25,6 +25,9 @@ export default function useAddressData(){
             setCurrent(currentAddress);
             setAddress(currentAddress);
         }
+        if(getCustomerAddress.rejected.match(response)){
+            notifyErrorToast(response.error?.message || "Failed to fetch address!");
+        }
     }
 
     const updateAddress = async()=>{
