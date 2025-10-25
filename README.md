@@ -17,6 +17,18 @@ A full-stack **E-Commerce platform** built with **React**, **Node.js**, **Expres
 
 ---
 
+## ▶️ How to Run Frontend Locally
+
+```bash
+# Clone repository
+git clone https://github.com/V-bhoy/ecommerce-web-app
+
+# Install frontend dependencies
+cd ecommerce-web-app/ecommerce-website
+npm install
+npm run dev
+```
+
 ## 📌 Features
 
 ```
@@ -65,7 +77,7 @@ A full-stack **E-Commerce platform** built with **React**, **Node.js**, **Expres
 •	✅ Add tests
 ```
 
-Separate repository for backend - https://github.com/V-bhoy/ecommerce-backend
+### Separate repository for backend - https://github.com/V-bhoy/ecommerce-backend
 
 ## 📸 Screenshots
 
