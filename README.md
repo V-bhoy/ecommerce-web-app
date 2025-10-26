@@ -75,6 +75,7 @@ npm run dev
 ```
 •	✅ Add Google Sign-In / OAuth
 •	✅ Add tests
+•	✅ Deployment 
 ```
 
 ### Separate repository for backend - https://github.com/V-bhoy/ecommerce-backend
